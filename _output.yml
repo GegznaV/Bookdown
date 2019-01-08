@@ -1,0 +1,9 @@
+bookdown::gitbook:
+  css: style.css
+  config:
+      toc:
+      collapse: none
+      before: |
+        <li><a href="./"> mixOmics vignette bookdown</a></li>
+      after: |
+        <li><a href="https://github.com/mixOmicsTeam/mixOmics/Bookdown" target="_blank">mixOmics Bookdown</a></li>
