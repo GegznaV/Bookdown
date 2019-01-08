@@ -25,13 +25,14 @@
 <meta name="author" content="Kim-Anh Le Cao &amp; Sebastien Dejean">
 
 
+<meta name="date" content="2019-01-08">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="intro.html">
+<link rel="prev" href="index.html">
 <link rel="next" href="pca.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -99,16 +100,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>index</a></li>
-<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
-<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#intro:datatypes"><i class="fa fa-check"></i><b>1.1</b> Input data</a></li>
-<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#methods"><i class="fa fa-check"></i><b>1.2</b> Methods</a><ul>
-<li class="chapter" data-level="1.2.1" data-path="intro.html"><a href="intro.html#intro:background"><i class="fa fa-check"></i><b>1.2.1</b> Some background knowledge</a></li>
-<li class="chapter" data-level="1.2.2" data-path="intro.html"><a href="intro.html#intro:overview"><i class="fa fa-check"></i><b>1.2.2</b> Overview</a></li>
-<li class="chapter" data-level="1.2.3" data-path="intro.html"><a href="intro.html#intro:pubs"><i class="fa fa-check"></i><b>1.2.3</b> Key publications</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#intro:datatypes"><i class="fa fa-check"></i><b>1.1</b> Input data</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#methods"><i class="fa fa-check"></i><b>1.2</b> Methods</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#intro:background"><i class="fa fa-check"></i><b>1.2.1</b> Some background knowledge</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#intro:overview"><i class="fa fa-check"></i><b>1.2.2</b> Overview</a></li>
+<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#intro:pubs"><i class="fa fa-check"></i><b>1.2.3</b> Key publications</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#outline-of-this-vignette"><i class="fa fa-check"></i><b>1.3</b> Outline of this Vignette</a></li>
-<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#other-methods-not-covered-in-this-vignette"><i class="fa fa-check"></i><b>1.4</b> Other methods not covered in this vignette</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#outline-of-this-vignette"><i class="fa fa-check"></i><b>1.3</b> Outline of this Vignette</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#other-methods-not-covered-in-this-vignette"><i class="fa fa-check"></i><b>1.4</b> Other methods not covered in this vignette</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="start.html"><a href="start.html"><i class="fa fa-check"></i><b>2</b> Let’s get started</a><ul>
 <li class="chapter" data-level="2.1" data-path="start.html"><a href="start.html#installation"><i class="fa fa-check"></i><b>2.1</b> Installation</a></li>
@@ -243,7 +243,7 @@ data &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span clas
 <li>Graphical representation of the samples</li>
 <li>Graphical representation of the variables</li>
 </ol>
-<p>Then use your critical thinking and additional functions and visual tools to make sense of your data! (some of which are listed in <a href="intro.html#intro:overview">1.2.2</a>) and will be described in the next Chapters.</p>
+<p>Then use your critical thinking and additional functions and visual tools to make sense of your data! (some of which are listed in <a href="index.html#intro:overview">1.2.2</a>) and will be described in the next Chapters.</p>
 <p>For instance, for Principal Components Analysis, we first load the data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(nutrimouse)
 X &lt;-<span class="st"> </span>nutrimouse<span class="op">$</span>gene</code></pre></div>
@@ -253,7 +253,7 @@ X &lt;-<span class="st"> </span>nutrimouse<span class="op">$</span>gene</code></
 <p><img src="Figures/unnamed-chunk-6-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotVar</span>(MyResult.pca)   <span class="co"># 3 Plot the variables</span></code></pre></div>
 <p><img src="Figures/unnamed-chunk-6-2.png" width="50%" style="display: block; margin: auto;" /></p>
-<p>This is only a first quick-start, there will be many avenues you can take to deepen your exploratory and integrative analyses. The package proposes several methods to perform variable, or feature selection to identify the relevant information from rather large omics data sets. The sparse methods are listed in the Table in <a href="intro.html#intro:overview">1.2.2</a>.</p>
+<p>This is only a first quick-start, there will be many avenues you can take to deepen your exploratory and integrative analyses. The package proposes several methods to perform variable, or feature selection to identify the relevant information from rather large omics data sets. The sparse methods are listed in the Table in <a href="index.html#intro:overview">1.2.2</a>.</p>
 <p>Following our example here, sparse PCA can be applied to select the top 5 variables contributing to each of the two components in PCA. The user specifies the number of variables to selected on each component, for example here 5 variables are selected on each of the first two components (<code>keepX=c(5,5)</code>):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">MyResult.spca &lt;-<span class="st"> </span><span class="kw">spca</span>(X, <span class="dt">keepX=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>)) <span class="co"># 1 Run the method</span>
 <span class="kw">plotIndiv</span>(MyResult.spca)               <span class="co"># 2 Plot the samples</span></code></pre></div>
@@ -276,7 +276,7 @@ X &lt;-<span class="st"> </span>nutrimouse<span class="op">$</span>gene</code></
           </div>
         </div>
       </div>
-<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="pca.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
@@ -310,7 +310,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["Vignette-mixOmics.pdf"],
 "collapse": "none",
 "before": "<li><a href="./"> mixOmics vignette bookdown</a></li> ",
 "after": "<li><a href="https://github.com/mixOmicsTeam/mixOmics/Bookdown" target="_blank">mixOmics Bookdown</a></li>"
