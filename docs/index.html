@@ -25,7 +25,7 @@
 <meta name="author" content="Kim-Anh Le Cao &amp; Sebastien Dejean">
 
 
-<meta name="date" content="2019-01-08">
+<meta name="date" content="2019-04-26">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -211,7 +211,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="header">
 <h1 class="title">mixOmics vignette</h1>
 <h4 class="author"><em>Kim-Anh Le Cao &amp; Sebastien Dejean</em></h4>
-<h4 class="date"><em>2019-01-08</em></h4>
+<h4 class="date"><em>2019-04-26</em></h4>
 </div>
 <div id="intro" class="section level1">
 <h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
@@ -267,16 +267,27 @@ Figure 1.2: Main functions and parameters of each method
 </div>
 <div id="intro:pubs" class="section level3">
 <h3><span class="header-section-number">1.2.3</span> Key publications</h3>
+<div id="methods-papers" class="section level4">
+<h4><span class="header-section-number">1.2.3.1</span> Methods papers</h4>
 <p>The methods implemented in <code>mixOmics</code> are described in detail in the following publications. A more extensive list can be found at this <a href="http://mixomics.org/a-propos/publications/">link</a>.</p>
 <ul>
-<li><p><strong>Overview and recent integrative methods</strong>: Rohart F., Gautier, B, Singh, A, Le Cao, K. A. mixOmics: an <a href="http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005752">R package for ’omics feature selection and multiple data integration</a>. <em>PLoS Comput Biol</em> 13(11): e1005752.</p></li>
+<li><p><strong>DIABLO</strong> (<span style="color:blue">New</span>): Singh A, Gautier B, Shannon C, Vacher M, Rohart F, Tebbutt S, K-A. Le Cao (2019). <a href="https://academic.oup.com/bioinformatics/article-lookup/doi/10.1093/bioinformatics/bty1054">DIABLO: an integrative approach for identifying key molecular drivers from multi-omics assays</a>. <em>Bioinformatics</em> bty1054.</p></li>
+<li><p><strong>Overview and recent integrative methods</strong>: Rohart F., Gautier, B, Singh, A, Le Cao, K. A. mixOmics: an <a href="http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005752">R package for omics feature selection and multiple data integration</a>. <em>PLoS Comput Biol</em> 13(11): e1005752.</p></li>
 <li><p><strong>Graphical outputs for integrative methods</strong>: <span class="citation">(González et al. <a href="#ref-Gon12">2012</a>)</span> Gonzalez I., Le Cao K.-A., Davis, M.D. and Dejean S. (2012) <a href="https://biodatamining.biomedcentral.com/articles/10.1186/1756-0381-5-19">Insightful graphical outputs to explore relationships between two omics data sets</a>. <em>BioData Mining</em> 5:19.</p></li>
-<li><p><strong>DIABLO</strong>: Singh A, Gautier B, Shannon C, Vacher M, Rohart F, Tebbutt S, K-A. Le Cao. <a href="https://www.biorxiv.org/content/early/2018/03/20/067611">DIABLO - multi-omics data integration for biomarker discovery.</a></p></li>
 <li><p><strong>sparse PLS</strong>: Le Cao K.-A., Martin P.G.P, Robert-Granie C. and Besse, P. (2009) <a href="http://www.biomedcentral.com/1471-2105/10/34/">Sparse Canonical Methods for Biological Data Integration: application to a cross-platform study</a>. <em>BMC Bioinformatics</em>, 10:34.</p></li>
 <li><p><strong>sparse PLS-DA</strong>:Le Cao K.-A., Boitard S. and Besse P. (2011) <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-12-253">Sparse PLS Discriminant Analysis: biologically relevant feature selection and graphical displays for multiclass problems</a>. <em>BMC Bioinformatics</em>, 22:253.</p></li>
-<li><p><strong>Multilevel approach for repeated measurements</strong>: Liquet B, Le Cao K-A, Hocini H, Thiebaut R (2012). <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-13-325">A novel approach for biomarker selection and the integration of repeated measures experiments from two assays</a>. <em>BMC Bioinformatics</em>, 13:325</p></li>
 <li><p><strong>sPLS-DA for microbiome data</strong>: Le Cao K-A<span class="math inline">\(^*\)</span>, Costello ME <span class="math inline">\(^*\)</span>, Lakis VA , Bartolo F, Chua XY, Brazeilles R and Rondeau P. (2016) <a href="http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0160169">MixMC: Multivariate insights into Microbial Communities</a>.PLoS ONE 11(8): e0160169</p></li>
+<li><p><strong>Multilevel approach for repeated measurements</strong>: Liquet B, Le Cao K-A, Hocini H, Thiebaut R (2012). <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-13-325">A novel approach for biomarker selection and the integration of repeated measures experiments from two assays</a>. <em>BMC Bioinformatics</em>, 13:325</p></li>
 </ul>
+</div>
+<div id="biological-application-papers" class="section level4">
+<h4><span class="header-section-number">1.2.3.2</span> Biological application papers</h4>
+<p>For those interested in how these methods have been applied to omics biological problems:</p>
+<ul>
+<li><p>Lee AH, Shanon CS, […], some members of mixOmics team and Kollman T (2019). <a href="https://www.nature.com/articles/s41467-019-08794-x">Dynamic molecular changes during the first week of human life follow a robust developmental trajectory</a> <em>Nature Communications</em> <strong>10</strong>: 1092. <em>We used DIABLO and other multi omics integrative methods to integratve 3 - 5 omics datasets</em>.</p></li>
+<li><p>Gavin PG, […], and Hamilton-Williams EE (2018). <a href="https://www.nature.com/articles/s41467-019-08794-x">Intestinal metaproteomics reveals host-microbiota interactions in subjects at risk for type 1 diabetes</a> <em>Diabetes care</em> <strong>41</strong>: 10. <em>We used DIABLO to integrate microbiome, proteomics and meta-proteomics</em>.</p></li>
+</ul>
+</div>
 </div>
 </div>
 <div id="outline-of-this-vignette" class="section level2">

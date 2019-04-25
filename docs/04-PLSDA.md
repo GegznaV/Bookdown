@@ -247,7 +247,18 @@ set.seed(30) # for reproducbility in this vignette, otherwise increase nrepeat
 MyPerf.plsda <- perf(MyResult.plsda2, validation = "Mfold", folds = 3, 
                   progressBar = FALSE, nrepeat = 10) # we suggest nrepeat = 50
 
-plot(MyPerf.plsda, col = color.mixo(5:7), sd = TRUE, legend.position = "horizontal")
+# type attributes(MyPerf.plsda) to see the different outputs
+# slight bug in our output function currently see the quick fix below
+#plot(MyPerf.plsda, col = color.mixo(5:7), sd = TRUE, legend.position = "horizontal")
+
+# quick fix
+matplot(MyPerf.plsda$error.rate$BER, type = 'l', lty = 1, 
+        col = color.mixo(1:3), 
+        main = 'Balanced Error rate')
+legend('topright', 
+       c('max.dist', 'centroids.dist', 'mahalanobis.dist'), 
+       lty = 1,
+       col = color.mixo(5:7))
 ```
 
 <img src="Figures/unnamed-chunk-13-1.png" width="50%" style="display: block; margin: auto;" />

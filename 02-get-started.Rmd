@@ -18,9 +18,12 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
  BiocManager::install("mixOmics")
 ```
 
-Alternatively, you can install the development version of the package from Github.
+Alternatively, you can install the *latest* development version of the package from Github.
 ```{r, eval = FALSE}
-BiocManager::install("mixOmicsTeam/mixOmics/")
+install.packages("devtools")
+# then load
+library(devtools)
+install_github("mixOmicsTeam/mixOmics")
 ```
 
 The `mixOmics` package should directly import the following packages: `igraph, rgl, ellipse, corpcor, RColorBrewer, plyr, parallel, dplyr, tidyr, reshape2, methods, matrixStats, rARPACK, gridExtra`. For *apple mac users*, if you are unable to install the imported library `rgl`, you will need to install the [XQuartz software](https://www.xquartz.org) first.
@@ -33,7 +36,7 @@ library(mixOmics)
 Check that there is no error when loading the package, especially for the `rgl` library (see above).
 
 ## Upload data
-The examples we give in this vignette use data that are already part of the package. To upload your own data, check first that your working directory is set, then read your data from a  `.txt` or `.csv` format, either by using **File > Import Dataset** in RStudio or via one of these command lines:
+The examples we give in this vignette use data that are already part of the package, *which means that the objects are stored as list. However, you do not need to store your data as list, just data frames will do*. To upload your own data, check first that your working directory is set, then read your data from a  `.txt` or `.csv` format, either by using **File > Import Dataset** in RStudio (*although be mindful this option may pose problem with row and col name headers*) or via one of these command lines:
 
 ```{r, eval = FALSE}
 # from csv file
@@ -41,6 +44,9 @@ data <- read.csv("your_data.csv", row.names = 1, header = TRUE)
 
 # from txt file
 data <- read.table("your_data.txt", header = TRUE)
+
+# then, in the argument in the mixOmics functions, just fill with:
+# X = data
 ```
 
 For more details about the arguments used to modify those functions, type `?read.csv` or `?read.table` in the R console.

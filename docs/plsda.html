@@ -25,7 +25,7 @@
 <meta name="author" content="Kim-Anh Le Cao &amp; Sebastien Dejean">
 
 
-<meta name="date" content="2019-01-08">
+<meta name="date" content="2019-04-26">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -349,7 +349,18 @@ Y &lt;-<span class="st"> </span>srbct<span class="op">$</span>class
 MyPerf.plsda &lt;-<span class="st"> </span><span class="kw">perf</span>(MyResult.plsda2, <span class="dt">validation =</span> <span class="st">&quot;Mfold&quot;</span>, <span class="dt">folds =</span> <span class="dv">3</span>, 
                   <span class="dt">progressBar =</span> <span class="ot">FALSE</span>, <span class="dt">nrepeat =</span> <span class="dv">10</span>) <span class="co"># we suggest nrepeat = 50</span>
 
-<span class="kw">plot</span>(MyPerf.plsda, <span class="dt">col =</span> <span class="kw">color.mixo</span>(<span class="dv">5</span><span class="op">:</span><span class="dv">7</span>), <span class="dt">sd =</span> <span class="ot">TRUE</span>, <span class="dt">legend.position =</span> <span class="st">&quot;horizontal&quot;</span>)</code></pre></div>
+<span class="co"># type attributes(MyPerf.plsda) to see the different outputs</span>
+<span class="co"># slight bug in our output function currently see the quick fix below</span>
+<span class="co">#plot(MyPerf.plsda, col = color.mixo(5:7), sd = TRUE, legend.position = &quot;horizontal&quot;)</span>
+
+<span class="co"># quick fix</span>
+<span class="kw">matplot</span>(MyPerf.plsda<span class="op">$</span>error.rate<span class="op">$</span>BER, <span class="dt">type =</span> <span class="st">&#39;l&#39;</span>, <span class="dt">lty =</span> <span class="dv">1</span>, 
+        <span class="dt">col =</span> <span class="kw">color.mixo</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>), 
+        <span class="dt">main =</span> <span class="st">&#39;Balanced Error rate&#39;</span>)
+<span class="kw">legend</span>(<span class="st">&#39;topright&#39;</span>, 
+       <span class="kw">c</span>(<span class="st">&#39;max.dist&#39;</span>, <span class="st">&#39;centroids.dist&#39;</span>, <span class="st">&#39;mahalanobis.dist&#39;</span>), 
+       <span class="dt">lty =</span> <span class="dv">1</span>,
+       <span class="dt">col =</span> <span class="kw">color.mixo</span>(<span class="dv">5</span><span class="op">:</span><span class="dv">7</span>))</code></pre></div>
 <p><img src="Figures/unnamed-chunk-13-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>The plot outputs the classification error rate, or <em>Balanced</em> classification error rate when the number of samples per group is unbalanced, the standard deviation according to three prediction distances. Here we can see that for the BER and the maximum distance, the best performance (i.e. low error rate) seems to be achieved for <code>ncomp = 3</code>.</p>
 <p>In addition (<strong>item 3</strong> for PLS-DA), the numerical outputs listed here can be reported as performance measures:</p>

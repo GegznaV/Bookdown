@@ -3,7 +3,7 @@ title: 'mixOmics vignette'
 author: 'Kim-Anh Le Cao & Sebastien Dejean'
 package: mixOmics
 site: bookdown::bookdown_site
-date: "2019-01-08"
+date: "2019-04-26"
 output: 
   bookdown::gitbook
 documentclass: book
@@ -99,21 +99,32 @@ Here is an overview of the most widely used methods in `mixOmics` that will be f
 
 ### Key publications {#intro:pubs}
 
+#### Methods papers
 The methods implemented in `mixOmics` are described in detail in the following publications. A more extensive list can be found at this [link](http://mixomics.org/a-propos/publications/).
 
-- **Overview and recent integrative methods**: Rohart F.,  Gautier, B, Singh, A, Le Cao, K. A. mixOmics: an [R package for 'omics feature selection and multiple data integration](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005752). *PLoS Comput Biol* 13(11): e1005752.
+- **DIABLO** (<span style="color:blue">New</span>): Singh A, Gautier B, Shannon C, Vacher M, Rohart F, Tebbutt S, K-A. Le Cao (2019). [DIABLO: an integrative approach for identifying key molecular drivers from multi-omics assays](https://academic.oup.com/bioinformatics/article-lookup/doi/10.1093/bioinformatics/bty1054). *Bioinformatics* bty1054. 
+
+
+- **Overview and recent integrative methods**: Rohart F.,  Gautier, B, Singh, A, Le Cao, K. A. mixOmics: an [R package for omics feature selection and multiple data integration](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005752). *PLoS Comput Biol* 13(11): e1005752.
 
 - **Graphical outputs for integrative methods**: [@Gon12] Gonzalez I., Le Cao K.-A., Davis, M.D. and Dejean S. (2012) [Insightful graphical outputs to explore relationships between two omics data sets](https://biodatamining.biomedcentral.com/articles/10.1186/1756-0381-5-19). *BioData Mining* 5:19.
 
-- **DIABLO**: Singh A, Gautier B, Shannon C, Vacher M, Rohart F, Tebbutt S, K-A. Le Cao. [DIABLO - multi-omics data integration for biomarker discovery.](https://www.biorxiv.org/content/early/2018/03/20/067611)
 
 - **sparse PLS**: Le Cao K.-A., Martin P.G.P, Robert-Granie C. and Besse, P. (2009) [Sparse Canonical Methods for Biological Data Integration: application to a cross-platform study](http://www.biomedcentral.com/1471-2105/10/34/). *BMC Bioinformatics*, 10:34.
 
 - **sparse PLS-DA**:Le Cao K.-A., Boitard S. and Besse P. (2011) [Sparse PLS Discriminant Analysis: biologically relevant feature selection and graphical displays for multiclass problems]( https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-12-253). *BMC Bioinformatics*, 22:253.
 
+- **sPLS-DA for microbiome data**: Le Cao K-A$^*$, Costello ME $^*$, Lakis VA , Bartolo F, Chua XY, Brazeilles R and Rondeau P. (2016) [MixMC: Multivariate insights into Microbial Communities](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0160169).PLoS ONE 11(8): e0160169
+
 - **Multilevel approach for repeated measurements**: Liquet B, Le Cao K-A, Hocini H, Thiebaut R (2012). [A novel approach for biomarker selection and the integration of repeated measures experiments from two assays](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-13-325). *BMC Bioinformatics*, 13:325
 
-- **sPLS-DA for microbiome data**: Le Cao K-A$^*$, Costello ME $^*$, Lakis VA , Bartolo F, Chua XY, Brazeilles R and Rondeau P. (2016) [MixMC: Multivariate insights into Microbial Communities](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0160169).PLoS ONE 11(8): e0160169
+
+#### Biological application papers
+For those interested in how these methods have been applied to omics biological problems:
+
+- Lee AH, Shanon CS, [...], some members of mixOmics team and Kollman T (2019). [Dynamic molecular changes during the first week of human life follow a robust developmental trajectory](https://www.nature.com/articles/s41467-019-08794-x) *Nature Communications* **10**: 1092. *We used DIABLO and other multi omics integrative methods to integratve 3 - 5 omics datasets*.
+
+- Gavin PG, [...], and Hamilton-Williams EE (2018). [Intestinal metaproteomics reveals host-microbiota interactions in subjects at risk for type 1 diabetes](https://www.nature.com/articles/s41467-019-08794-x) *Diabetes care* **41**: 10. *We used DIABLO to integrate microbiome, proteomics and meta-proteomics*.
 
 
 

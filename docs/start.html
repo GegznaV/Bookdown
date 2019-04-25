@@ -25,7 +25,7 @@
 <meta name="author" content="Kim-Anh Le Cao &amp; Sebastien Dejean">
 
 
-<meta name="date" content="2019-01-08">
+<meta name="date" content="2019-04-26">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -216,8 +216,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>))
     <span class="kw">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)
  BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">&quot;mixOmics&quot;</span>)</code></pre></div>
-<p>Alternatively, you can install the development version of the package from Github.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">&quot;mixOmicsTeam/mixOmics/&quot;</span>)</code></pre></div>
+<p>Alternatively, you can install the <em>latest</em> development version of the package from Github.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)
+<span class="co"># then load</span>
+<span class="kw">library</span>(devtools)
+<span class="kw">install_github</span>(<span class="st">&quot;mixOmicsTeam/mixOmics&quot;</span>)</code></pre></div>
 <p>The <code>mixOmics</code> package should directly import the following packages: <code>igraph, rgl, ellipse, corpcor, RColorBrewer, plyr, parallel, dplyr, tidyr, reshape2, methods, matrixStats, rARPACK, gridExtra</code>. For <em>apple mac users</em>, if you are unable to install the imported library <code>rgl</code>, you will need to install the <a href="https://www.xquartz.org">XQuartz software</a> first.</p>
 </div>
 <div id="start:upload" class="section level2">
@@ -227,12 +230,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="upload-data" class="section level2">
 <h2><span class="header-section-number">2.3</span> Upload data</h2>
-<p>The examples we give in this vignette use data that are already part of the package. To upload your own data, check first that your working directory is set, then read your data from a <code>.txt</code> or <code>.csv</code> format, either by using <strong>File &gt; Import Dataset</strong> in RStudio or via one of these command lines:</p>
+<p>The examples we give in this vignette use data that are already part of the package, <em>which means that the objects are stored as list. However, you do not need to store your data as list, just data frames will do</em>. To upload your own data, check first that your working directory is set, then read your data from a <code>.txt</code> or <code>.csv</code> format, either by using <strong>File &gt; Import Dataset</strong> in RStudio (<em>although be mindful this option may pose problem with row and col name headers</em>) or via one of these command lines:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># from csv file</span>
 data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;your_data.csv&quot;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
 
 <span class="co"># from txt file</span>
-data &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;your_data.txt&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)</code></pre></div>
+data &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;your_data.txt&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
+
+<span class="co"># then, in the argument in the mixOmics functions, just fill with:</span>
+<span class="co"># X = data</span></code></pre></div>
 <p>For more details about the arguments used to modify those functions, type <code>?read.csv</code> or <code>?read.table</code> in the R console.</p>
 </div>
 <div id="start:PCA" class="section level2">
