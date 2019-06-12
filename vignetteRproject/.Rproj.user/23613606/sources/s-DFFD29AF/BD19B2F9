@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1560321835627.000,
+    "dirty" : true,
+    "encoding" : "ISO-8859-1",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "BD19B2F9",
+    "lastKnownWriteTime" : 1560322260,
+    "last_content_update" : 1560326365097,
+    "path" : "~/Documents/_Projects/__mixOmics/mixOmics_mixOmicsTeam/Bookdown/vignetteRproject/04-PLSDA.Rmd",
+    "project_path" : "04-PLSDA.Rmd",
+    "properties" : {
+        "cursorPosition" : "14,50",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

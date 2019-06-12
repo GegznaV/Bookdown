@@ -1,0 +1,14 @@
+# mixOmics vignette files
+
+All Rproject files are storned in `./vignetteRproject`. 
+
+`./vignetteRproject/BiocStyle`:    Contains the vignette files in `Bioconductor` format.
+`./vignetteRproject/pdf_book` :    Contains the vignette files in `pdf`          format.
+`./ (top-level)`:                  Contains the vignette files in `html`         format.
+
+## Re-render the vignettes
+
+   * open the .Rproj file in RStudio
+   * in `vignetteRproject/_bookdown.yml`, keep the relevant `output_dir` line. Note that for `html` output we need all the files in the top-level directory of the branch for `GitHub` to recognise them.
+   * from the `build` pane in RStudio, choose the relevant output to build.
+

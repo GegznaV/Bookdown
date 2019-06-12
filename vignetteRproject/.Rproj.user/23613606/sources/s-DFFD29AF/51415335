@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1560321200529.000,
+    "dirty" : false,
+    "encoding" : "ISO-8859-1",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "51415335",
+    "lastKnownWriteTime" : 1560326378,
+    "last_content_update" : 1560326378953,
+    "path" : "~/Documents/_Projects/__mixOmics/mixOmics_mixOmicsTeam/Bookdown/vignetteRproject/03-PCA.Rmd",
+    "project_path" : "03-PCA.Rmd",
+    "properties" : {
+        "cursorPosition" : "4,56",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

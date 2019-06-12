@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1560321847702.000,
+    "dirty" : false,
+    "encoding" : "ISO-8859-1",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "CBDC5CEE",
+    "lastKnownWriteTime" : 1560322316,
+    "last_content_update" : 1560322316791,
+    "path" : "~/Documents/_Projects/__mixOmics/mixOmics_mixOmicsTeam/Bookdown/vignetteRproject/07-SessionInfo.Rmd",
+    "project_path" : "07-SessionInfo.Rmd",
+    "properties" : {
+        "cursorPosition" : "5,3",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 10,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
