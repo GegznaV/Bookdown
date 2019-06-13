@@ -4,4 +4,4 @@ language:
     chapter_name: "Chapter "
 delete_merged_file: true
 new_session: yes
-output_dir: "../" ## html
+output_dir: "../docs" ## this works only for gitbook. For BiocStyle it is created in top level.
