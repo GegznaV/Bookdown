@@ -4,3 +4,12 @@
 **/*.Ruserdata
 **/*.rds
 **/_book*
+
+**/*.md
+
+
+
+
+
+
+!**/README.md
