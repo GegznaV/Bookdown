@@ -22,7 +22,7 @@ Alternatively, you can install the development version of the package from Githu
 BiocManager::install("mixOmicsTeam/mixOmics/")
 ```
 
-The `mixOmics` package should directly import the following packages: `igraph, rgl, ellipse, corpcor, RColorBrewer, plyr, parallel, dplyr, tidyr, reshape2, methods, matrixStats, rARPACK, gridExtra`. For *apple mac users*, if you are unable to install the imported library `rgl`, you will need to install the [XQuartz software](https://www.xquartz.org) first.
+The `mixOmics` package should directly import the following packages: `igraph, rgl, ellipse, corpcor, RColorBrewer, plyr, parallel, dplyr, tidyr, reshape2, methods, matrixStats, rARPACK, gridExtra`. For *apple mac users*, if you are unable to install the imported package `rgl`, you will need to install the [XQuartz software](https://www.xquartz.org) first.
 
 ## Load the package {#start:upload}
 ```{r 02-load, message=FALSE}
@@ -71,7 +71,7 @@ plotVar(MyResult.pca)   # 3 Plot the variables
 
 This is only a first quick-start, there will be many avenues you can take to deepen your exploratory and integrative analyses. The package proposes several methods to perform variable, or feature selection to identify the relevant information from rather large omics data sets. The sparse methods are listed in the Table in \@ref(intro:overview).
 
-Following our example here, sparse PCA can be applied to select the top 5 variables contributing to each of the two components in PCA. The user specifies the number of variables to selected on each component, for example here 5 variables are selected on each of the first two components (`keepX=c(5,5)`): 
+Following our example here, sparse PCA can be applied to select the top 5 variables contributing to each of the two components in PCA. The user specifies the number of variables to selected on each component, for example, here 5 variables are selected on each of the first two components (`keepX=c(5,5)`): 
 
 ```{r 02-spca-nutrimouse}
 MyResult.spca <- spca(X, keepX=c(5,5)) # 1 Run the method
@@ -88,7 +88,7 @@ Do not stop here! We are not done yet. You can enhance your analyses with the fo
 
 - Run the examples from the help file using the `example` function: `example(pca)`, `example(plotIndiv)`, ...
 
-- Have a look at out [website](http://www.mixomics.org) that features many tutorials and case studies,
+- Have a look at our [website](http://www.mixomics.org) that features many tutorials and case studies,
 
 - Keep reading this vignette, this is *just the beginning!*
 
