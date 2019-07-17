@@ -57,7 +57,7 @@ To illustrate sparse PLS, we will integrate the gene expression levels (`gene`) 
 
 Partial Least Squares (PLS) regression [@Wol66; @Wol01] is a multivariate methodology which relates (\textit{integrates}) two data matrices `X` (e.g. transcriptomics) and `Y` (e.g. lipids). PLS goes beyond traditional multiple regression by modelling the structure of both matrices. Unlike traditional multiple regression models, it is not limited to uncorrelated variables. One of the many advantages of PLS is that it can handle many noisy, collinear (correlated) and missing variables and can also simultaneously model several response variables in `Y`. 
 
-PLS is a multivariate projection-based method that can address different types of integration problems. Its flexibility is the reason why it is the backbone of most methods in `mixOmics`. PLS is computationally very efficient when the number of variables $p + q >> n$ the number of samples. It performs successive local regressions that avoid computational issues due to the inversion of large singular covariance matrices. Unlike PCA which maximizes the variance of components from a  single data set, PLS maximizes the covariance between components from two data sets. The mathematical concepts of covariance and correlation are similar, but the covariance is an unbounded measure and covariance has a unit measure (see \@ref(intro:background)). In PLS, linear combination of variables are called *latent variables* or *latent components*. The weight vectors used to calculate the linear combinations are called the *loading vectors*. Latent  variables and loading vectors are thus associated, and come in pairs from each of the two data sets being integrated. 
+PLS is a multivariate projection-based method that can address different types of integration problems. Its flexibility is the reason why it is the backbone of most methods in `mixOmics`. PLS is computationally very efficient when the number of variables $p + q >> n$ the number of samples. It performs successive local regressions that avoid computational issues due to the inversion of large singular covariance matrices. Unlike PCA which maximizes the variance of components from a  single data set, PLS maximizes the covariance between components from two data sets. The mathematical concepts of covariance and correlation are similar, but the covariance is an unbounded measure and covariance has a unit measure (see \@ref(intro:background)). In PLS, a linear combination of variables is called *latent variables* or *latent components*. The weight vectors used to calculate the linear combinations are called the *loading vectors*. Latent variables and loading vectors are thus associated and come in pairs from each of the two data sets being integrated. 
 
 ## Principle of sparse PLS
 Even though PLS is highly efficient in a high dimensional context, the interpretability of PLS needed to be improved. sPLS has been recently developed by our team to perform simultaneous variable selection in both data sets `X` and `Y` data sets, by including LASSO $\ell_1$ penalizations in PLS on each pair of loading vectors [@Lec08].
@@ -68,7 +68,7 @@ We consider the data input matrices: `X` is a $n \times p$ data matrix and `Y` a
 
 - A **set of components**, also called latent variables associated to each data set. There are as many components as the chosen dimension of the PLS.
 
-- A **set of loading vectors**, which are coefficients assigned to each variable to define each component. Those coefficients indicate the importance of each variable in PLS. Importantly, each loading vector is associated to a particular component. Loading vectors are obtained so that the covariance between a linear combination of the variables from `X` (the X-component) and from `Y` (the $Y$-component) is maximised.
+- A **set of loading vectors**, which are coefficients assigned to each variable to define each component. These coefficients indicate the importance of each variable in PLS. Importantly, each loading vector is associated to a particular component. Loading vectors are obtained so that the covariance between a linear combination of the variables from `X` (the X-component) and from `Y` (the $Y$-component) is maximised.
 
 - A **list of selected variables** from both `X` and `Y` and associated to each component if sPLS is applied. 
 
@@ -99,9 +99,9 @@ If you were to run `spls` with this minimal code, you would be using the followi
 
 - `ncomp = 2`: the first two PLS components are calculated and are used for graphical outputs;
 - `scale = TRUE`: data are scaled (variance = 1, strongly advised here);
-- `mode = "regression"`: by default a PLS regression mode should be used (see \@ref(PLS:details) for more details) .
+- `mode = "regression"`: by default, a PLS regression mode should be used (see \@ref(PLS:details) for more details).
 
-Because PLS generates a pair of components, each associated to each data set, the function `plotIndiv` produces 2 plots that represent the same samples projected in either the space spanned by the X-components, or the Y-components. A single plot can also be displayed, see section \@ref(pls:plotIndiv).
+Because PLS generates a pair of components, each associated to each data set, the function `plotIndiv` produces 2 plots that represent the same samples projected in either space spanned by the X-components or the Y-components. A single plot can also be displayed, see section \@ref(pls:plotIndiv).
 
 ## To go further {#pls-tgf}
 
@@ -150,9 +150,9 @@ cim(MyResult.spls, comp = 1, save = 'jpeg', name.save = 'PLScim')
 ```
 
 #### Relevance networks {#pls:network}
-Using the same similarity matrix input in CIM, we can also represent relevance bipartite networks. Those networks only represent edges between on type of variable from `X` and the other type of variable, from `Y`. Whilst we use sPLS to narrow down to a few key correlated variables, our `keepX` and `keepY` values might still be very high for this kind of output. A cut-off can be set based on the correlation coefficient between the different types of variables.
+Using the same similarity matrix input in CIM, we can also represent relevance bipartite networks. Those networks only represent edges between one type of variables from `X` and the other type of variable, from `Y`. Whilst we use sPLS to narrow down to a few key correlated variables, our `keepX` and `keepY` values might still be very high for this kind of output. A cut-off can be set based on the correlation coefficient between the different types of variables.
 
-Other arguments such as `interactive = TRUE` enables a scrollbar to change the cut-off value interactively, see other options in `?network`. Additionally, the graph object can be saved to be input into Cytoscape for an improved visualisation.
+Other arguments such as `interactive = TRUE` enables a scrollbar to change the cut-off value interactively, see other options in `?network`. Additionally, the graph object can be saved to be input into Cytoscape for improved visualisation.
 
 ```{r 05-pls-network, eval=FALSE}
 X11()
@@ -202,7 +202,7 @@ For PLS and sPLS, two types of parameters need to be chosen:
 
 2 - The number of variables to select on each component and on each data set `keepX` and `keepY` for sparse PLS.
 
-For **item 1** we use the `perf` function and repeated k-fold cross-validation to calculate the Q$^2$ criterion used in the SIMCA-P software [@Ume96]. The rule of thumbs is that a PLS component should be included in the model if its value is $\leq 0.0975$. Here we use 3-fold CV repeated 10 times (note that we advise to use at least 50 repeats, and choose the number of folds that are appropriate for the sample size of the data set). 
+For **item 1** we use the `perf` function and repeated k-fold cross-validation to calculate the Q$^2$ criterion used in the SIMCA-P software [@Ume96]. The rule of thumbs is that a PLS component should be included in the model if its value is $\leq 0.0975$. Here we use 3-fold CV repeated 10 times (note that we advise using at least 50 repeats, and choose the number of folds that are appropriate for the sample size of the data set). 
 
 We run a PLS model with a sufficient number of components first, then run `perf` on the object.
 
@@ -242,10 +242,10 @@ Tuning `keepX` and `keepY` conjointly is still work in progress. What we advise 
 
 ### PLS modes {#PLS:details}
 
-You may have noticed the `mode` argument in PLS. We can calculate the residual matrices at each PLS iteration differently. Note: this is fore **advanced** users.
+You may have noticed the `mode` argument in PLS. We can calculate the residual matrices at each PLS iteration differently. Note: this is for **advanced** users.
 
 #### Regression mode 
-The PLS regression mode models  *uni-directional* (or 'causal') relationship between two data sets. The `Y` matrix is deflated with respect to the information extracted/modelled from the local regression on X. Here the goal is to predict `Y` from `X` (`Y` and `X` play an *assymmetric role*). Consequently the latent variables computed to predict Y from X are different from those computed to predict X from Y. More details about the model can be found in[ Appendix [@Lec08]. 
+The PLS regression mode models  *uni-directional* (or 'causal') relationship between two data sets. The `Y` matrix is deflated with respect to the information extracted/modelled from the local regression on X. Here the goal is to predict `Y` from `X` (`Y` and `X` play an *asymmetric role*). Consequently, the latent variables computed to predict Y from X are different from those computed to predict X from Y. More details about the model can be found in[ Appendix [@Lec08]. 
 
 PLS regression mode, also called PLS2, is commonly applied for the analysis of biological data [@Bou05; @Byl07] due to the biological assumptions or the biological dogma. In general, the number of variables in `Y` to predict are fewer in number than the predictors in `X`. 
 
@@ -260,7 +260,7 @@ The 'invariant' mode performs a redundancy analysis, where the `Y` matrix is not
 
 
 #### Difference between PLS modes
-For the first PLS dimension, all PLS modes will output the same results in terms of latent variables and loading vectors. After the first dimension, these vectors will differ, as the  matrices are deflated differently. 
+For the first PLS dimension, all PLS modes will output the same results in terms of latent variables and loading vectors. After the first dimension, these vectors will differ, as the matrices are deflated differently. 
 
 ## Additional resources
  
@@ -274,7 +274,7 @@ Additional examples are provided in `example(spls)`  and in our case studies on 
 
 
 * Can PLS deal with more than 2 data sets?
-    + sPLS can only deal with 2 data sets, but see `DIABLO` (Chapter \@ref(diablo)) for multi-block analyses
+    + sPLS can only deal with 2 data sets but see `DIABLO` (Chapter \@ref(diablo)) for multi-block analyses
 
 
 * What are the differences between sPLS and Canonical Correlation Analysis (CCA, see `?rcca` in mixOmics)?
@@ -289,6 +289,6 @@ Additional examples are provided in `example(spls)`  and in our case studies on 
     + Yes, and sparse PLS is particularly useful to identify sets of variables that play a role in explaining the relationship between two data sets.
 
 
-* Can I perform PLS with 2 data sets that are highly unbalanced (thousands of variables in one data set and less than 10 in the other ?
+* Can I perform PLS with 2 data sets that are highly unbalanced (thousands of variables in one data set and less than 10 in the other?
     + Yes! Even if you performed sPLS to select variables in one data set (or both), you can still control the number of variables selected with `keepX`.
 
