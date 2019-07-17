@@ -61,7 +61,7 @@ To illustrate PLS-DA, we will analyse the gene expression levels of `srbct$gene`
 Although Partial Least Squares was not originally designed for classification and discrimination problems, it has often been used for that purpose [@Ngu02a;@Tan04]. The response matrix `Y` is qualitative and is internally recoded as a dummy block matrix that records the membership of each observation, i.e. each of the response categories are coded via an indicator variable (see [@mixomics] Suppl. Information S1 for an illustration). The PLS regression (now PLS-DA) is then run as if Y was a continuous matrix. This PLS classification trick works well in practice, as demonstrated in many references [@Bar03;@Ngu02a;@Bou07;@Chung10].
 
 
-Sparse PLS-DA [@Lec11] performs variable selection and classification in a one step procedure. sPLS-DA is a special case of sparse PLS described later in \@ref(pls), where  $\ell_1$ penalization is applied on the loading vectors associated to the X data set.
+Sparse PLS-DA [@Lec11] performs variable selection and classification in a one-step procedure. sPLS-DA is a special case of sparse PLS described later in \@ref(pls), where  $\ell_1$ penalization is applied on the loading vectors associated to the X data set.
 
 ## Inputs and outputs
 
@@ -70,7 +70,7 @@ We use the following data input matrices: `X` is a $n \times p$ data matrix, `Y`
 - A **set of components**, also called latent variables. There are as many components as the chosen
 *dimension* of the PLS-DA model.
 
-- A **set of loading vectors**, which are coefficients assigned to each variable to define each component. Those coefficients indicate the importance of each variable in PLS-DA. Importantly, each loading vector is associated to a particular component. Loading vectors are obtained so that the covariance between a linear combination of the variables from X (the X-component) and the factor of interest Y (the $Y^*$-component) is maximised.
+- A **set of loading vectors**, which are coefficients assigned to each variable to define each component. These coefficients indicate the importance of each variable in PLS-DA. Importantly, each loading vector is associated to a particular component. Loading vectors are obtained so that the covariance between a linear combination of the variables from X (the X-component) and the factor of interest Y (the $Y^*$-component) is maximised.
 
 - A **list of selected variables** from `X` and associated to each component if sPLS-DA is applied. 
 
@@ -92,7 +92,7 @@ dim(X); length(Y)
 
 ## Quick start
 
-For a quick start we arbitrarily set the number of variables to select to 50 on each of the 3 components of PLS-DA (see section \@ref(tuning:sPLSDA) for tuning these values).
+For a quick start, we arbitrarily set the number of variables to select to 50 on each of the 3 components of PLS-DA (see section \@ref(tuning:sPLSDA) for tuning these values).
 
 ```{r 04-splsda-and-plots, echo=FALSE,results='hide', fig.show = 'hide'}
 MyResult.splsda <- splsda(X, Y, keepX = c(50,50)) # 1 Run the method
@@ -101,7 +101,7 @@ plotVar(MyResult.splsda)                            # 3 Plot the variables
 selectVar(MyResult.splsda, comp=1)$name             # Selected variables on component 1
 ```
 
-As PLS-DA is a supervised method, the sample plot automatically displays the group membership of each sample. We can observe a clear discrimination between the BL samples and the others on the first component (x-axis), and EWS vs the others on the second component (y-axis). Remember that this discrimination spanned by the first two PLS-DA components is obtained based on a subset of 100 variables (50 selected on each component). 
+As PLS-DA is a supervised method, the sample plot automatically displays the group membership of each sample. We can observe clear discrimination between the BL samples and the others on the first component (x-axis), and EWS vs the others on the second component (y-axis). Remember that this discrimination spanned by the first two PLS-DA components is obtained based on a subset of 100 variables (50 selected on each component). 
 
 From the `plotIndiv` the axis labels indicate the amount of variation explained per component. Note that the interpretation of this amount is *not* the same as in PCA. In PLS-DA, the aim is to maximise the covariance between `X` and `Y`, not only the variance of `X` as it is the case in PCA! 
 
@@ -110,7 +110,7 @@ If you were to run `splsda` with this minimal code, you would be using the follo
 
 - `ncomp = 2`: the first two PLS components are calculated and are used for graphical outputs;
 - `scale = TRUE`: data are scaled (variance = 1, strongly advised here);
-- `mode = "regression"`: by default a PLS regression mode should be used.
+- `mode = "regression"`: by default, a PLS regression mode should be used.
 
 
 PLS-DA without variable selection can be performed as:
@@ -144,7 +144,7 @@ plotVar(MyResult.splsda, var.names=FALSE)
 ```
 
 
-In addition, if we had used the non sparse version of PLS-DA, a cut-off can be set to display only the variables that mostly contribute to the definition of each component. Those variables should be located towards the circle of radius 1, far from the centre. 
+In addition, if we had used the non-sparse version of PLS-DA, a cut-off can be set to display only the variables that mostly contribute to the definition of each component. Those variables should be located towards the circle of radius 1, far from the centre. 
 
 ```{r 04-plsda-plotVar-cutoff}
 plotVar(MyResult.plsda, cutoff=0.7)
@@ -266,7 +266,7 @@ plotIndiv(MyResult.splsda.final, ind.names = FALSE, legend=TRUE,
           ellipse = TRUE, title="SPLS-DA, Final result")
 ```
 
-Additionally we can run `perf` for the final performance of the sPLS-DA model. Also note that `perf` will output `features` that lists the frequency of selection of the variables across the different folds and different repeats. This is a useful output to assess the confidence of your final variable selection, see a more [detailed example here](http://mixomics.org/case-studies/splsda-srbct/).
+Additionally, we can run `perf` for the final performance of the sPLS-DA model. Also, note that `perf` will output `features` that lists the frequency of selection of the variables across the different folds and different repeats. This is a useful output to assess the confidence of your final variable selection, see a more [detailed example here](http://mixomics.org/case-studies/splsda-srbct/).
 
 ## Additional resources
  
@@ -276,10 +276,10 @@ Additionally we can run `perf` for the final performance of the sPLS-DA model. A
 ## FAQ
 
 * Can I discriminate more than two groups of samples (multiclass classification)?
-    + Yes, this is one of the advantage of PLS-DA, see this example above
+    + Yes, this is one of the advantages of PLS-DA, see this example above
 
 * Can I have a hierarchy between two factors (e.g. diet nested into genotype)?
-    + Unfortunately no, sparse PLS-DA only allows to discriminate all groups at once (i.e. 4 x 2 groups when there are 4 diets and 2 genotypes)
+    + Unfortunately no, sparse PLS-DA only allows discriminating all groups at once (i.e. 4 x 2 groups when there are 4 diets and 2 genotypes)
 
 * Can I have missing values in my data?
     + Yes in the X data set, but you won't be able to do any prediction (i.e. `tune, perf, predict`)
