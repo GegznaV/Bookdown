@@ -13,4 +13,6 @@ All Rproject files are stored in `./vignetteRproject`. In addition:
    * move `Vignette-mixOmics.html` to `./BiocStyle`.
    * move the pdf file vignette to `./pdf_book`.
    * The gitbook/html vignette will now be updated in `./docs`.
-
+   
+## Bookdown link
+https://mixomicsteam.github.io/Bookdown/
