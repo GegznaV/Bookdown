@@ -1,16 +1,17 @@
-
-```{r 03-global_options, include=FALSE}
+```{r, include=FALSE}
 library(knitr)
-# global options
+# global options - probably better to put out.width='60%' for pdf output
 knitr::opts_chunk$set(dpi = 100, echo=TRUE, warning=FALSE, message=FALSE, eval = TRUE, cache=TRUE,
-                      fig.show=TRUE, fig.width= 7,fig.height= 6,fig.align='center', out.width = '50%', fig.pos= "h", out.extra = '',
-                      fig.path= 'Figures/')
+                      fig.show=TRUE, fig.asp=1,fig.align='center', out.width = '75%',
+                      fig.pos= "h", out.extra = '', fig.path= 'Figures/')
+library(rgl)
+knit_hooks$set(webgl = hook_webgl) ## to include 3d images in the html vignette - 3D chunks must have webgl=TRUE
 ```
 
 
 # Principal Component Analysis (PCA) {#pca}
 
-```{r 03-overview-PCA, echo=FALSE, message=FALSE}
+```{r 03-overview-PCA, echo=FALSE, message=FALSE, fig.width=10}
 library(mixOmics)
 coul <- color.mixo(1:3)
 
@@ -73,10 +74,10 @@ X <- liver.toxicity$gene
 ```
 
 ## Quick start
-```{r 03-pca-plots, fig.show = 'hide'}
+```{r 03-pca-plots}
 MyResult.pca <- pca(X)     # 1 Run the method
 plotIndiv(MyResult.pca)    # 2 Plot the samples
-plotVar(MyResult.pca)      # 3 Plot the variables
+plotVar(MyResult.pca, cutoff = 0.8)      # 3 Plot the variables
 ```
 
 If you were to run `pca` with this minimal code, you would be using the following default values:
@@ -129,7 +130,7 @@ Here, the 3rd component on the y-axis clearly highlights a time of exposure effe
 ### Amount of variance explained and choice of a number of components
 The amount of variance explained can be extracted with the following: a screeplot or the actual numerical proportions of explained variance, and cumulative proportion.
 
-```{r 03-pca-liver-2-plot}
+```{r 03-pca-liver-2-plot, fig.width=7}
 plot(MyResult.pca2)
 MyResult.pca2
 ```
@@ -140,12 +141,12 @@ There are no clear guidelines on how many components should be included in PCA: 
 
 We can also have a look at the variable coefficients in each component with the loading vectors.  The loading weights are represented in decreasing order from bottom to top in `plotLoadings`. Their absolute value indicates the importance of each variable to define each PC, as represented by the length of each bar. See `?plotLoadings` to change the arguments.
 
-```{r 03-pca-liver-loadings,eval=TRUE, fig.show = 'hide'}
+```{r 03-pca-liver-loadings}
 # a minimal example
 plotLoadings(MyResult.pca)
 ```
 
-```{r 03-pca-liver-loadings-args, eval=TRUE, fig.show = 'hide'}
+```{r 03-pca-liver-loadings-args}
 # a customized example to only show the top 100 genes 
 # and their gene name
 plotLoadings(MyResult.pca, ndisplay = 100, 
@@ -156,9 +157,9 @@ plotLoadings(MyResult.pca, ndisplay = 100,
 Such representation will be more informative once we select a few variables in the next section \@ref(sPCA).
 
 
-Plots can also be displayed in 3 dimensions using the option `style="3d"`, and interactively (we use the `rgl` package for this).
+Plots can also be interactively displayed in 3 dimensions using the option `style="3d"`. We use the `rgl` package for this (the interative figure is only interatice in the `html` vignette).
 
-```{r 03-pca-liver-plotIndiv, eval= TRUE, fig.show = 'hide'}
+```{r 03-pca-liver-plotIndiv, webgl=TRUE}
 plotIndiv(MyResult.pca2,
           group = liver.toxicity$treatment$Dose.Group, style="3d",
           legend = TRUE, title = 'Liver toxicity: genes, PCA comp 1 - 2 - 3')
@@ -184,7 +185,7 @@ plotVar(MyResult.spca, cex = 1)                                        # 3 Plot 
 # cex is used to reduce the size of the labels on the plot
 ```
 
-Selected variables can be identified on each component with the `selectVar` function. Here the coefficient values are extracted, but there are other outputs, see `?selectVar`:
+Selected variables can be identified on each component with the `selectVar` function. Here the coefficient values are extracted, but there are other outputs as well, see `?selectVar`:
 
 ```{r 03-pca-liver-selectVar}
 selectVar(MyResult.spca, comp = 1)$value
@@ -195,12 +196,12 @@ Those values correspond to the loading weights that are used to define each comp
 We can complement this output with `plotLoadings`. We can see here that all coefficients are negative.
 
 ```{r 03-pca-liver-plotLoadings}
-plotLoadings(MyResult.spca)
+plotLoadings(MyResult.spca, comp=1)
 ```
 
-If we look at component two, we can see a mix of positive and negative weights (also see in the `plotVar`), those correspond to variables that oppose the low and high doses (see from the `plotIndiv):
+If we look at the 2nd component, we can see a mix of positive and negative weights (also see in the `plotVar`), those correspond to variables that oppose the low and high doses (see from the `plotIndiv`):
 
-```{r 03-pca-liver-comp2, echo=FALSE,results='hide', fig.show=FALSE}
+```{r 03-pca-liver-comp2, echo=FALSE,results='hide', fig.show=TRUE}
 selectVar(MyResult.spca, comp=2)$value
 plotLoadings(MyResult.spca, comp = 2)
 ```
@@ -214,11 +215,11 @@ For this set of methods, two parameters need to be chosen:
 
 The function `tune.pca` calculates the percentage of variance explained for each component, up to the minimum between the number of rows, or column in the data set. The `optimal' number of components can be identified if an elbow appears on the screeplot. In the example below the cut-off is not very clear, we could choose 2 components.
 
-```{r 03-tune-pca, eval=TRUE, echo=FALSE, results='hide'}
+```{r 03-tune-pca, eval=TRUE, echo=TRUE, results='hide'}
 tune.pca(X)
 ```
 
-Regarding the number of variables to select in sparse PCA, there is no clear criterion at this stage. As PCA is an exploration method, we prefer to set arbitrary thresholds that will pinpoint the key variables to focus on during the interpretation stage.
+Regarding the number of variables to select in sparse PCA, there is not a clear criterion at this stage. As PCA is an exploration method, we prefer to set arbitrary thresholds that will pinpoint the key variables to focus on during the interpretation stage.
 
 
 ## Additional resources

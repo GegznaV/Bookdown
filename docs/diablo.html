@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 Multi-block Discriminant Analysis with DIABLO | mixOmics vignette</title>
   <meta name="description" content="Vignette for the R package mixOmics" />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 Multi-block Discriminant Analysis with DIABLO | mixOmics vignette" />
   <meta property="og:type" content="book" />
@@ -54,7 +54,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -150,7 +149,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5" data-path="pca.html"><a href="pca.html#quick-start"><i class="fa fa-check"></i><b>3.5</b> Quick start</a></li>
 <li class="chapter" data-level="3.6" data-path="pca.html"><a href="pca.html#to-go-further"><i class="fa fa-check"></i><b>3.6</b> To go further</a><ul>
 <li class="chapter" data-level="3.6.1" data-path="pca.html"><a href="pca.html#customize-plots"><i class="fa fa-check"></i><b>3.6.1</b> Customize plots</a></li>
-<li class="chapter" data-level="3.6.2" data-path="pca.html"><a href="pca.html#amount-of-variance-explained-and-choice-of-number-of-components"><i class="fa fa-check"></i><b>3.6.2</b> Amount of variance explained and choice of number of components</a></li>
+<li class="chapter" data-level="3.6.2" data-path="pca.html"><a href="pca.html#amount-of-variance-explained-and-choice-of-a-number-of-components"><i class="fa fa-check"></i><b>3.6.2</b> Amount of variance explained and choice of a number of components</a></li>
 <li class="chapter" data-level="3.6.3" data-path="pca.html"><a href="pca.html#other-useful-plots"><i class="fa fa-check"></i><b>3.6.3</b> Other useful plots</a></li>
 </ul></li>
 <li class="chapter" data-level="3.7" data-path="pca.html"><a href="pca.html#sPCA"><i class="fa fa-check"></i><b>3.7</b> Variable selection with sparse PCA</a><ul>
@@ -168,7 +167,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5" data-path="plsda.html"><a href="plsda.html#set-up-the-data"><i class="fa fa-check"></i><b>4.5</b> Set up the data</a></li>
 <li class="chapter" data-level="4.6" data-path="plsda.html"><a href="plsda.html#quick-start-1"><i class="fa fa-check"></i><b>4.6</b> Quick start</a></li>
 <li class="chapter" data-level="4.7" data-path="plsda.html"><a href="plsda.html#plsda-tgf"><i class="fa fa-check"></i><b>4.7</b> To go further</a><ul>
-<li class="chapter" data-level="4.7.1" data-path="plsda.html"><a href="plsda.html#splsda:plotIndiv"><i class="fa fa-check"></i><b>4.7.1</b> Customize sample plots</a></li>
+<li class="chapter" data-level="4.7.1" data-path="plsda.html"><a href="plsda.html#splsda:plotIndiv"><i class="fa fa-check"></i><b>4.7.1</b> Customize the sample plots</a></li>
 <li class="chapter" data-level="4.7.2" data-path="plsda.html"><a href="plsda.html#customize-variable-plots"><i class="fa fa-check"></i><b>4.7.2</b> Customize variable plots</a></li>
 <li class="chapter" data-level="4.7.3" data-path="plsda.html"><a href="plsda.html#other-useful-plots-1"><i class="fa fa-check"></i><b>4.7.3</b> Other useful plots</a></li>
 <li class="chapter" data-level="4.7.4" data-path="plsda.html"><a href="plsda.html#variable-selection-outputs"><i class="fa fa-check"></i><b>4.7.4</b> Variable selection outputs</a></li>
@@ -236,7 +235,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="diablo" class="section level1">
 <h1><span class="header-section-number">Chapter 6</span> Multi-block Discriminant Analysis with DIABLO</h1>
-<p><img src="Figures/06-overview-DIABLO-1.png" width="50%"  style="display: block; margin: auto;" /></p>
+<p><img src="Figures/06-overview-DIABLO-1.png" width="75%"  style="display: block; margin: auto;" /></p>
 <p>DIABLO is our new framework in <code>mixOmics</code> that extends PLS for multiple data sets integration and PLS-discriminant analysis. The acronyms stands for <strong>D</strong>ata <strong>I</strong>ntegration <strong>A</strong>nalysis for <strong>B</strong>iomarker discovery using a <strong>L</strong>atent c<strong>O</strong>mponents <span class="citation">(Singh et al. <a href="#ref-Sin16">2017</a>)</span>.</p>
 <div id="biological-question-4" class="section level2">
 <h2><span class="header-section-number">6.1</span> Biological question</h2>
@@ -266,11 +265,11 @@ The data were divided into a training set with a subset of 150 samples from the 
 </div>
 <div id="inputs-and-outputs-2" class="section level2">
 <h2><span class="header-section-number">6.4</span> Inputs and outputs</h2>
-<p>We consider as input a list <code>X</code> of data frames with <span class="math inline">\(n\)</span> rows (the number of samples) and different number of variations in each data frame. <code>Y</code> is a factor vector of length <span class="math inline">\(n\)</span> that indicates the class of each sample. Internally and similar to PLS-DA in Chapter <a href="plsda.html#plsda">4</a> it will be coded as a dummy matrix.</p>
+<p>We consider as input a list <code>X</code> of data frames with <span class="math inline">\(n\)</span> rows (the number of samples) and a different number of variations in each data frame. <code>Y</code> is a factor vector of length <span class="math inline">\(n\)</span> that indicates the class of each sample. Internally and similar to PLS-DA in Chapter <a href="plsda.html#plsda">4</a> it will be coded as a dummy matrix.</p>
 <p>DIABLO main outputs are:</p>
 <ul>
 <li><p>A <strong>set of components</strong>, also called latent variables associated to each data set. There are as many components as the chosen dimension of DIABLO.</p></li>
-<li><p>A <strong>set of loading vectors</strong>, which are coefficients assigned to each variable to define each component. Those coefficients indicate the importance of each variable in DIABLO. Importantly, each loading vector is associated to a particular component. Loading vectors are obtained so that the covariance between a linear combination of the variables from <code>X</code> (the X-component) and from <code>Y</code> (the <span class="math inline">\(Y\)</span>-component) is maximised.</p></li>
+<li><p>A <strong>set of loading vectors</strong>, which are coefficients assigned to each variable to define each component. These coefficients indicate the importance of each variable in DIABLO. Importantly, each loading vector is associated to a particular component. Loading vectors are obtained so that the covariance between a linear combination of the variables from <code>X</code> (the X-component) and from <code>Y</code> (the <span class="math inline">\(Y\)</span>-component) is maximised.</p></li>
 <li><p>A <strong>list of selected variables</strong> from each data set and associated to each component if sparse DIABLO is applied.</p></li>
 </ul>
 </div>
@@ -278,51 +277,53 @@ The data were divided into a training set with a subset of 150 samples from the 
 <h2><span class="header-section-number">6.5</span> Set up the data</h2>
 <p>We first set up the input data as a list of data frames <code>X</code> expression matrix and <code>Y</code> as a factor indicating the class membership of each sample. Each data frame in <code>X</code> should be <strong>named consistently</strong> to match with the <code>keepX</code> parameter.</p>
 <p>We check that the dimensions are correct and match. We then set up arbitrarily the number of variables <code>keepX</code> that we wish to select in each data set and each component.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mixOmics)
-<span class="kw">data</span>(breast.TCGA)
-<span class="co"># extract training data and name each data frame</span>
-X &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">mRNA =</span> breast.TCGA<span class="op">$</span>data.train<span class="op">$</span>mrna, 
-          <span class="dt">miRNA =</span> breast.TCGA<span class="op">$</span>data.train<span class="op">$</span>mirna, 
-          <span class="dt">protein =</span> breast.TCGA<span class="op">$</span>data.train<span class="op">$</span>protein)
-Y &lt;-<span class="st"> </span>breast.TCGA<span class="op">$</span>data.train<span class="op">$</span>subtype
-<span class="kw">summary</span>(Y)</code></pre>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" data-line-number="1"><span class="kw">library</span>(mixOmics)</a>
+<a class="sourceLine" id="cb85-2" data-line-number="2"><span class="kw">data</span>(breast.TCGA)</a>
+<a class="sourceLine" id="cb85-3" data-line-number="3"><span class="co"># extract training data and name each data frame</span></a>
+<a class="sourceLine" id="cb85-4" data-line-number="4">X &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">mRNA =</span> breast.TCGA<span class="op">$</span>data.train<span class="op">$</span>mrna, </a>
+<a class="sourceLine" id="cb85-5" data-line-number="5">          <span class="dt">miRNA =</span> breast.TCGA<span class="op">$</span>data.train<span class="op">$</span>mirna, </a>
+<a class="sourceLine" id="cb85-6" data-line-number="6">          <span class="dt">protein =</span> breast.TCGA<span class="op">$</span>data.train<span class="op">$</span>protein)</a>
+<a class="sourceLine" id="cb85-7" data-line-number="7">Y &lt;-<span class="st"> </span>breast.TCGA<span class="op">$</span>data.train<span class="op">$</span>subtype</a>
+<a class="sourceLine" id="cb85-8" data-line-number="8"><span class="kw">summary</span>(Y)</a></code></pre></div>
 <pre><code>## Basal  Her2  LumA 
 ##    45    30    75</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">list.keepX &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">mRNA =</span> <span class="kw">c</span>(<span class="dv">16</span>, <span class="dv">17</span>), <span class="dt">miRNA =</span> <span class="kw">c</span>(<span class="dv">18</span>,<span class="dv">5</span>), <span class="dt">protein =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">5</span>))</code></pre>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1">list.keepX &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">mRNA =</span> <span class="kw">c</span>(<span class="dv">16</span>, <span class="dv">17</span>), <span class="dt">miRNA =</span> <span class="kw">c</span>(<span class="dv">18</span>,<span class="dv">5</span>), <span class="dt">protein =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">5</span>))</a></code></pre></div>
 </div>
 <div id="quick-start-3" class="section level2">
 <h2><span class="header-section-number">6.6</span> Quick start</h2>
-<pre class="sourceCode r"><code class="sourceCode r">MyResult.diablo &lt;-<span class="st"> </span><span class="kw">block.splsda</span>(X, Y, <span class="dt">keepX=</span>list.keepX)
-<span class="kw">plotIndiv</span>(MyResult.diablo)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotVar</span>(MyResult.diablo)</code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1">MyResult.diablo &lt;-<span class="st"> </span><span class="kw">block.splsda</span>(X, Y, <span class="dt">keepX=</span>list.keepX)</a>
+<a class="sourceLine" id="cb88-2" data-line-number="2"><span class="kw">plotIndiv</span>(MyResult.diablo) <span class="co">## sample plot</span></a></code></pre></div>
+<p><img src="Figures/06-diablo-sparse-1.png" width="75%"  style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1"><span class="kw">plotVar</span>(MyResult.diablo) <span class="co">## variable plot</span></a></code></pre></div>
+<p><img src="Figures/06-diablo-sparse-2.png" width="75%"  style="display: block; margin: auto;" /></p>
 <p>Similar to PLS (Chapter <a href="pls.html#pls">5</a>), DIABLO generates a pair of components, each associated to each data set. This is why we can visualise here 3 sample plots. As DIABLO is a supervised method, samples are represented with different colours depending on their known class.</p>
-<p>The variable plot suggest some correlation structure between proteins, mRNA and miRNA. We will further customize these plots in Sections <a href="diablo.html#diablo:plotIndiv">6.7.1</a> and <a href="diablo.html#diablo:plotVar">6.7.2</a>.</p>
+<p>The variable plot suggests some correlation structure between proteins, mRNA and miRNA. We will further customize these plots in Sections <a href="diablo.html#diablo:plotIndiv">6.7.1</a> and <a href="diablo.html#diablo:plotVar">6.7.2</a>.</p>
 <p>If you were to run <code>block.splsda</code> with this minimal code, you would be using the following default values:</p>
 <ul>
 <li><code>ncomp = 2</code>: the first two PLS components are calculated and are used for graphical outputs;</li>
 <li><code>scale = TRUE</code>: data are scaled (variance = 1, strongly advised here for data integration);</li>
 <li><code>mode = &quot;regression&quot;</code>: by default a PLS regression mode should be used (see Section <a href="pls.html#PLS:details">5.8.6</a> for more details) .</li>
 </ul>
-<p>We focused here on the sparse version as would like to identify a minimal multi-omics signature, however, the non sparse version could also be run with <code>block.plsda</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">MyResult.diablo2 &lt;-<span class="st"> </span><span class="kw">block.plsda</span>(X, Y)</code></pre>
+<p>We focused here on the sparse version as would like to identify a minimal multi-omics signature, however, the non-sparse version could also be run with <code>block.plsda</code>:</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1">MyResult.diablo2 &lt;-<span class="st"> </span><span class="kw">block.plsda</span>(X, Y)</a></code></pre></div>
 </div>
 <div id="to-go-further-1" class="section level2">
 <h2><span class="header-section-number">6.7</span> To go further</h2>
 <div id="diablo:plotIndiv" class="section level3">
 <h3><span class="header-section-number">6.7.1</span> Customize sample plots</h3>
 <p>Here is an example of an improved plot, see also Section <a href="plsda.html#splsda:plotIndiv">4.7.1</a> for additional sources of inspiration.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotIndiv</span>(MyResult.diablo, 
-          <span class="dt">ind.names =</span> <span class="ot">FALSE</span>, 
-          <span class="dt">legend=</span><span class="ot">TRUE</span>, <span class="dt">cex=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>),
-          <span class="dt">title =</span> <span class="st">&#39;BRCA with DIABLO&#39;</span>)</code></pre>
-<p><img src="Figures/06-diablo-plotIndiv-1.png" width="50%"  style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1"><span class="kw">plotIndiv</span>(MyResult.diablo, </a>
+<a class="sourceLine" id="cb91-2" data-line-number="2">          <span class="dt">ind.names =</span> <span class="ot">FALSE</span>, </a>
+<a class="sourceLine" id="cb91-3" data-line-number="3">          <span class="dt">legend=</span><span class="ot">TRUE</span>, <span class="dt">cex=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb91-4" data-line-number="4">          <span class="dt">title =</span> <span class="st">&#39;BRCA with DIABLO&#39;</span>)</a></code></pre></div>
+<p><img src="Figures/06-diablo-plotIndiv-1.png" width="75%"  style="display: block; margin: auto;" /></p>
 </div>
 <div id="diablo:plotVar" class="section level3">
 <h3><span class="header-section-number">6.7.2</span> Customize variable plots</h3>
 <p>Labels can be omitted in some data sets to improve readability. For example her we only show the name of the proteins:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotVar</span>(MyResult.diablo, <span class="dt">var.names =</span> <span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>),
-        <span class="dt">legend=</span><span class="ot">TRUE</span>, <span class="dt">pch=</span><span class="kw">c</span>(<span class="dv">16</span>,<span class="dv">16</span>,<span class="dv">1</span>))</code></pre>
-<p><img src="Figures/06-diablo-plotVar-1.png" width="50%"  style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1"><span class="kw">plotVar</span>(MyResult.diablo, <span class="dt">var.names =</span> <span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb92-2" data-line-number="2">        <span class="dt">legend=</span><span class="ot">TRUE</span>, <span class="dt">pch=</span><span class="kw">c</span>(<span class="dv">16</span>,<span class="dv">16</span>,<span class="dv">1</span>))</a></code></pre></div>
+<p><img src="Figures/06-diablo-plotVar-1.png" width="75%"  style="display: block; margin: auto;" /></p>
 </div>
 <div id="other-useful-plots-for-data-integration-1" class="section level3">
 <h3><span class="header-section-number">6.7.3</span> Other useful plots for data integration</h3>
@@ -330,38 +331,39 @@ Y &lt;-<span class="st"> </span>breast.TCGA<span class="op">$</span>data.train<s
 <div id="plotdiablo" class="section level4">
 <h4><span class="header-section-number">6.7.3.1</span> <code>plotDiablo</code></h4>
 <p>A global overview of the correlation structure at the component level can be represented with the <code>plotDiablo</code> function. It plots the components across the different data sets for a given dimension. Colours indicate the class of each sample.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotDiablo</span>(MyResult.diablo, <span class="dt">ncomp =</span> <span class="dv">1</span>)</code></pre>
-<p><img src="Figures/06-diablo-plotDiablo-1.png" width="50%"  style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1"><span class="kw">plotDiablo</span>(MyResult.diablo, <span class="dt">ncomp =</span> <span class="dv">1</span>)</a></code></pre></div>
+<p><img src="Figures/06-diablo-plotDiablo-1.png" width="75%"  style="display: block; margin: auto;" /></p>
 <p>Here, we can see that a strong correlation is extracted by DIABLO between the mRNA and protein data sets. Other dimensions can be plotted with the argument <code>comp</code>.</p>
 </div>
 <div id="circosplot" class="section level4">
 <h4><span class="header-section-number">6.7.3.2</span> <code>circosPlot</code></h4>
 <p>The circos plot represents the correlations between variables of different types, represented on the side quadrants. Several display options are possible, to show within and between connexions between blocks, expression levels of each variable according to each class (argument <code>line = TRUE</code>). The circos plot is built based on a similarity matrix, which was extended to the case of multiple data sets from <span class="citation">(González et al. <a href="#ref-Gon12">2012</a>)</span>. A <code>cutoff</code> argument can be included to visualise correlation coefficients above this threshold in the multi-omics signature.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">circosPlot</span>(MyResult.diablo, <span class="dt">cutoff=</span><span class="fl">0.7</span>)</code></pre>
-<p><img src="Figures/06-diablo-circosPlot-1.png" width="50%"  style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1"><span class="kw">circosPlot</span>(MyResult.diablo, <span class="dt">cutoff=</span><span class="fl">0.7</span>)</a></code></pre></div>
+<p><img src="Figures/06-diablo-circosPlot-1.png" width="75%"  style="display: block; margin: auto;" /></p>
 </div>
 <div id="cimdiablo" class="section level4">
 <h4><span class="header-section-number">6.7.3.3</span> <code>cimDiablo</code></h4>
 <p>The <code>cimDiablo</code> function is a clustered image map specifically implemented to represent the multi-omics molecular signature expression for each sample. It is very similar to a classic hierarchical clustering:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># minimal example with margins improved:</span>
-<span class="co"># cimDiablo(MyResult.diablo, margin=c(8,20))</span>
-<span class="co"># extended example:</span>
-<span class="kw">cimDiablo</span>(MyResult.diablo, <span class="dt">color.blocks =</span> <span class="kw">c</span>(<span class="st">&#39;darkorchid&#39;</span>, <span class="st">&#39;brown1&#39;</span>, <span class="st">&#39;lightgreen&#39;</span>), <span class="dt">comp =</span> <span class="dv">1</span>, <span class="dt">margin=</span><span class="kw">c</span>(<span class="dv">8</span>,<span class="dv">20</span>), <span class="dt">legend.position =</span> <span class="st">&quot;right&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1"><span class="co"># minimal example with margins improved:</span></a>
+<a class="sourceLine" id="cb95-2" data-line-number="2"><span class="co"># cimDiablo(MyResult.diablo, margin=c(8,20))</span></a>
+<a class="sourceLine" id="cb95-3" data-line-number="3"><span class="co"># extended example:</span></a>
+<a class="sourceLine" id="cb95-4" data-line-number="4"><span class="kw">cimDiablo</span>(MyResult.diablo, <span class="dt">color.blocks =</span> <span class="kw">c</span>(<span class="st">&#39;darkorchid&#39;</span>, <span class="st">&#39;brown1&#39;</span>, <span class="st">&#39;lightgreen&#39;</span>), <span class="dt">comp =</span> <span class="dv">1</span>, <span class="dt">margin=</span><span class="kw">c</span>(<span class="dv">8</span>,<span class="dv">20</span>), <span class="dt">legend.position =</span> <span class="st">&quot;right&quot;</span>)</a></code></pre></div>
+<p><img src="Figures/06-cimDiablo-1.png" width="75%"  style="display: block; margin: auto;" /></p>
 </div>
 <div id="plotloadings" class="section level4">
 <h4><span class="header-section-number">6.7.3.4</span> <code>plotLoadings</code></h4>
 <p>The <code>plotLoadings</code> function visualises the loading weights of each selected variables on each component (default is <code>comp = 1</code>) and each data set. The color indicates the class in which the variable has the maximum level of expression (<code>contrib = &quot;max&quot;</code>) or minimum (<code>contrib =&quot;min&quot;</code>), on average (<code>method=&quot;mean&quot;</code>) or using the median (<code>method =&quot;median&quot;</code>). We only show the last plot here:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#plotLoadings(MyResult.diablo, contrib = &quot;max&quot;)</span>
-<span class="kw">plotLoadings</span>(MyResult.diablo, <span class="dt">comp =</span> <span class="dv">2</span>, <span class="dt">contrib =</span> <span class="st">&quot;max&quot;</span>)</code></pre>
-<p><img src="Figures/06-plotLoadings-max-1.png" width="50%"  style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1"><span class="co">#plotLoadings(MyResult.diablo, contrib = &quot;max&quot;)</span></a>
+<a class="sourceLine" id="cb96-2" data-line-number="2"><span class="kw">plotLoadings</span>(MyResult.diablo, <span class="dt">comp =</span> <span class="dv">2</span>, <span class="dt">contrib =</span> <span class="st">&quot;max&quot;</span>)</a></code></pre></div>
+<p><img src="Figures/06-plotLoadings-max-1.png" width="75%"  style="display: block; margin: auto;" /></p>
 </div>
 <div id="relevance-networks" class="section level4">
 <h4><span class="header-section-number">6.7.3.5</span> Relevance networks</h4>
-<p>Another visualisation of the correlation between the different types of variables is the relevance network, which is also built on the similarity matrix <span class="citation">(González et al. <a href="#ref-Gon12">2012</a>)</span>. Each color represents a type of variable. A threshold can also be set using the argument <code>cutoff</code>.</p>
+<p>Another visualisation of the correlation between the different types of variables is the relevance network, which is also built on the similarity matrix <span class="citation">(González et al. <a href="#ref-Gon12">2012</a>)</span>. Each colour represents a type of variable. A threshold can also be set using the argument <code>cutoff</code>.</p>
 <p>See also Section <a href="pls.html#pls:network">5.8.3.2</a> to save the graph and the different options, or <code>?network</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">network</span>(MyResult.diablo, <span class="dt">blocks =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>),
-        <span class="dt">color.node =</span> <span class="kw">c</span>(<span class="st">&#39;darkorchid&#39;</span>, <span class="st">&#39;brown1&#39;</span>, <span class="st">&#39;lightgreen&#39;</span>), 
-        <span class="dt">cutoff =</span> <span class="fl">0.6</span>, <span class="dt">save =</span> <span class="st">&#39;jpeg&#39;</span>, <span class="dt">name.save =</span> <span class="st">&#39;DIABLOnetwork&#39;</span>)</code></pre>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1"><span class="kw">network</span>(MyResult.diablo, <span class="dt">blocks =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb97-2" data-line-number="2">        <span class="dt">color.node =</span> <span class="kw">c</span>(<span class="st">&#39;darkorchid&#39;</span>, <span class="st">&#39;brown1&#39;</span>, <span class="st">&#39;lightgreen&#39;</span>), </a>
+<a class="sourceLine" id="cb97-3" data-line-number="3">        <span class="dt">cutoff =</span> <span class="fl">0.6</span>, <span class="dt">save =</span> <span class="st">&#39;jpeg&#39;</span>, <span class="dt">name.save =</span> <span class="st">&#39;DIABLOnetwork&#39;</span>)</a></code></pre></div>
 </div>
 </div>
 </div>
@@ -370,36 +372,37 @@ Y &lt;-<span class="st"> </span>breast.TCGA<span class="op">$</span>data.train<s
 <div id="classification-performance" class="section level3">
 <h3><span class="header-section-number">6.8.1</span> Classification performance</h3>
 <p>Similar to what is described in Section <a href="plsda.html#tuning:sPLSDA">4.7.5</a> we use repeated cross-validation with <code>perf</code> to assess the prediction of the model. For this complex classification problems, often a centroid distance is suitable, see details in <span class="citation">(Rohart, Gautier, et al. <a href="#ref-mixomics">2017</a>)</span> Suppl. Material S1.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">123</span>) <span class="co"># for reproducibility in this vignette</span>
-MyPerf.diablo &lt;-<span class="st"> </span><span class="kw">perf</span>(MyResult.diablo, <span class="dt">validation =</span> <span class="st">&#39;Mfold&#39;</span>, <span class="dt">folds =</span> <span class="dv">5</span>, 
-                   <span class="dt">nrepeat =</span> <span class="dv">10</span>, 
-                   <span class="dt">dist =</span> <span class="st">&#39;centroids.dist&#39;</span>)
-
-<span class="co">#MyPerf.diablo  # lists the different outputs</span>
-
-<span class="co"># Performance with Majority vote</span>
-<span class="co">#MyPerf.diablo$MajorityVote.error.rate</span></code></pre>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">123</span>) <span class="co"># for reproducibility in this vignette</span></a>
+<a class="sourceLine" id="cb98-2" data-line-number="2">MyPerf.diablo &lt;-<span class="st"> </span><span class="kw">perf</span>(MyResult.diablo, <span class="dt">validation =</span> <span class="st">&#39;Mfold&#39;</span>, <span class="dt">folds =</span> <span class="dv">5</span>, </a>
+<a class="sourceLine" id="cb98-3" data-line-number="3">                   <span class="dt">nrepeat =</span> <span class="dv">10</span>, </a>
+<a class="sourceLine" id="cb98-4" data-line-number="4">                   <span class="dt">dist =</span> <span class="st">&#39;centroids.dist&#39;</span>)</a>
+<a class="sourceLine" id="cb98-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb98-6" data-line-number="6"><span class="co">#MyPerf.diablo  # lists the different outputs</span></a>
+<a class="sourceLine" id="cb98-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb98-8" data-line-number="8"><span class="co"># Performance with Majority vote</span></a>
+<a class="sourceLine" id="cb98-9" data-line-number="9"><span class="co">#MyPerf.diablo$MajorityVote.error.rate</span></a></code></pre></div>
 </div>
 <div id="auc" class="section level3">
 <h3><span class="header-section-number">6.8.2</span> AUC</h3>
 <p>An AUC plot per block is plotted using the function <code>auroc</code> see <span class="citation">(Rohart, Gautier, et al. <a href="#ref-mixomics">2017</a>)</span> for the interpretation of such output as the ROC and AUC criteria are not particularly insightful in relation to the performance evaluation of our methods, but can complement the statistical analysis.</p>
 <p>Here we evaluate the AUC for the model that includes 2 components in the miRNA data set.</p>
-<p><img src="Figures/06-auroc-1.png" width="50%"  style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" data-line-number="1">Myauc.diablo &lt;-<span class="st"> </span><span class="kw">auroc</span>(MyResult.diablo, <span class="dt">roc.block =</span> <span class="st">&quot;miRNA&quot;</span>, <span class="dt">roc.comp =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="Figures/06-auroc-1.png" width="75%"  style="display: block; margin: auto;" /></p>
 <div id="prediction-on-an-external-test-set" class="section level4">
 <h4><span class="header-section-number">6.8.2.1</span> Prediction on an external test set</h4>
-<p>The <code>predict</code> function predicts the class of samples from a test set. In our specific case, one data set is missing in the test set but the method can still be applied. Make sure the name of the blocks correspond exactly.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># prepare test set data: here one block (proteins) is missing</span>
-X.test &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">mRNA =</span> breast.TCGA<span class="op">$</span>data.test<span class="op">$</span>mrna, 
-                      <span class="dt">miRNA =</span> breast.TCGA<span class="op">$</span>data.test<span class="op">$</span>mirna)
-
-Mypredict.diablo &lt;-<span class="st"> </span><span class="kw">predict</span>(MyResult.diablo, <span class="dt">newdata =</span> X.test)
-<span class="co"># the warning message will inform us that one block is missing</span>
-<span class="co">#Mypredict.diablo # list the different outputs</span></code></pre>
+<p>The <code>predict</code> function predicts the class of samples from a test set. In our specific case, one data set is missing in the test set but the method can still be applied. Make sure the names of the blocks correspond exactly.</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" data-line-number="1"><span class="co"># prepare test set data: here one block (proteins) is missing</span></a>
+<a class="sourceLine" id="cb100-2" data-line-number="2">X.test &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">mRNA =</span> breast.TCGA<span class="op">$</span>data.test<span class="op">$</span>mrna, </a>
+<a class="sourceLine" id="cb100-3" data-line-number="3">                      <span class="dt">miRNA =</span> breast.TCGA<span class="op">$</span>data.test<span class="op">$</span>mirna)</a>
+<a class="sourceLine" id="cb100-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb100-5" data-line-number="5">Mypredict.diablo &lt;-<span class="st"> </span><span class="kw">predict</span>(MyResult.diablo, <span class="dt">newdata =</span> X.test)</a>
+<a class="sourceLine" id="cb100-6" data-line-number="6"><span class="co"># the warning message will inform us that one block is missing</span></a>
+<a class="sourceLine" id="cb100-7" data-line-number="7"><span class="co">#Mypredict.diablo # list the different outputs</span></a></code></pre></div>
 <p>The confusion table compares the real subtypes with the predicted subtypes for a 2 component model, for the distance of interest:</p>
-<pre class="sourceCode r"><code class="sourceCode r">confusion.mat &lt;-<span class="st"> </span><span class="kw">get.confusion_matrix</span>(
-                <span class="dt">truth =</span> breast.TCGA<span class="op">$</span>data.test<span class="op">$</span>subtype, 
-                <span class="dt">predicted =</span> Mypredict.diablo<span class="op">$</span>MajorityVote<span class="op">$</span>centroids.dist[,<span class="dv">2</span>])
-<span class="kw">kable</span>(confusion.mat)</code></pre>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" data-line-number="1">confusion.mat &lt;-<span class="st"> </span><span class="kw">get.confusion_matrix</span>(</a>
+<a class="sourceLine" id="cb101-2" data-line-number="2">                <span class="dt">truth =</span> breast.TCGA<span class="op">$</span>data.test<span class="op">$</span>subtype, </a>
+<a class="sourceLine" id="cb101-3" data-line-number="3">                <span class="dt">predicted =</span> Mypredict.diablo<span class="op">$</span>MajorityVote<span class="op">$</span>centroids.dist[,<span class="dv">2</span>])</a>
+<a class="sourceLine" id="cb101-4" data-line-number="4"><span class="kw">kable</span>(confusion.mat)</a></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -434,49 +437,49 @@ Mypredict.diablo &lt;-<span class="st"> </span><span class="kw">predict</span>(M
 </tr>
 </tbody>
 </table>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get.BER</span>(confusion.mat)</code></pre>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1"><span class="kw">get.BER</span>(confusion.mat)</a></code></pre></div>
 <pre><code>## [1] 0.2428571</code></pre>
 </div>
 </div>
 <div id="tuning-parameters-1" class="section level3">
 <h3><span class="header-section-number">6.8.3</span> Tuning parameters</h3>
 <p>For DIABLO, the parameters to tune are:</p>
-<p>1 - The design matrix <code>design</code> indicates which data sets, or blocks should be connected to maximise the covariance between components, and to which extend. A compromise needs to be achieved between maximising the correlation between data sets (design value between 0.5 and 1) and maximising the discrimination with the outcome <code>Y</code> (design value between 0 and 0.5), see <span class="citation">(Singh et al. <a href="#ref-Sin16">2017</a>)</span> for more details.</p>
+<p>1 - The design matrix <code>design</code> indicates, which data sets or blocks should be connected to maximise the covariance between components, and to which extent. A compromise needs to be achieved between maximising the correlation between data sets (design value between 0.5 and 1) and maximising the discrimination with the outcome <code>Y</code> (design value between 0 and 0.5), see <span class="citation">(Singh et al. <a href="#ref-Sin16">2017</a>)</span> for more details.</p>
 <p>2 - The number of components to retain <code>ncomp</code>. The rule of thumb is usually <span class="math inline">\(K-1\)</span> where <span class="math inline">\(K\)</span> is the number of classes, but it is worth testing a few extra components.</p>
 <p>3 - The number of variables to select on each component and on each data set in the list <code>keepX</code>.</p>
 <p>For <strong>item 1</strong>, by default all data sets are linked as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r">MyResult.diablo<span class="op">$</span>design</code></pre>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1">MyResult.diablo<span class="op">$</span>design</a></code></pre></div>
 <pre><code>##         mRNA miRNA protein Y
 ## mRNA       0     1       1 1
 ## miRNA      1     0       1 1
 ## protein    1     1       0 1
 ## Y          1     1       1 0</code></pre>
 <p>The <code>design</code> can be changed as follows. By default each data set will be linked to the <code>Y</code> outcome.</p>
-<pre class="sourceCode r"><code class="sourceCode r">MyDesign &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.3</span>,
-                     <span class="fl">0.1</span>, <span class="dv">0</span>, <span class="fl">0.9</span>,
-                     <span class="fl">0.3</span>, <span class="fl">0.9</span>, <span class="dv">0</span>),
-                   <span class="dt">byrow=</span><span class="ot">TRUE</span>,
-                   <span class="dt">ncol =</span> <span class="kw">length</span>(X), <span class="dt">nrow =</span> <span class="kw">length</span>(X),
-                 <span class="dt">dimnames =</span> <span class="kw">list</span>(<span class="kw">names</span>(X), <span class="kw">names</span>(X)))
-MyDesign</code></pre>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" data-line-number="1">MyDesign &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.3</span>,</a>
+<a class="sourceLine" id="cb106-2" data-line-number="2">                     <span class="fl">0.1</span>, <span class="dv">0</span>, <span class="fl">0.9</span>,</a>
+<a class="sourceLine" id="cb106-3" data-line-number="3">                     <span class="fl">0.3</span>, <span class="fl">0.9</span>, <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb106-4" data-line-number="4">                   <span class="dt">byrow=</span><span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb106-5" data-line-number="5">                   <span class="dt">ncol =</span> <span class="kw">length</span>(X), <span class="dt">nrow =</span> <span class="kw">length</span>(X),</a>
+<a class="sourceLine" id="cb106-6" data-line-number="6">                 <span class="dt">dimnames =</span> <span class="kw">list</span>(<span class="kw">names</span>(X), <span class="kw">names</span>(X)))</a>
+<a class="sourceLine" id="cb106-7" data-line-number="7">MyDesign</a></code></pre></div>
 <pre><code>##         mRNA miRNA protein
 ## mRNA     0.0   0.1     0.3
 ## miRNA    0.1   0.0     0.9
 ## protein  0.3   0.9     0.0</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">MyResult.diablo.design &lt;-<span class="st"> </span><span class="kw">block.splsda</span>(X, Y, <span class="dt">keepX=</span>list.keepX, <span class="dt">design=</span>MyDesign)</code></pre>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" data-line-number="1">MyResult.diablo.design &lt;-<span class="st"> </span><span class="kw">block.splsda</span>(X, Y, <span class="dt">keepX=</span>list.keepX, <span class="dt">design=</span>MyDesign)</a></code></pre></div>
 <p><strong>Items 2 and 3</strong> can be tuned using repeated cross-validation, as we described in Chapter <a href="plsda.html#plsda">4</a>. A detailed tutorial is provided on our <a href="http://mixomics.org/mixdiablo/">website</a> in the different DIABLO tabs.</p>
 </div>
 </div>
 <div id="additional-resources-3" class="section level2">
 <h2><span class="header-section-number">6.9</span> Additional resources</h2>
-<p>Additional examples are provided in <code>example(block.splsda)</code> and in our DIABLO tab in <a href="http://www.mixomics.org" class="uri">http://www.mixomics.org</a>. Also have a look at <span class="citation">(Singh et al. <a href="#ref-Sin16">2017</a>)</span></p>
+<p>Additional examples are provided in <code>example(block.splsda)</code> and in our DIABLO tab in <a href="http://www.mixomics.org" class="uri">http://www.mixomics.org</a>. Also, have a look at <span class="citation">(Singh et al. <a href="#ref-Sin16">2017</a>)</span></p>
 </div>
 <div id="faq-3" class="section level2">
 <h2><span class="header-section-number">6.10</span> FAQ</h2>
 <ul>
 <li>When performing a multi-block analysis, how do I choose my design?
 <ul>
-<li>We recommend first relying on some prior biological knowledge you may have on the relationship you expect to see between data sets. Conduct a few trials on a non sparse version <code>block.plsda</code>, look at the classification performance with <code>perf</code> and <code>plotDiablo</code> before you can decide on your final design.</li>
+<li>We recommend first relying on some prior biological knowledge you may have on the relationship you expect to see between data sets. Conduct a few trials on a non-sparse version <code>block.plsda</code>, look at the classification performance with <code>perf</code> and <code>plotDiablo</code> before you can decide on your final design.</li>
 </ul></li>
 <li>I have a small number of samples (n &lt; 10), should I still tune <code>keepX</code>?
 <ul>
@@ -488,11 +491,11 @@ MyDesign</code></pre>
 </ul></li>
 <li>My tuning step indicated the selection of only 1 miRNA…
 <ul>
-<li>Choose a grid of keepX values that starts at a higher value (e.g. 5). The algorithm found an optimum with only one variable, either because it is highly discriminatory or because the data are noisy, but it does not stop you from trying for more.</li>
+<li>Choose a grid of <code>keepX</code> values that starts at a higher value (e.g. 5). The algorithm found an optimum with only one variable, either because it is highly discriminatory or because the data are noisy, but it does not stop you from trying for more.</li>
 </ul></li>
 <li>My Y is continuous, what can I do?
 <ul>
-<li>You can perform a multi-omics regression with <code>block.spls</code>. We have not found a way yet to tune the results so you will need to adopt an exploratory approach or back yourself up with down stream analyses once you have identified a list of highly correlated features.</li>
+<li>You can perform a multi-omics regression with <code>block.spls</code>. We have not found a way yet to tune the results so you will need to adopt an exploratory approach or back yourself up with downstream analyses once you have identified a list of highly correlated features.</li>
 </ul></li>
 </ul>
 

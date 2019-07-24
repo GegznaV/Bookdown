@@ -1,6 +1,6 @@
 --- 
 title: 'mixOmics vignette'
-author: 'Kim-Anh Le Cao, Sebastien Dejean, Al J Abadi'
+author: 'Kim-Anh Lê Cao, Sebastien Dejean, Al J Abadi'
 package: mixOmics
 date: '\today'
 site: bookdown::bookdown_site
@@ -17,7 +17,13 @@ header-includes:
   - \usepackage{color}
   
 ---
-
+```{r, include=FALSE}
+library(knitr)
+# global options - probably better to put out.width='60%' for pdf output
+knitr::opts_chunk$set(dpi = 100, echo=TRUE, warning=FALSE, message=FALSE, eval = TRUE, cache=TRUE,
+                      fig.show=TRUE, fig.asp=1,fig.align='center', out.width = '75%',
+                      fig.pos= "h", out.extra = '', fig.path= 'Figures/')
+```
 # Preface {-}
 
 This document outlines some of the utilities of _mixOmics_ package. If you run into any issues reproducing these results, please let us know by creating an issue [here](https://github.com/mixOmicsTeam/Bookdown/issues). Also, feel free to share your experience/suggestions in [mixOmics Discourse forum](https://mixomics-users.discourse.group/).

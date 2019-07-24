@@ -1,10 +1,11 @@
-
-```{r 05-global_options, include=FALSE}
+```{r, include=FALSE}
 library(knitr)
-# global options
+# global options - probably better to put out.width='60%' for pdf output
 knitr::opts_chunk$set(dpi = 100, echo=TRUE, warning=FALSE, message=FALSE, eval = TRUE, cache=TRUE,
-                      fig.show=TRUE, fig.width= 7,fig.height= 6,fig.align='center', out.width = '50%', fig.pos= "h", out.extra = '',
-                      fig.path= 'Figures/')
+                      fig.show=TRUE, fig.asp=1,fig.align='center', out.width = '75%',
+                      fig.pos= "h", out.extra = '', fig.path= 'Figures/')
+library(rgl)
+knit_hooks$set(webgl = hook_webgl) ## to include 3d images in the html vignette - 3D chunks must have webgl=TRUE
 ```
 
 
@@ -89,10 +90,10 @@ dim(X); dim(Y)
 
 We will mainly focus on sparse PLS for large biological data sets where variable selection can help the interpretation of the results. See `?pls` for a model with no variable selection. Here we arbitrarily set the number of variables to select to 50 on each of the 2 components of PLS (see section \@ref(tuning:PLS) for tuning these values).
 
-```{r 05-pls-and-plots, fig.show='hide'}
+```{r 05-pls-and-plots}
 MyResult.spls <- spls(X,Y, keepX = c(25, 25), keepY = c(5,5))  
-plotIndiv(MyResult.spls)                                      
-plotVar(MyResult.spls)                                        
+plotIndiv(MyResult.spls)     ## sample plot                   
+plotVar(MyResult.spls)       ## variable plot
 ```
 
 If you were to run `spls` with this minimal code, you would be using the following default values:
@@ -128,10 +129,13 @@ plotIndiv(MyResult.spls, group=nutrimouse$diet,
 
 
 ### Customize variable plots {#pls:plotVar}
-See (`example(plotVar)`) for more examples. Here we change the size of the labels. By default the colours are assigned to each type of variable. The coordinates of the variables can also be saved as follows:
+See (`example(plotVar)`) for more examples. Here we change the size of the labels. By default the colours are assigned to each type of variable. 
 
 ```{r 05-pls-plotVar-1}
 plotVar(MyResult.spls, cex=c(3,2), legend = TRUE)
+```
+The coordinates of the variables can also be saved as follows:
+```{r 05-pls-plotVar-2}
 coordinates <- plotVar(MyResult.spls, plot = FALSE)
 ```
 
@@ -143,20 +147,27 @@ We extended other types of plots, based on clustered image maps and relevance ne
 #### Clustered Image Maps
 A clustered image map can be produced using the `cim` function. You may experience figures margin issues in RStudio. Best is to either use `X11()` or save the plot as an external file. For example to show the correlation structure between the X and Y variables selected on component 1:
 
-```{r 05-pls-cim, eval= FALSE, fig.show = 'hide'}
+```{r 05-pls-cim-1, webgl=TRUE}
 X11()
 cim(MyResult.spls, comp = 1)
+```
+```{r 05-pls-cim-2, eval= FALSE}
+## or save it
 cim(MyResult.spls, comp = 1, save = 'jpeg', name.save = 'PLScim')
 ```
+
 
 #### Relevance networks {#pls:network}
 Using the same similarity matrix input in CIM, we can also represent relevance bipartite networks. Those networks only represent edges between one type of variables from `X` and the other type of variable, from `Y`. Whilst we use sPLS to narrow down to a few key correlated variables, our `keepX` and `keepY` values might still be very high for this kind of output. A cut-off can be set based on the correlation coefficient between the different types of variables.
 
 Other arguments such as `interactive = TRUE` enables a scrollbar to change the cut-off value interactively, see other options in `?network`. Additionally, the graph object can be saved to be input into Cytoscape for improved visualisation.
-
-```{r 05-pls-network, eval=FALSE}
+```{r 05-pls-network-1, webgl=TRUE}
 X11()
 network(MyResult.spls, comp = 1)
+```
+
+```{r 05-pls-network, eval=FALSE}
+## or save it
 network(MyResult.spls, comp = 1, cutoff = 0.6, save = 'jpeg', name.save = 'PLSnetwork')
 # save as graph object for cytoscape
 myNetwork <- network(MyResult.spls, comp = 1)$gR
@@ -171,8 +182,6 @@ Instead of projecting the samples into the combined XY representation space, as 
 plotArrow(MyResult.spls,group=nutrimouse$diet, legend = TRUE,
           X.label = 'PLS comp 1', Y.label = 'PLS comp 2')
 ```
-
-
 
 
 ### Variable selection outputs
@@ -190,8 +199,6 @@ The loading plots help visualise the coefficients assigned to each selected vari
 ```{r 05-pls-plotLoadings-1}
 plotLoadings(MyResult.spls, comp = 1, size.name = rel(0.5))
 ```
-
-
 
 
 ### Tuning parameters and numerical outputs {#tuning:PLS}

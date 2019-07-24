@@ -1,10 +1,9 @@
-
-```{r 02-global_options, include=FALSE}
+```{r, include=FALSE}
 library(knitr)
-# global options
+# global options - probably better to put out.width='60%' for pdf output
 knitr::opts_chunk$set(dpi = 100, echo=TRUE, warning=FALSE, message=FALSE, eval = TRUE, cache=TRUE,
-                      fig.show=TRUE, fig.width= 7,fig.height= 6,fig.align='center', out.width = '50%', fig.pos= "h", out.extra = '',
-                      fig.path= 'Figures/')
+                      fig.show=TRUE, fig.asp=1,fig.align='center', out.width = '75%',
+                      fig.pos= "h", out.extra = '', fig.path= 'Figures/')
 ```
 
 # Let's get started {#start}
@@ -17,12 +16,14 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
  BiocManager::install("mixOmics")
 ```
 
-Alternatively, you can install the development version of the package from Github.
+Alternatively, you can install the latest GitHub version of the package:
 ```{r 02-install-github, eval = FALSE}
-BiocManager::install("mixOmicsTeam/mixOmics/")
+BiocManager::install("mixOmicsTeam/mixOmics")
 ```
 
-The `mixOmics` package should directly import the following packages: `igraph, rgl, ellipse, corpcor, RColorBrewer, plyr, parallel, dplyr, tidyr, reshape2, methods, matrixStats, rARPACK, gridExtra`. For *apple mac users*, if you are unable to install the imported package `rgl`, you will need to install the [XQuartz software](https://www.xquartz.org) first.
+The `mixOmics` package should directly import the following packages:
+`igraph, rgl, ellipse, corpcor, RColorBrewer, plyr, parallel, dplyr, tidyr, reshape2, methods, matrixStats, rARPACK, gridExtra`.
+**For Apple mac users:** if you are unable to install the imported package `rgl`, you will need to install the [XQuartz software](https://www.xquartz.org) first.
 
 ## Load the package {#start:upload}
 ```{r 02-load, message=FALSE}

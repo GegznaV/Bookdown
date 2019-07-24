@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Projection to Latent Structure (PLS) | mixOmics vignette</title>
   <meta name="description" content="Vignette for the R package mixOmics" />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Projection to Latent Structure (PLS) | mixOmics vignette" />
   <meta property="og:type" content="book" />
@@ -54,7 +54,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -150,7 +149,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5" data-path="pca.html"><a href="pca.html#quick-start"><i class="fa fa-check"></i><b>3.5</b> Quick start</a></li>
 <li class="chapter" data-level="3.6" data-path="pca.html"><a href="pca.html#to-go-further"><i class="fa fa-check"></i><b>3.6</b> To go further</a><ul>
 <li class="chapter" data-level="3.6.1" data-path="pca.html"><a href="pca.html#customize-plots"><i class="fa fa-check"></i><b>3.6.1</b> Customize plots</a></li>
-<li class="chapter" data-level="3.6.2" data-path="pca.html"><a href="pca.html#amount-of-variance-explained-and-choice-of-number-of-components"><i class="fa fa-check"></i><b>3.6.2</b> Amount of variance explained and choice of number of components</a></li>
+<li class="chapter" data-level="3.6.2" data-path="pca.html"><a href="pca.html#amount-of-variance-explained-and-choice-of-a-number-of-components"><i class="fa fa-check"></i><b>3.6.2</b> Amount of variance explained and choice of a number of components</a></li>
 <li class="chapter" data-level="3.6.3" data-path="pca.html"><a href="pca.html#other-useful-plots"><i class="fa fa-check"></i><b>3.6.3</b> Other useful plots</a></li>
 </ul></li>
 <li class="chapter" data-level="3.7" data-path="pca.html"><a href="pca.html#sPCA"><i class="fa fa-check"></i><b>3.7</b> Variable selection with sparse PCA</a><ul>
@@ -168,7 +167,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5" data-path="plsda.html"><a href="plsda.html#set-up-the-data"><i class="fa fa-check"></i><b>4.5</b> Set up the data</a></li>
 <li class="chapter" data-level="4.6" data-path="plsda.html"><a href="plsda.html#quick-start-1"><i class="fa fa-check"></i><b>4.6</b> Quick start</a></li>
 <li class="chapter" data-level="4.7" data-path="plsda.html"><a href="plsda.html#plsda-tgf"><i class="fa fa-check"></i><b>4.7</b> To go further</a><ul>
-<li class="chapter" data-level="4.7.1" data-path="plsda.html"><a href="plsda.html#splsda:plotIndiv"><i class="fa fa-check"></i><b>4.7.1</b> Customize sample plots</a></li>
+<li class="chapter" data-level="4.7.1" data-path="plsda.html"><a href="plsda.html#splsda:plotIndiv"><i class="fa fa-check"></i><b>4.7.1</b> Customize the sample plots</a></li>
 <li class="chapter" data-level="4.7.2" data-path="plsda.html"><a href="plsda.html#customize-variable-plots"><i class="fa fa-check"></i><b>4.7.2</b> Customize variable plots</a></li>
 <li class="chapter" data-level="4.7.3" data-path="plsda.html"><a href="plsda.html#other-useful-plots-1"><i class="fa fa-check"></i><b>4.7.3</b> Other useful plots</a></li>
 <li class="chapter" data-level="4.7.4" data-path="plsda.html"><a href="plsda.html#variable-selection-outputs"><i class="fa fa-check"></i><b>4.7.4</b> Variable selection outputs</a></li>
@@ -236,7 +235,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="pls" class="section level1">
 <h1><span class="header-section-number">Chapter 5</span> Projection to Latent Structure (PLS)</h1>
-<p><img src="Figures/05-overview-PLS-1.png" width="50%"  style="display: block; margin: auto;" /></p>
+<p><img src="Figures/05-overview-PLS-1.png" width="75%"  style="display: block; margin: auto;" /></p>
 <div id="biological-question-3" class="section level2">
 <h2><span class="header-section-number">5.1</span> Biological question</h2>
 <p><span style="color:blue">
@@ -258,7 +257,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="principle-of-pls" class="section level2">
 <h2><span class="header-section-number">5.3</span> Principle of PLS</h2>
 <p>Partial Least Squares (PLS) regression <span class="citation">(Wold <a href="#ref-Wol66">1966</a>; Wold, Sjöström, and Eriksson <a href="#ref-Wol01">2001</a>)</span> is a multivariate methodology which relates () two data matrices <code>X</code> (e.g. transcriptomics) and <code>Y</code> (e.g. lipids). PLS goes beyond traditional multiple regression by modelling the structure of both matrices. Unlike traditional multiple regression models, it is not limited to uncorrelated variables. One of the many advantages of PLS is that it can handle many noisy, collinear (correlated) and missing variables and can also simultaneously model several response variables in <code>Y</code>.</p>
-<p>PLS is a multivariate projection-based method that can address different types of integration problems. Its flexibility is the reason why it is the backbone of most methods in <code>mixOmics</code>. PLS is computationally very efficient when the number of variables <span class="math inline">\(p + q &gt;&gt; n\)</span> the number of samples. It performs successive local regressions that avoid computational issues due to the inversion of large singular covariance matrices. Unlike PCA which maximizes the variance of components from a single data set, PLS maximizes the covariance between components from two data sets. The mathematical concepts of covariance and correlation are similar, but the covariance is an unbounded measure and covariance has a unit measure (see <a href="intro.html#intro:background">1.2.1</a>). In PLS, linear combination of variables are called <em>latent variables</em> or <em>latent components</em>. The weight vectors used to calculate the linear combinations are called the <em>loading vectors</em>. Latent variables and loading vectors are thus associated, and come in pairs from each of the two data sets being integrated.</p>
+<p>PLS is a multivariate projection-based method that can address different types of integration problems. Its flexibility is the reason why it is the backbone of most methods in <code>mixOmics</code>. PLS is computationally very efficient when the number of variables <span class="math inline">\(p + q &gt;&gt; n\)</span> the number of samples. It performs successive local regressions that avoid computational issues due to the inversion of large singular covariance matrices. Unlike PCA which maximizes the variance of components from a single data set, PLS maximizes the covariance between components from two data sets. The mathematical concepts of covariance and correlation are similar, but the covariance is an unbounded measure and covariance has a unit measure (see <a href="intro.html#intro:background">1.2.1</a>). In PLS, a linear combination of variables is called <em>latent variables</em> or <em>latent components</em>. The weight vectors used to calculate the linear combinations are called the <em>loading vectors</em>. Latent variables and loading vectors are thus associated and come in pairs from each of the two data sets being integrated.</p>
 </div>
 <div id="principle-of-sparse-pls" class="section level2">
 <h2><span class="header-section-number">5.4</span> Principle of sparse PLS</h2>
@@ -269,60 +268,63 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We consider the data input matrices: <code>X</code> is a <span class="math inline">\(n \times p\)</span> data matrix and <code>Y</code> a <span class="math inline">\(n \times q\)</span> data matrix, where <span class="math inline">\(n\)</span> the number of samples (individuals), <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> are the number of variables in each data set. PLS main outputs are:</p>
 <ul>
 <li><p>A <strong>set of components</strong>, also called latent variables associated to each data set. There are as many components as the chosen dimension of the PLS.</p></li>
-<li><p>A <strong>set of loading vectors</strong>, which are coefficients assigned to each variable to define each component. Those coefficients indicate the importance of each variable in PLS. Importantly, each loading vector is associated to a particular component. Loading vectors are obtained so that the covariance between a linear combination of the variables from <code>X</code> (the X-component) and from <code>Y</code> (the <span class="math inline">\(Y\)</span>-component) is maximised.</p></li>
+<li><p>A <strong>set of loading vectors</strong>, which are coefficients assigned to each variable to define each component. These coefficients indicate the importance of each variable in PLS. Importantly, each loading vector is associated to a particular component. Loading vectors are obtained so that the covariance between a linear combination of the variables from <code>X</code> (the X-component) and from <code>Y</code> (the <span class="math inline">\(Y\)</span>-component) is maximised.</p></li>
 <li><p>A <strong>list of selected variables</strong> from both <code>X</code> and <code>Y</code> and associated to each component if sPLS is applied.</p></li>
 </ul>
 </div>
 <div id="set-up-the-data-1" class="section level2">
 <h2><span class="header-section-number">5.6</span> Set up the data</h2>
 <p>We first set up the data as <code>X</code> expression matrix and <code>Y</code> as the lipid abundance matrix. We also check that the dimensions are correct and match:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mixOmics)
-<span class="kw">data</span>(nutrimouse)
-X &lt;-<span class="st"> </span>nutrimouse<span class="op">$</span>gene  
-Y &lt;-<span class="st"> </span>nutrimouse<span class="op">$</span>lipid
-<span class="kw">dim</span>(X); <span class="kw">dim</span>(Y)</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="kw">library</span>(mixOmics)</a>
+<a class="sourceLine" id="cb62-2" data-line-number="2"><span class="kw">data</span>(nutrimouse)</a>
+<a class="sourceLine" id="cb62-3" data-line-number="3">X &lt;-<span class="st"> </span>nutrimouse<span class="op">$</span>gene  </a>
+<a class="sourceLine" id="cb62-4" data-line-number="4">Y &lt;-<span class="st"> </span>nutrimouse<span class="op">$</span>lipid</a>
+<a class="sourceLine" id="cb62-5" data-line-number="5"><span class="kw">dim</span>(X); <span class="kw">dim</span>(Y)</a></code></pre></div>
 <pre><code>## [1]  40 120</code></pre>
 <pre><code>## [1] 40 21</code></pre>
 </div>
 <div id="quick-start-2" class="section level2">
 <h2><span class="header-section-number">5.7</span> Quick start</h2>
 <p>We will mainly focus on sparse PLS for large biological data sets where variable selection can help the interpretation of the results. See <code>?pls</code> for a model with no variable selection. Here we arbitrarily set the number of variables to select to 50 on each of the 2 components of PLS (see section <a href="pls.html#tuning:PLS">5.8.5</a> for tuning these values).</p>
-<pre class="sourceCode r"><code class="sourceCode r">MyResult.spls &lt;-<span class="st"> </span><span class="kw">spls</span>(X,Y, <span class="dt">keepX =</span> <span class="kw">c</span>(<span class="dv">25</span>, <span class="dv">25</span>), <span class="dt">keepY =</span> <span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>))  
-<span class="kw">plotIndiv</span>(MyResult.spls)                                      </code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotVar</span>(MyResult.spls)                                        </code></pre>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1">MyResult.spls &lt;-<span class="st"> </span><span class="kw">spls</span>(X,Y, <span class="dt">keepX =</span> <span class="kw">c</span>(<span class="dv">25</span>, <span class="dv">25</span>), <span class="dt">keepY =</span> <span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>))  </a>
+<a class="sourceLine" id="cb65-2" data-line-number="2"><span class="kw">plotIndiv</span>(MyResult.spls)     <span class="co">## sample plot                   </span></a></code></pre></div>
+<p><img src="Figures/05-pls-and-plots-1.png" width="75%"  style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="kw">plotVar</span>(MyResult.spls)       <span class="co">## variable plot</span></a></code></pre></div>
+<p><img src="Figures/05-pls-and-plots-2.png" width="75%"  style="display: block; margin: auto;" /></p>
 <p>If you were to run <code>spls</code> with this minimal code, you would be using the following default values:</p>
 <ul>
 <li><code>ncomp = 2</code>: the first two PLS components are calculated and are used for graphical outputs;</li>
 <li><code>scale = TRUE</code>: data are scaled (variance = 1, strongly advised here);</li>
-<li><code>mode = &quot;regression&quot;</code>: by default a PLS regression mode should be used (see <a href="pls.html#PLS:details">5.8.6</a> for more details) .</li>
+<li><code>mode = &quot;regression&quot;</code>: by default, a PLS regression mode should be used (see <a href="pls.html#PLS:details">5.8.6</a> for more details).</li>
 </ul>
-<p>Because PLS generates a pair of components, each associated to each data set, the function <code>plotIndiv</code> produces 2 plots that represent the same samples projected in either the space spanned by the X-components, or the Y-components. A single plot can also be displayed, see section <a href="pls.html#pls:plotIndiv">5.8.1</a>.</p>
+<p>Because PLS generates a pair of components, each associated to each data set, the function <code>plotIndiv</code> produces 2 plots that represent the same samples projected in either space spanned by the X-components or the Y-components. A single plot can also be displayed, see section <a href="pls.html#pls:plotIndiv">5.8.1</a>.</p>
 </div>
 <div id="pls-tgf" class="section level2">
 <h2><span class="header-section-number">5.8</span> To go further</h2>
 <div id="pls:plotIndiv" class="section level3">
 <h3><span class="header-section-number">5.8.1</span> Customize sample plots</h3>
 <p>Some of the sample plot additional arguments were described in <a href="plsda.html#splsda:plotIndiv">4.7.1</a>. In addition, you can choose the representation space to be either the components from the <code>X</code>-data set, the <code>Y</code>- data set, or an average between both components <code>rep.space = 'XY-variate'</code>. See more examples in <code>examples(plotIndiv)</code> and on our <a href="http://mixomics.org/graphics/sample-plots/">website</a>. Here are two examples with colours indicating genotype or diet:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotIndiv</span>(MyResult.spls, <span class="dt">group =</span> nutrimouse<span class="op">$</span>genotype,
-          <span class="dt">rep.space =</span> <span class="st">&quot;XY-variate&quot;</span>, <span class="dt">legend =</span> <span class="ot">TRUE</span>,
-          <span class="dt">legend.title =</span> <span class="st">&#39;Genotype&#39;</span>,
-          <span class="dt">ind.names =</span> nutrimouse<span class="op">$</span>diet,
-          <span class="dt">title =</span> <span class="st">&#39;Nutrimouse: sPLS&#39;</span>)</code></pre>
-<p><img src="Figures/05-pls-plotIndiv-1-1.png" width="50%"  style="display: block; margin: auto;" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotIndiv</span>(MyResult.spls, <span class="dt">group=</span>nutrimouse<span class="op">$</span>diet,
-          <span class="dt">pch =</span> nutrimouse<span class="op">$</span>genotype,
-          <span class="dt">rep.space =</span> <span class="st">&quot;XY-variate&quot;</span>,  <span class="dt">legend =</span> <span class="ot">TRUE</span>,
-          <span class="dt">legend.title =</span> <span class="st">&#39;Diet&#39;</span>, <span class="dt">legend.title.pch =</span> <span class="st">&#39;Genotype&#39;</span>,
-          <span class="dt">ind.names =</span> <span class="ot">FALSE</span>, 
-          <span class="dt">title =</span> <span class="st">&#39;Nutrimouse: sPLS&#39;</span>)</code></pre>
-<p><img src="Figures/05-pls-plotIndiv-2-1.png" width="50%"  style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1"><span class="kw">plotIndiv</span>(MyResult.spls, <span class="dt">group =</span> nutrimouse<span class="op">$</span>genotype,</a>
+<a class="sourceLine" id="cb67-2" data-line-number="2">          <span class="dt">rep.space =</span> <span class="st">&quot;XY-variate&quot;</span>, <span class="dt">legend =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb67-3" data-line-number="3">          <span class="dt">legend.title =</span> <span class="st">&#39;Genotype&#39;</span>,</a>
+<a class="sourceLine" id="cb67-4" data-line-number="4">          <span class="dt">ind.names =</span> nutrimouse<span class="op">$</span>diet,</a>
+<a class="sourceLine" id="cb67-5" data-line-number="5">          <span class="dt">title =</span> <span class="st">&#39;Nutrimouse: sPLS&#39;</span>)</a></code></pre></div>
+<p><img src="Figures/05-pls-plotIndiv-1-1.png" width="75%"  style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1"><span class="kw">plotIndiv</span>(MyResult.spls, <span class="dt">group=</span>nutrimouse<span class="op">$</span>diet,</a>
+<a class="sourceLine" id="cb68-2" data-line-number="2">          <span class="dt">pch =</span> nutrimouse<span class="op">$</span>genotype,</a>
+<a class="sourceLine" id="cb68-3" data-line-number="3">          <span class="dt">rep.space =</span> <span class="st">&quot;XY-variate&quot;</span>,  <span class="dt">legend =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb68-4" data-line-number="4">          <span class="dt">legend.title =</span> <span class="st">&#39;Diet&#39;</span>, <span class="dt">legend.title.pch =</span> <span class="st">&#39;Genotype&#39;</span>,</a>
+<a class="sourceLine" id="cb68-5" data-line-number="5">          <span class="dt">ind.names =</span> <span class="ot">FALSE</span>, </a>
+<a class="sourceLine" id="cb68-6" data-line-number="6">          <span class="dt">title =</span> <span class="st">&#39;Nutrimouse: sPLS&#39;</span>)</a></code></pre></div>
+<p><img src="Figures/05-pls-plotIndiv-2-1.png" width="75%"  style="display: block; margin: auto;" /></p>
 </div>
 <div id="pls:plotVar" class="section level3">
 <h3><span class="header-section-number">5.8.2</span> Customize variable plots</h3>
-<p>See (<code>example(plotVar)</code>) for more examples. Here we change the size of the labels. By default the colours are assigned to each type of variable. The coordinates of the variables can also be saved as follows:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotVar</span>(MyResult.spls, <span class="dt">cex=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>), <span class="dt">legend =</span> <span class="ot">TRUE</span>)</code></pre>
-<p><img src="Figures/05-pls-plotVar-1-1.png" width="50%"  style="display: block; margin: auto;" /></p>
-<pre class="sourceCode r"><code class="sourceCode r">coordinates &lt;-<span class="st"> </span><span class="kw">plotVar</span>(MyResult.spls, <span class="dt">plot =</span> <span class="ot">FALSE</span>)</code></pre>
+<p>See (<code>example(plotVar)</code>) for more examples. Here we change the size of the labels. By default the colours are assigned to each type of variable.</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1"><span class="kw">plotVar</span>(MyResult.spls, <span class="dt">cex=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>), <span class="dt">legend =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="Figures/05-pls-plotVar-1-1.png" width="75%"  style="display: block; margin: auto;" />
+The coordinates of the variables can also be saved as follows:</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1">coordinates &lt;-<span class="st"> </span><span class="kw">plotVar</span>(MyResult.spls, <span class="dt">plot =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 </div>
 <div id="other-useful-plots-for-data-integration" class="section level3">
 <h3><span class="header-section-number">5.8.3</span> Other useful plots for data integration</h3>
@@ -330,81 +332,84 @@ Y &lt;-<span class="st"> </span>nutrimouse<span class="op">$</span>lipid
 <div id="clustered-image-maps" class="section level4">
 <h4><span class="header-section-number">5.8.3.1</span> Clustered Image Maps</h4>
 <p>A clustered image map can be produced using the <code>cim</code> function. You may experience figures margin issues in RStudio. Best is to either use <code>X11()</code> or save the plot as an external file. For example to show the correlation structure between the X and Y variables selected on component 1:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">X11</span>()
-<span class="kw">cim</span>(MyResult.spls, <span class="dt">comp =</span> <span class="dv">1</span>)
-<span class="kw">cim</span>(MyResult.spls, <span class="dt">comp =</span> <span class="dv">1</span>, <span class="dt">save =</span> <span class="st">&#39;jpeg&#39;</span>, <span class="dt">name.save =</span> <span class="st">&#39;PLScim&#39;</span>)</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1"><span class="kw">X11</span>()</a>
+<a class="sourceLine" id="cb71-2" data-line-number="2"><span class="kw">cim</span>(MyResult.spls, <span class="dt">comp =</span> <span class="dv">1</span>)</a></code></pre></div>
+<p><img src="Figures/05-pls-cim-1-1.png" width="75%"  style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1"><span class="co">## or save it</span></a>
+<a class="sourceLine" id="cb72-2" data-line-number="2"><span class="kw">cim</span>(MyResult.spls, <span class="dt">comp =</span> <span class="dv">1</span>, <span class="dt">save =</span> <span class="st">&#39;jpeg&#39;</span>, <span class="dt">name.save =</span> <span class="st">&#39;PLScim&#39;</span>)</a></code></pre></div>
 </div>
 <div id="pls:network" class="section level4">
 <h4><span class="header-section-number">5.8.3.2</span> Relevance networks</h4>
-<p>Using the same similarity matrix input in CIM, we can also represent relevance bipartite networks. Those networks only represent edges between on type of variable from <code>X</code> and the other type of variable, from <code>Y</code>. Whilst we use sPLS to narrow down to a few key correlated variables, our <code>keepX</code> and <code>keepY</code> values might still be very high for this kind of output. A cut-off can be set based on the correlation coefficient between the different types of variables.</p>
-<p>Other arguments such as <code>interactive = TRUE</code> enables a scrollbar to change the cut-off value interactively, see other options in <code>?network</code>. Additionally, the graph object can be saved to be input into Cytoscape for an improved visualisation.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">X11</span>()
-<span class="kw">network</span>(MyResult.spls, <span class="dt">comp =</span> <span class="dv">1</span>)
-<span class="kw">network</span>(MyResult.spls, <span class="dt">comp =</span> <span class="dv">1</span>, <span class="dt">cutoff =</span> <span class="fl">0.6</span>, <span class="dt">save =</span> <span class="st">&#39;jpeg&#39;</span>, <span class="dt">name.save =</span> <span class="st">&#39;PLSnetwork&#39;</span>)
-<span class="co"># save as graph object for cytoscape</span>
-myNetwork &lt;-<span class="st"> </span><span class="kw">network</span>(MyResult.spls, <span class="dt">comp =</span> <span class="dv">1</span>)<span class="op">$</span>gR</code></pre>
+<p>Using the same similarity matrix input in CIM, we can also represent relevance bipartite networks. Those networks only represent edges between one type of variables from <code>X</code> and the other type of variable, from <code>Y</code>. Whilst we use sPLS to narrow down to a few key correlated variables, our <code>keepX</code> and <code>keepY</code> values might still be very high for this kind of output. A cut-off can be set based on the correlation coefficient between the different types of variables.</p>
+<p>Other arguments such as <code>interactive = TRUE</code> enables a scrollbar to change the cut-off value interactively, see other options in <code>?network</code>. Additionally, the graph object can be saved to be input into Cytoscape for improved visualisation.</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1"><span class="kw">X11</span>()</a>
+<a class="sourceLine" id="cb73-2" data-line-number="2"><span class="kw">network</span>(MyResult.spls, <span class="dt">comp =</span> <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1"><span class="co">## or save it</span></a>
+<a class="sourceLine" id="cb74-2" data-line-number="2"><span class="kw">network</span>(MyResult.spls, <span class="dt">comp =</span> <span class="dv">1</span>, <span class="dt">cutoff =</span> <span class="fl">0.6</span>, <span class="dt">save =</span> <span class="st">&#39;jpeg&#39;</span>, <span class="dt">name.save =</span> <span class="st">&#39;PLSnetwork&#39;</span>)</a>
+<a class="sourceLine" id="cb74-3" data-line-number="3"><span class="co"># save as graph object for cytoscape</span></a>
+<a class="sourceLine" id="cb74-4" data-line-number="4">myNetwork &lt;-<span class="st"> </span><span class="kw">network</span>(MyResult.spls, <span class="dt">comp =</span> <span class="dv">1</span>)<span class="op">$</span>gR</a></code></pre></div>
 </div>
 <div id="arrow-plots" class="section level4">
 <h4><span class="header-section-number">5.8.3.3</span> Arrow plots</h4>
 <p>Instead of projecting the samples into the combined XY representation space, as shown in <a href="pls.html#pls:plotIndiv">5.8.1</a>, we can overlap the X- and Y- representation plots. One arrow joins the same sample from the X- space to the Y- space. Short arrows indicate a good agreement found by the PLS between both data sets.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotArrow</span>(MyResult.spls,<span class="dt">group=</span>nutrimouse<span class="op">$</span>diet, <span class="dt">legend =</span> <span class="ot">TRUE</span>,
-          <span class="dt">X.label =</span> <span class="st">&#39;PLS comp 1&#39;</span>, <span class="dt">Y.label =</span> <span class="st">&#39;PLS comp 2&#39;</span>)</code></pre>
-<p><img src="Figures/05-pls-plotArrow-1.png" width="50%"  style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1"><span class="kw">plotArrow</span>(MyResult.spls,<span class="dt">group=</span>nutrimouse<span class="op">$</span>diet, <span class="dt">legend =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb75-2" data-line-number="2">          <span class="dt">X.label =</span> <span class="st">&#39;PLS comp 1&#39;</span>, <span class="dt">Y.label =</span> <span class="st">&#39;PLS comp 2&#39;</span>)</a></code></pre></div>
+<p><img src="Figures/05-pls-plotArrow-1.png" width="75%"  style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="variable-selection-outputs-1" class="section level3">
 <h3><span class="header-section-number">5.8.4</span> Variable selection outputs</h3>
 <p>The selected variables can be extracted using the <code>selectVar</code> function for further analysis.</p>
-<pre class="sourceCode r"><code class="sourceCode r">MySelectedVariables &lt;-<span class="st"> </span><span class="kw">selectVar</span>(MyResult.spls, <span class="dt">comp =</span> <span class="dv">1</span>)
-MySelectedVariables<span class="op">$</span>X<span class="op">$</span>name <span class="co"># Selected genes on component 1</span></code></pre>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1">MySelectedVariables &lt;-<span class="st"> </span><span class="kw">selectVar</span>(MyResult.spls, <span class="dt">comp =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb76-2" data-line-number="2">MySelectedVariables<span class="op">$</span>X<span class="op">$</span>name <span class="co"># Selected genes on component 1</span></a></code></pre></div>
 <pre><code>##  [1] &quot;SR.BI&quot;   &quot;SPI1.1&quot;  &quot;PMDCI&quot;   &quot;CYP3A11&quot; &quot;Ntcp&quot;    &quot;GSTpi2&quot;  &quot;FAT&quot;    
 ##  [8] &quot;apoC3&quot;   &quot;UCP2&quot;    &quot;CAR1&quot;    &quot;Waf1&quot;    &quot;ACOTH&quot;   &quot;eif2g&quot;   &quot;PDK4&quot;   
 ## [15] &quot;CYP4A10&quot; &quot;VDR&quot;     &quot;SIAT4c&quot;  &quot;RXRg1&quot;   &quot;RXRa&quot;    &quot;CBS&quot;     &quot;SHP1&quot;   
 ## [22] &quot;MCAD&quot;    &quot;MS&quot;      &quot;CYP4A14&quot; &quot;ALDH3&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">MySelectedVariables<span class="op">$</span>Y<span class="op">$</span>name <span class="co"># Selected lipids on component 1</span></code></pre>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1">MySelectedVariables<span class="op">$</span>Y<span class="op">$</span>name <span class="co"># Selected lipids on component 1</span></a></code></pre></div>
 <pre><code>## [1] &quot;C18.0&quot;    &quot;C16.1n.9&quot; &quot;C18.1n.9&quot; &quot;C20.3n.6&quot; &quot;C22.6n.3&quot;</code></pre>
 <p>The loading plots help visualise the coefficients assigned to each selected variable on each component:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotLoadings</span>(MyResult.spls, <span class="dt">comp =</span> <span class="dv">1</span>, <span class="dt">size.name =</span> <span class="kw">rel</span>(<span class="fl">0.5</span>))</code></pre>
-<p><img src="Figures/05-pls-plotLoadings-1-1.png" width="50%"  style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1"><span class="kw">plotLoadings</span>(MyResult.spls, <span class="dt">comp =</span> <span class="dv">1</span>, <span class="dt">size.name =</span> <span class="kw">rel</span>(<span class="fl">0.5</span>))</a></code></pre></div>
+<p><img src="Figures/05-pls-plotLoadings-1-1.png" width="75%"  style="display: block; margin: auto;" /></p>
 </div>
 <div id="tuning:PLS" class="section level3">
 <h3><span class="header-section-number">5.8.5</span> Tuning parameters and numerical outputs</h3>
 <p>For PLS and sPLS, two types of parameters need to be chosen:</p>
 <p>1 - The number of components to retain <code>ncomp</code>,</p>
 <p>2 - The number of variables to select on each component and on each data set <code>keepX</code> and <code>keepY</code> for sparse PLS.</p>
-<p>For <strong>item 1</strong> we use the <code>perf</code> function and repeated k-fold cross-validation to calculate the Q<span class="math inline">\(^2\)</span> criterion used in the SIMCA-P software <span class="citation">(Umetri <a href="#ref-Ume96">1996</a>)</span>. The rule of thumbs is that a PLS component should be included in the model if its value is <span class="math inline">\(\leq 0.0975\)</span>. Here we use 3-fold CV repeated 10 times (note that we advise to use at least 50 repeats, and choose the number of folds that are appropriate for the sample size of the data set).</p>
+<p>For <strong>item 1</strong> we use the <code>perf</code> function and repeated k-fold cross-validation to calculate the Q<span class="math inline">\(^2\)</span> criterion used in the SIMCA-P software <span class="citation">(Umetri <a href="#ref-Ume96">1996</a>)</span>. The rule of thumbs is that a PLS component should be included in the model if its value is <span class="math inline">\(\leq 0.0975\)</span>. Here we use 3-fold CV repeated 10 times (note that we advise using at least 50 repeats, and choose the number of folds that are appropriate for the sample size of the data set).</p>
 <p>We run a PLS model with a sufficient number of components first, then run <code>perf</code> on the object.</p>
-<pre class="sourceCode r"><code class="sourceCode r">MyResult.pls &lt;-<span class="st"> </span><span class="kw">pls</span>(X,Y, <span class="dt">ncomp =</span> <span class="dv">4</span>)  
-<span class="kw">set.seed</span>(<span class="dv">30</span>) <span class="co"># for reproducbility in this vignette, otherwise increase nrepeat</span>
-perf.pls &lt;-<span class="st"> </span><span class="kw">perf</span>(MyResult.pls, <span class="dt">validation =</span> <span class="st">&quot;Mfold&quot;</span>, <span class="dt">folds =</span> <span class="dv">5</span>,
-                  <span class="dt">progressBar =</span> <span class="ot">FALSE</span>, <span class="dt">nrepeat =</span> <span class="dv">10</span>)
-<span class="kw">plot</span>(perf.pls<span class="op">$</span>Q2.total)
-<span class="kw">abline</span>(<span class="dt">h =</span> <span class="fl">0.0975</span>)</code></pre>
-<p><img src="Figures/05-pls-perf-1.png" width="50%"  style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1">MyResult.pls &lt;-<span class="st"> </span><span class="kw">pls</span>(X,Y, <span class="dt">ncomp =</span> <span class="dv">4</span>)  </a>
+<a class="sourceLine" id="cb81-2" data-line-number="2"><span class="kw">set.seed</span>(<span class="dv">30</span>) <span class="co"># for reproducbility in this vignette, otherwise increase nrepeat</span></a>
+<a class="sourceLine" id="cb81-3" data-line-number="3">perf.pls &lt;-<span class="st"> </span><span class="kw">perf</span>(MyResult.pls, <span class="dt">validation =</span> <span class="st">&quot;Mfold&quot;</span>, <span class="dt">folds =</span> <span class="dv">5</span>,</a>
+<a class="sourceLine" id="cb81-4" data-line-number="4">                  <span class="dt">progressBar =</span> <span class="ot">FALSE</span>, <span class="dt">nrepeat =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb81-5" data-line-number="5"><span class="kw">plot</span>(perf.pls<span class="op">$</span>Q2.total)</a>
+<a class="sourceLine" id="cb81-6" data-line-number="6"><span class="kw">abline</span>(<span class="dt">h =</span> <span class="fl">0.0975</span>)</a></code></pre></div>
+<p><img src="Figures/05-pls-perf-1.png" width="75%"  style="display: block; margin: auto;" /></p>
 <p>This example seems to indicate that up to 3 components could be enough. In a small <span class="math inline">\(p+q\)</span> setting we generally observe a Q<span class="math inline">\(^2\)</span> that decreases, but that is not the case here as <span class="math inline">\(n &lt;&lt; p+q\)</span>.</p>
 <p><strong>Item 2</strong> can be quite difficult to tune. Here is a minimal example where we only tune <code>keepX</code> based on the Mean Absolute Value. Other measures proposed are Mean Square Error, Bias and R2 (see <code>?tune.spls</code>):</p>
-<pre class="sourceCode r"><code class="sourceCode r">list.keepX &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>)
-<span class="co"># tuning based on MAE</span>
-<span class="kw">set.seed</span>(<span class="dv">30</span>) <span class="co"># for reproducbility in this vignette, otherwise increase nrepeat</span>
-tune.spls.MAE &lt;-<span class="st"> </span><span class="kw">tune.spls</span>(X, Y, <span class="dt">ncomp =</span> <span class="dv">3</span>,
-                           <span class="dt">test.keepX =</span> list.keepX,
-                           <span class="dt">validation =</span> <span class="st">&quot;Mfold&quot;</span>, <span class="dt">folds =</span> <span class="dv">5</span>,
-                           <span class="dt">nrepeat =</span> <span class="dv">10</span>, <span class="dt">progressBar =</span> <span class="ot">FALSE</span>,
-                           <span class="dt">measure =</span> <span class="st">&#39;MAE&#39;</span>)
-<span class="kw">plot</span>(tune.spls.MAE, <span class="dt">legend.position =</span> <span class="st">&#39;topright&#39;</span>)</code></pre>
-<p><img src="Figures/05-pls-tune-1.png" width="50%"  style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1">list.keepX &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb82-2" data-line-number="2"><span class="co"># tuning based on MAE</span></a>
+<a class="sourceLine" id="cb82-3" data-line-number="3"><span class="kw">set.seed</span>(<span class="dv">30</span>) <span class="co"># for reproducbility in this vignette, otherwise increase nrepeat</span></a>
+<a class="sourceLine" id="cb82-4" data-line-number="4">tune.spls.MAE &lt;-<span class="st"> </span><span class="kw">tune.spls</span>(X, Y, <span class="dt">ncomp =</span> <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb82-5" data-line-number="5">                           <span class="dt">test.keepX =</span> list.keepX,</a>
+<a class="sourceLine" id="cb82-6" data-line-number="6">                           <span class="dt">validation =</span> <span class="st">&quot;Mfold&quot;</span>, <span class="dt">folds =</span> <span class="dv">5</span>,</a>
+<a class="sourceLine" id="cb82-7" data-line-number="7">                           <span class="dt">nrepeat =</span> <span class="dv">10</span>, <span class="dt">progressBar =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb82-8" data-line-number="8">                           <span class="dt">measure =</span> <span class="st">&#39;MAE&#39;</span>)</a>
+<a class="sourceLine" id="cb82-9" data-line-number="9"><span class="kw">plot</span>(tune.spls.MAE, <span class="dt">legend.position =</span> <span class="st">&#39;topright&#39;</span>)</a></code></pre></div>
+<p><img src="Figures/05-pls-tune-1.png" width="75%"  style="display: block; margin: auto;" /></p>
 <p>Based on the lowest MAE obtained on each component, the optimal number of variables to select in the <code>X</code> data set, including all variables in the <code>Y</code> data set would be:</p>
-<pre class="sourceCode r"><code class="sourceCode r">tune.spls.MAE<span class="op">$</span>choice.keepX</code></pre>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1">tune.spls.MAE<span class="op">$</span>choice.keepX</a></code></pre></div>
 <pre><code>## comp1 comp2 comp3 
 ##    15     3    20</code></pre>
 <p>Tuning <code>keepX</code> and <code>keepY</code> conjointly is still work in progress. What we advise in the meantime is either to adopt an arbitrary approach by setting those parameters arbitrarily, depending on the biological question, or tuning one parameter then the other.</p>
 </div>
 <div id="PLS:details" class="section level3">
 <h3><span class="header-section-number">5.8.6</span> PLS modes</h3>
-<p>You may have noticed the <code>mode</code> argument in PLS. We can calculate the residual matrices at each PLS iteration differently. Note: this is fore <strong>advanced</strong> users.</p>
+<p>You may have noticed the <code>mode</code> argument in PLS. We can calculate the residual matrices at each PLS iteration differently. Note: this is for <strong>advanced</strong> users.</p>
 <div id="regression-mode" class="section level4">
 <h4><span class="header-section-number">5.8.6.1</span> Regression mode</h4>
-<p>The PLS regression mode models <em>uni-directional</em> (or ‘causal’) relationship between two data sets. The <code>Y</code> matrix is deflated with respect to the information extracted/modelled from the local regression on X. Here the goal is to predict <code>Y</code> from <code>X</code> (<code>Y</code> and <code>X</code> play an <em>assymmetric role</em>). Consequently the latent variables computed to predict Y from X are different from those computed to predict X from Y. More details about the model can be found in[ Appendix <span class="citation">(Lê Cao et al. <a href="#ref-Lec08">2008</a>)</span>.</p>
+<p>The PLS regression mode models <em>uni-directional</em> (or ‘causal’) relationship between two data sets. The <code>Y</code> matrix is deflated with respect to the information extracted/modelled from the local regression on X. Here the goal is to predict <code>Y</code> from <code>X</code> (<code>Y</code> and <code>X</code> play an <em>asymmetric role</em>). Consequently, the latent variables computed to predict Y from X are different from those computed to predict X from Y. More details about the model can be found in[ Appendix <span class="citation">(Lê Cao et al. <a href="#ref-Lec08">2008</a>)</span>.</p>
 <p>PLS regression mode, also called PLS2, is commonly applied for the analysis of biological data <span class="citation">(Boulesteix and Strimmer <a href="#ref-Bou05">2005</a>; Bylesjö et al. <a href="#ref-Byl07">2007</a>)</span> due to the biological assumptions or the biological dogma. In general, the number of variables in <code>Y</code> to predict are fewer in number than the predictors in <code>X</code>.</p>
 </div>
 <div id="canonical-mode" class="section level4">
@@ -435,7 +440,7 @@ tune.spls.MAE &lt;-<span class="st"> </span><span class="kw">tune.spls</span>(X,
 </ul></li>
 <li>Can PLS deal with more than 2 data sets?
 <ul>
-<li>sPLS can only deal with 2 data sets, but see <code>DIABLO</code> (Chapter <a href="diablo.html#diablo">6</a>) for multi-block analyses</li>
+<li>sPLS can only deal with 2 data sets but see <code>DIABLO</code> (Chapter <a href="diablo.html#diablo">6</a>) for multi-block analyses</li>
 </ul></li>
 <li>What are the differences between sPLS and Canonical Correlation Analysis (CCA, see <code>?rcca</code> in mixOmics)?
 <ul>
@@ -451,7 +456,7 @@ tune.spls.MAE &lt;-<span class="st"> </span><span class="kw">tune.spls</span>(X,
 <ul>
 <li>Yes, and sparse PLS is particularly useful to identify sets of variables that play a role in explaining the relationship between two data sets.</li>
 </ul></li>
-<li>Can I perform PLS with 2 data sets that are highly unbalanced (thousands of variables in one data set and less than 10 in the other ?
+<li>Can I perform PLS with 2 data sets that are highly unbalanced (thousands of variables in one data set and less than 10 in the other?
 <ul>
 <li>Yes! Even if you performed sPLS to select variables in one data set (or both), you can still control the number of variables selected with <code>keepX</code>.</li>
 </ul></li>

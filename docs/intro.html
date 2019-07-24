@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 1 Introduction | mixOmics vignette</title>
   <meta name="description" content="Vignette for the R package mixOmics" />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 1 Introduction | mixOmics vignette" />
   <meta property="og:type" content="book" />
@@ -54,7 +54,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -150,7 +149,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5" data-path="pca.html"><a href="pca.html#quick-start"><i class="fa fa-check"></i><b>3.5</b> Quick start</a></li>
 <li class="chapter" data-level="3.6" data-path="pca.html"><a href="pca.html#to-go-further"><i class="fa fa-check"></i><b>3.6</b> To go further</a><ul>
 <li class="chapter" data-level="3.6.1" data-path="pca.html"><a href="pca.html#customize-plots"><i class="fa fa-check"></i><b>3.6.1</b> Customize plots</a></li>
-<li class="chapter" data-level="3.6.2" data-path="pca.html"><a href="pca.html#amount-of-variance-explained-and-choice-of-number-of-components"><i class="fa fa-check"></i><b>3.6.2</b> Amount of variance explained and choice of number of components</a></li>
+<li class="chapter" data-level="3.6.2" data-path="pca.html"><a href="pca.html#amount-of-variance-explained-and-choice-of-a-number-of-components"><i class="fa fa-check"></i><b>3.6.2</b> Amount of variance explained and choice of a number of components</a></li>
 <li class="chapter" data-level="3.6.3" data-path="pca.html"><a href="pca.html#other-useful-plots"><i class="fa fa-check"></i><b>3.6.3</b> Other useful plots</a></li>
 </ul></li>
 <li class="chapter" data-level="3.7" data-path="pca.html"><a href="pca.html#sPCA"><i class="fa fa-check"></i><b>3.7</b> Variable selection with sparse PCA</a><ul>
@@ -168,7 +167,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5" data-path="plsda.html"><a href="plsda.html#set-up-the-data"><i class="fa fa-check"></i><b>4.5</b> Set up the data</a></li>
 <li class="chapter" data-level="4.6" data-path="plsda.html"><a href="plsda.html#quick-start-1"><i class="fa fa-check"></i><b>4.6</b> Quick start</a></li>
 <li class="chapter" data-level="4.7" data-path="plsda.html"><a href="plsda.html#plsda-tgf"><i class="fa fa-check"></i><b>4.7</b> To go further</a><ul>
-<li class="chapter" data-level="4.7.1" data-path="plsda.html"><a href="plsda.html#splsda:plotIndiv"><i class="fa fa-check"></i><b>4.7.1</b> Customize sample plots</a></li>
+<li class="chapter" data-level="4.7.1" data-path="plsda.html"><a href="plsda.html#splsda:plotIndiv"><i class="fa fa-check"></i><b>4.7.1</b> Customize the sample plots</a></li>
 <li class="chapter" data-level="4.7.2" data-path="plsda.html"><a href="plsda.html#customize-variable-plots"><i class="fa fa-check"></i><b>4.7.2</b> Customize variable plots</a></li>
 <li class="chapter" data-level="4.7.3" data-path="plsda.html"><a href="plsda.html#other-useful-plots-1"><i class="fa fa-check"></i><b>4.7.3</b> Other useful plots</a></li>
 <li class="chapter" data-level="4.7.4" data-path="plsda.html"><a href="plsda.html#variable-selection-outputs"><i class="fa fa-check"></i><b>4.7.4</b> Variable selection outputs</a></li>
@@ -243,8 +242,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Note the data pre-processing requirements before analysing data with <code>mixOmics</code>:</p>
 <ul>
 <li><p><strong>Types of data</strong>. Different types of biological data can be explored and integrated with <code>mixOmics</code>. Our methods can handle molecular features measured on a continuous scale (e.g. microarray, mass spectrometry-based proteomics and metabolomics) or sequenced-based count data (RNA-seq, 16S, shotgun metagenomics) that become `continuous’ data after pre-processing and normalisation.</p></li>
-<li><p><strong>Normalisation</strong>. The package does not handle normalisation as it is platform specific and we cover a too wide variety of data! Prior to the analysis, we assume the data sets have been normalised using appropriate normalisation methods and pre-processed when applicable.</p></li>
-<li><p><strong>Prefiltering</strong>. While <code>mixOmics</code> methods can handle large data sets (several tens of thousands of predictors), we recommend pre-filtering the data to less than 10K predictor variables per data set, for example by using Median Absolute Deviation <span class="citation">(Teng et al. <a href="#ref-Ten16">2016</a>)</span> for RNA-seq data, by removing consistently low counts in microbiome data sets <span class="citation">(Lê Cao et al. <a href="#ref-Lec16">2016</a>)</span> or by removing near zero variance predictors. Such step aims to lessen the computational time during the parameter tuning process.</p></li>
+<li><p><strong>Normalisation</strong>. The package does not handle normalisation as it is platform-specific and we cover a too wide variety of data! Prior to the analysis, we assume the data sets have been normalised using appropriate normalisation methods and pre-processed when applicable.</p></li>
+<li><p><strong>Prefiltering</strong>. While <code>mixOmics</code> methods can handle large data sets (several tens of thousands of predictors), we recommend pre-filtering the data to less than 10K predictor variables per data set, for example by using Median Absolute Deviation <span class="citation">(Teng et al. <a href="#ref-Ten16">2016</a>)</span> for RNA-seq data, by removing consistently low counts in microbiome data sets <span class="citation">(Lê Cao et al. <a href="#ref-Lec16">2016</a>)</span> or by removing near-zero variance predictors. Such step aims to lessen the computational time during the parameter tuning process.</p></li>
 <li><p><strong>Data format</strong>.
 Our methods use matrix decomposition techniques. Therefore, the numeric data matrix or data frames have <span class="math inline">\(n\)</span> observations or samples in rows and <span class="math inline">\(p\)</span> predictors or variables (e.g. genes, proteins, OTUs) in columns.</p></li>
 <li><p><strong>Covariates</strong>. In the current version of <code>mixOmics</code>, covariates that may confound the analysis are not included in the methods. We recommend correcting for those covariates beforehand using appropriate univariate or multivariate methods for batch effect removal. Contact us for more details as we are currently working on this aspect.</p></li>
@@ -256,16 +255,16 @@ Our methods use matrix decomposition techniques. Therefore, the numeric data mat
 <h3><span class="header-section-number">1.2.1</span> Some background knowledge</h3>
 <p>We list here the main methodological or theoretical concepts you need to know to be able to efficiently apply <code>mixOmics</code>:</p>
 <ul>
-<li><p><strong>Individuals, observations or samples</strong>: the experimental units on which information are collected, e.g. patients, cell lines, cells, faecal samples …</p></li>
-<li><p><strong>Variables, predictors</strong>: read-out measured on each sample, e.g. gene (expression), protein or OTU (abundance), weight …</p></li>
-<li><p><strong>Variance</strong>: measures the spread of one variable. In our methods we estimate the variance of components rather that variable read-outs. A high variance indicates that the data points are very spread out from the mean, and from one another (scattered).</p></li>
-<li><p><strong>Covariance</strong>: measures the strength of the relationship between two variables, i.e whether they co-vary. A high covariance value indicates a strong relationship, e.g weight and height in individuals frequently vary roughly in the same way; roughly, the heaviest are the tallest. A covariance value has no lower or upper bound.</p></li>
+<li><p><strong>Individuals, observations or samples</strong>: the experimental units on which information are collected, e.g. patients, cell lines, cells, faecal samples etc.</p></li>
+<li><p><strong>Variables, predictors</strong>: read-out measured on each sample, e.g. gene (expression), protein or OTU (abundance), weight etc.</p></li>
+<li><p><strong>Variance</strong>: measures the spread of one variable. In our methods, we estimate the variance of components rather that variable read-outs. A high variance indicates that the data points are very spread out from the mean, and from one another (scattered).</p></li>
+<li><p><strong>Covariance</strong>: measures the strength of the relationship between two variables, i.e. whether they co-vary. A high covariance value indicates a strong relationship, e.g. weight and height in individuals frequently vary roughly in the same way; roughly, the heaviest are the tallest. A covariance value has no lower or upper bound.</p></li>
 <li><p><strong>Correlation</strong>: a standardized version of the covariance that is bounded by -1 and 1.</p></li>
-<li><p><strong>Linear combination</strong>: variables are combined by multiplying each of of them by a coefficient and adding the results. A linear combination of height and weight could be 2 <span class="math inline">\(*\)</span> weight - 1.5 <span class="math inline">\(*\)</span> height with the coefficients 2 and -1.5 assigned with weight and height respectively.</p></li>
-<li><p><strong>Component</strong>: an artificial variable built from a linear combination of the observed variables in a given data set. Variable coefficients are optimally defined based on some statistical criterion. For example in Principal Component Analysis, the coefficients in the (principal) component is defined so as to maximise the variance of the component.</p></li>
+<li><p><strong>Linear combination</strong>: variables are combined by multiplying each of them by a coefficient and adding the results. A linear combination of height and weight could be 2 <span class="math inline">\(*\)</span> weight - 1.5 <span class="math inline">\(*\)</span> height with the coefficients 2 and -1.5 assigned with weight and height respectively.</p></li>
+<li><p><strong>Component</strong>: an artificial variable built from a linear combination of the observed variables in a given data set. Variable coefficients are optimally defined based on some statistical criterion. For example in Principal Component Analysis, the coefficients of a (principal) component are defined so as to maximise the variance of the component.</p></li>
 <li><p><strong>Loadings</strong>: variable coefficients used to define a component.</p></li>
-<li><p><strong>Sample plot</strong>: representation of the samples projected in a small space spanned (defined) by the components. Samples coordinates are determined by their components values, or scores.</p></li>
-<li><p><strong>Correlation circle plot</strong>: representation of the variables in a space spanned by the components. Each variable coordinate is defined as the correlation between the original variable value and each component. A correlation circle plot enables to visualise the correlation between variables - negative or positive correlation, defined by the cosine angle between the centre of the circle and each variable point) and the contribution of each variable to each component - defined by absolute value of the coordinate on each component. For this interpretation, data need to be centred and scaled (by default in most of our methods except PCA). For more details on this insightful graphic, see Figure 1 in <span class="citation">(González et al. <a href="#ref-Gon12">2012</a>)</span>.</p></li>
+<li><p><strong>Sample plot</strong>: representation of the samples projected in a small space spanned (defined) by the components. Samples coordinates are determined by their components values or scores.</p></li>
+<li><p><strong>Correlation circle plot</strong>: representation of the variables in a space spanned by the components. Each variable coordinate is defined as the correlation between the original variable value and each component. A correlation circle plot enables to visualise the correlation between variables - negative or positive correlation, defined by the cosine angle between the centre of the circle and each variable point) and the contribution of each variable to each component - defined by the absolute value of the coordinate on each component. For this interpretation, data need to be centred and scaled (by default in most of our methods except PCA). For more details on this insightful graphic, see Figure 1 in <span class="citation">(González et al. <a href="#ref-Gon12">2012</a>)</span>.</p></li>
 <li><p><strong>Unsupervised analysis</strong>: the method does not take into account any known sample groups and the analysis is exploratory. Examples of unsupervised methods covered in this vignette are Principal Component Analysis (PCA, Chapter <a href="pca.html#pca">3</a>), Projection to Latent Structures (PLS, Chapter <a href="pls.html#pls">5</a>), and also Canonical Correlation Analysis (CCA, not covered here).</p></li>
 <li><p><strong>Supervised analysis</strong>: the method includes a vector indicating the class membership of each sample. The aim is to discriminate sample groups and perform sample class prediction. Examples of supervised methods covered in this vignette are PLS Discriminant Analysis (PLS-DA, Chapter <a href="plsda.html#plsda">4</a>), DIABLO (Chapter <a href="diablo.html#diablo">6</a>) and also MINT (not covered here <span class="citation">(Rohart, Matigian, et al. <a href="#ref-Roh16">2017</a>)</span>).</p></li>
 </ul>
@@ -274,7 +273,7 @@ Our methods use matrix decomposition techniques. Therefore, the numeric data mat
 <h3><span class="header-section-number">1.2.2</span> Overview</h3>
 <p>Here is an overview of the most widely used methods in <code>mixOmics</code> that will be further detailed in this vignette, with the exception of rCCA and MINT. We depict them along with the type of data set they can handle.</p>
 <!-- It can be displayed using the `overview` function.-->
-<p><img src="Figures/01-overview-1.png" width="50%"  style="display: block; margin: auto;" /></p>
+<p><img src="Figures/01-overview-1.png" width="75%"  style="display: block; margin: auto;" /></p>
 <div class="figure" style="text-align: center"><span id="fig:01-methods"></span>
 <img src="XtraFigs/Methods.png" alt="List of methods in mixOmics, sparse indicates methods that perform variable selection" width="100%"  />
 <p class="caption">
@@ -294,9 +293,9 @@ Figure 1.2: Main functions and parameters of each method
 <ul>
 <li><p><strong>Overview and recent integrative methods</strong>: Rohart F., Gautier, B, Singh, A, Le Cao, K. A. mixOmics: an <a href="http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005752">R package for ’omics feature selection and multiple data integration</a>. <em>PLoS Comput Biol</em> 13(11): e1005752.</p></li>
 <li><p><strong>Graphical outputs for integrative methods</strong>: <span class="citation">(González et al. <a href="#ref-Gon12">2012</a>)</span> Gonzalez I., Le Cao K.-A., Davis, M.D. and Dejean S. (2012) <a href="https://biodatamining.biomedcentral.com/articles/10.1186/1756-0381-5-19">Insightful graphical outputs to explore relationships between two omics data sets</a>. <em>BioData Mining</em> 5:19.</p></li>
-<li><p><strong>DIABLO</strong>: Singh A, Gautier B, Shannon C, Vacher M, Rohart F, Tebbutt S, K-A. Le Cao. <a href="https://www.biorxiv.org/content/early/2018/03/20/067611">DIABLO - multi-omics data integration for biomarker discovery.</a></p></li>
+<li><p><strong>DIABLO</strong>: Singh A, Gautier B, Shannon C, Vacher M, Rohart F, Tebbutt S, K-A. Le Cao. <a href="https://www.biorxiv.org/content/early/2018/03/20/067611">DIABLO - multi-omics data integration for biomarker discovery</a>.</p></li>
 <li><p><strong>sparse PLS</strong>: Le Cao K.-A., Martin P.G.P, Robert-Granie C. and Besse, P. (2009) <a href="http://www.biomedcentral.com/1471-2105/10/34/">Sparse Canonical Methods for Biological Data Integration: application to a cross-platform study</a>. <em>BMC Bioinformatics</em>, 10:34.</p></li>
-<li><p><strong>sparse PLS-DA</strong>:Le Cao K.-A., Boitard S. and Besse P. (2011) <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-12-253">Sparse PLS Discriminant Analysis: biologically relevant feature selection and graphical displays for multiclass problems</a>. <em>BMC Bioinformatics</em>, 22:253.</p></li>
+<li><p><strong>sparse PLS-DA</strong>: Le Cao K.-A., Boitard S. and Besse P. (2011) <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-12-253">Sparse PLS Discriminant Analysis: biologically relevant feature selection and graphical displays for multiclass problems</a>. <em>BMC Bioinformatics</em>, 22:253.</p></li>
 <li><p><strong>Multilevel approach for repeated measurements</strong>: Liquet B, Le Cao K-A, Hocini H, Thiebaut R (2012). <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-13-325">A novel approach for biomarker selection and the integration of repeated measures experiments from two assays</a>. <em>BMC Bioinformatics</em>, 13:325</p></li>
 <li><p><strong>sPLS-DA for microbiome data</strong>: Le Cao K-A<span class="math inline">\(^*\)</span>, Costello ME <span class="math inline">\(^*\)</span>, Lakis VA , Bartolo F, Chua XY, Brazeilles R and Rondeau P. (2016) <a href="http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0160169">MixMC: Multivariate insights into Microbial Communities</a>.PLoS ONE 11(8): e0160169</p></li>
 </ul>
@@ -311,13 +310,13 @@ Figure 1.2: Main functions and parameters of each method
 <li><strong>Chapter <a href="pls.html#pls">5</a></strong>: Projection to Latent Structures (PLS)</li>
 <li><strong>Chapter <a href="diablo.html#diablo">6</a></strong>: Integrative analysis for multiple data sets (DIABLO)</li>
 </ul>
-<p>Each of the methods chapter has the following outline:</p>
+<p>Each methods chapter has the following outline:</p>
 <ol style="list-style-type: decimal">
 <li>Type of biological question to be answered</li>
 <li>Brief description of an illustrative data set</li>
 <li>Principle of the method</li>
 <li>Quick start of the method with the main functions and arguments</li>
-<li>To go further: customized plots, additional graphical outputs and tuning parameters</li>
+<li>To go further: customized plots, additional graphical outputs, and tuning parameters</li>
 <li>FAQ</li>
 </ol>
 </div>

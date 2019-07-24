@@ -1,11 +1,11 @@
-
-```{r 04-global_options, include=FALSE}
+```{r, include=FALSE}
 library(knitr)
-# global options
-knitr::opts_chunk$set(dpi = 100, echo=TRUE, warning=FALSE, message=FALSE, eval = TRUE,
-                      fig.show=TRUE, fig.width= 7,fig.height= 6,fig.align='center', out.width = '50%', 
-                      fig.path= 'Figures/')
-
+# global options - probably better to put out.width='60%' for pdf output
+knitr::opts_chunk$set(dpi = 100, echo=TRUE, warning=FALSE, message=FALSE, eval = TRUE, cache=TRUE,
+                      fig.show=TRUE, fig.asp=1,fig.align='center', out.width = '75%',
+                      fig.pos= "h", out.extra = '', fig.path= 'Figures/')
+library(rgl)
+knit_hooks$set(webgl = hook_webgl) ## to include 3d images in the html vignette - 3D chunks must have webgl=TRUE
 ```
 
 
@@ -86,17 +86,18 @@ library(mixOmics)
 data(srbct)
 X <- srbct$gene
 Y <- srbct$class 
-summary(Y)
-dim(X); length(Y)
+summary(Y) ## class summary
+dim(X) ## number of samples and features
+length(Y) ## length of class memebrship factor = number of samples
 ```
 
 ## Quick start
 
 For a quick start, we arbitrarily set the number of variables to select to 50 on each of the 3 components of PLS-DA (see section \@ref(tuning:sPLSDA) for tuning these values).
 
-```{r 04-splsda-and-plots, echo=FALSE,results='hide', fig.show = 'hide'}
+```{r 04-splsda-and-plots, results='hide'}
 MyResult.splsda <- splsda(X, Y, keepX = c(50,50)) # 1 Run the method
-plotIndiv(MyResult.splsda)                          # 2 Plot the samples
+plotIndiv(MyResult.splsda)                          # 2 Plot the samples (coloured by classes automatically)
 plotVar(MyResult.splsda)                            # 3 Plot the variables
 selectVar(MyResult.splsda, comp=1)$name             # Selected variables on component 1
 ```
@@ -117,14 +118,14 @@ PLS-DA without variable selection can be performed as:
 ```{r 04-plsda-and-plots, fig.show='hide'}
 MyResult.plsda <- plsda(X,Y) # 1 Run the method
 plotIndiv(MyResult.plsda)    # 2 Plot the samples
-plotVar(MyResult.plsda)      # 3 Plot the variables
+plotVar(MyResult.plsda, cutoff = 0.7)      # 3 Plot the variables
 ```
 
 
 
 ## To go further {#plsda-tgf}
 
-### Customize sample plots {#splsda:plotIndiv}
+### Customize the sample plots {#splsda:plotIndiv}
 
 The sample plots can be improved in various ways. First, if the names of the samples are not meaningful at this stage, they can be replaced by symbols (`ind.names=TRUE`). Confidence ellipses can be plotted for each sample (`ellipse = TRUE`, confidence level set to 95\% by default, see the argument `ellipse.level`), Additionally, a star plot displays arrows from each group centroid towards each individual sample (`star = TRUE`). A 3D plot is also available, see `plotIndiv` for more details.
 
@@ -144,7 +145,7 @@ plotVar(MyResult.splsda, var.names=FALSE)
 ```
 
 
-In addition, if we had used the non-sparse version of PLS-DA, a cut-off can be set to display only the variables that mostly contribute to the definition of each component. Those variables should be located towards the circle of radius 1, far from the centre. 
+In addition, if we had used the non-sparse version of PLS-DA, a cut-off can be set to display only the variables that mostly contribute to the definition of each component. These variables should be located towards the circle of radius 1, far from the centre. 
 
 ```{r 04-plsda-plotVar-cutoff}
 plotVar(MyResult.plsda, cutoff=0.7)
@@ -167,9 +168,10 @@ plotIndiv(MyResult.splsda, comp = 1:2, group = srbct$class,
 
 
 #### ROC
+
 As PLS-DA acts as a classifier, we can plot a ROC Curve to complement the sPLS-DA classification performance results detailed in \@ref(tuning:sPLSDA). The AUC is calculated from training cross-validation sets and averaged. Note however that ROC and AUC criteria may not be particularly insightful, or may not be in full agreement with the PLSDA performance, as the prediction threshold in PLS-DA is based on specified distance as described in [@mixomics].
 
-```{r 04-auroc, echo=FALSE,results='hide', fig.keep='all'}
+```{r 04-auroc, results='hide', fig.show=TRUE}
 auc.plsda <- auroc(MyResult.splsda)
 ```
 
@@ -182,7 +184,7 @@ MyResult.splsda2 <- splsda(X,Y, ncomp=3, keepX=c(15,10,5))
 
 Selected variables are listed in the `selectVar` function: 
 
-```{r 04-splsda-selectVar-value, eval=TRUE}
+```{r 04-splsda-selectVar-value}
 selectVar(MyResult.splsda2, comp=1)$value
 ```
 
@@ -196,8 +198,8 @@ plotLoadings(MyResult.splsda2, contrib = 'max', method = 'mean')
 Interestingly from this plot, we can see that all selected variables on component 1 are highly expressed in the BL (orange) class. Setting `contrib = 'min'` would highlight that those variables are lowly expressed in the NB grey class, which makes sense when we look at the sample plot.
 
 
-Since 4 classes are being discriminated here, samples plots in 3d may help interpretation: 
-```{r 04-splsda-3d, eval=TRUE, fig.show='hide'}
+Since 4 classes are being discriminated here, samples plots in 3d may help interpretation (available in the `html` vignette only): 
+```{r 04-splsda-3d, webgl=TRUE}
 plotIndiv(MyResult.splsda2, style="3d")
 ```
 
@@ -236,7 +238,7 @@ MyPerf.plsda
 Regarding **item 2**, we now use `tune.splsda` to assess the optimal number of variables to select on each component. We first set up a grid of `keepX` values that will be assessed on each component, one component at a time. 
 Similar to above we run 3-fold CV repeated 10 times with a maximum distance prediction defined as above. 
 
-```{r 04-splsda-tune,, eval=TRUE}
+```{r 04-splsda-tune}
 list.keepX <- c(5:10,  seq(20, 100, 10))
 list.keepX # to output the grid of values tested
 set.seed(30) # for reproducbility in this vignette, otherwise increase nrepeat
@@ -260,10 +262,11 @@ plot(tune.splsda.srbct, col = color.jet(ncomp))
 
 
 Based on those tuning results, we can run our final and tuned sPLS-DA model:
-```{r 04-final-splsda, fig.show = 'hide'}
+```{r 04-final-splsda}
 MyResult.splsda.final <- splsda(X, Y, ncomp = ncomp, keepX = select.keepX)
+
 plotIndiv(MyResult.splsda.final, ind.names = FALSE, legend=TRUE,
-          ellipse = TRUE, title="SPLS-DA, Final result")
+          ellipse = TRUE, title="sPLS-DA - final result")
 ```
 
 Additionally, we can run `perf` for the final performance of the sPLS-DA model. Also, note that `perf` will output `features` that lists the frequency of selection of the variables across the different folds and different repeats. This is a useful output to assess the confidence of your final variable selection, see a more [detailed example here](http://mixomics.org/case-studies/splsda-srbct/).
@@ -279,7 +282,7 @@ Additionally, we can run `perf` for the final performance of the sPLS-DA model. 
     + Yes, this is one of the advantages of PLS-DA, see this example above
 
 * Can I have a hierarchy between two factors (e.g. diet nested into genotype)?
-    + Unfortunately no, sparse PLS-DA only allows discriminating all groups at once (i.e. 4 x 2 groups when there are 4 diets and 2 genotypes)
+    + Unfortunately no, sparse PLS-DA only allows to discriminate all groups at once (i.e. 4 x 2 groups when there are 4 diets and 2 genotypes)
 
 * Can I have missing values in my data?
     + Yes in the X data set, but you won't be able to do any prediction (i.e. `tune, perf, predict`)

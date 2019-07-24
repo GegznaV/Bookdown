@@ -1,10 +1,9 @@
-
-```{r 01-global_options, include=FALSE}
+```{r, include=FALSE}
 library(knitr)
-# global options
+# global options - probably better to put out.width='60%' for pdf output
 knitr::opts_chunk$set(dpi = 100, echo=TRUE, warning=FALSE, message=FALSE, eval = TRUE, cache=TRUE,
-                      fig.show=TRUE, fig.width= 7,fig.height= 6,fig.align='center', out.width = '50%', fig.pos= "h", out.extra = '',
-                      fig.path= 'Figures/')
+                      fig.show=TRUE, fig.asp=1,fig.align='center', out.width = '75%',
+                      fig.pos= "h", out.extra = '', fig.path= 'Figures/')
 ```
 
 
@@ -36,9 +35,9 @@ Our methods use matrix decomposition techniques. Therefore, the numeric data mat
 
 We list here the main methodological or theoretical concepts you need to know to be able to efficiently apply `mixOmics`:
 
-- **Individuals, observations or samples**: the experimental units on which information are collected, e.g. patients, cell lines, cells, faecal samples.
+- **Individuals, observations or samples**: the experimental units on which information are collected, e.g. patients, cell lines, cells, faecal samples etc.
 
-- **Variables, predictors**: read-out measured on each sample, e.g. gene (expression), protein or OTU (abundance), weight... 
+- **Variables, predictors**: read-out measured on each sample, e.g. gene (expression), protein or OTU (abundance), weight etc. 
 
 - **Variance**: measures the spread of one variable. In our methods, we estimate the variance of components rather that variable read-outs. A high variance indicates that the data points are very spread out from the mean, and from one another (scattered). 
 
@@ -145,7 +144,7 @@ The methods implemented in `mixOmics` are described in detail in the following p
 - **Chapter \@ref(pls)**: Projection to Latent Structures (PLS)
 - **Chapter \@ref(diablo)**: Integrative analysis for multiple data sets (DIABLO)
 
-Each of the method's chapter has the following outline:
+Each methods chapter has the following outline:
 
 1. Type of biological question to be answered
 2. Brief description of an illustrative data set

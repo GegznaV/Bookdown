@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 Let’s get started | mixOmics vignette</title>
   <meta name="description" content="Vignette for the R package mixOmics" />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 Let’s get started | mixOmics vignette" />
   <meta property="og:type" content="book" />
@@ -54,7 +54,6 @@ a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -150,7 +149,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5" data-path="pca.html"><a href="pca.html#quick-start"><i class="fa fa-check"></i><b>3.5</b> Quick start</a></li>
 <li class="chapter" data-level="3.6" data-path="pca.html"><a href="pca.html#to-go-further"><i class="fa fa-check"></i><b>3.6</b> To go further</a><ul>
 <li class="chapter" data-level="3.6.1" data-path="pca.html"><a href="pca.html#customize-plots"><i class="fa fa-check"></i><b>3.6.1</b> Customize plots</a></li>
-<li class="chapter" data-level="3.6.2" data-path="pca.html"><a href="pca.html#amount-of-variance-explained-and-choice-of-number-of-components"><i class="fa fa-check"></i><b>3.6.2</b> Amount of variance explained and choice of number of components</a></li>
+<li class="chapter" data-level="3.6.2" data-path="pca.html"><a href="pca.html#amount-of-variance-explained-and-choice-of-a-number-of-components"><i class="fa fa-check"></i><b>3.6.2</b> Amount of variance explained and choice of a number of components</a></li>
 <li class="chapter" data-level="3.6.3" data-path="pca.html"><a href="pca.html#other-useful-plots"><i class="fa fa-check"></i><b>3.6.3</b> Other useful plots</a></li>
 </ul></li>
 <li class="chapter" data-level="3.7" data-path="pca.html"><a href="pca.html#sPCA"><i class="fa fa-check"></i><b>3.7</b> Variable selection with sparse PCA</a><ul>
@@ -168,7 +167,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5" data-path="plsda.html"><a href="plsda.html#set-up-the-data"><i class="fa fa-check"></i><b>4.5</b> Set up the data</a></li>
 <li class="chapter" data-level="4.6" data-path="plsda.html"><a href="plsda.html#quick-start-1"><i class="fa fa-check"></i><b>4.6</b> Quick start</a></li>
 <li class="chapter" data-level="4.7" data-path="plsda.html"><a href="plsda.html#plsda-tgf"><i class="fa fa-check"></i><b>4.7</b> To go further</a><ul>
-<li class="chapter" data-level="4.7.1" data-path="plsda.html"><a href="plsda.html#splsda:plotIndiv"><i class="fa fa-check"></i><b>4.7.1</b> Customize sample plots</a></li>
+<li class="chapter" data-level="4.7.1" data-path="plsda.html"><a href="plsda.html#splsda:plotIndiv"><i class="fa fa-check"></i><b>4.7.1</b> Customize the sample plots</a></li>
 <li class="chapter" data-level="4.7.2" data-path="plsda.html"><a href="plsda.html#customize-variable-plots"><i class="fa fa-check"></i><b>4.7.2</b> Customize variable plots</a></li>
 <li class="chapter" data-level="4.7.3" data-path="plsda.html"><a href="plsda.html#other-useful-plots-1"><i class="fa fa-check"></i><b>4.7.3</b> Other useful plots</a></li>
 <li class="chapter" data-level="4.7.4" data-path="plsda.html"><a href="plsda.html#variable-selection-outputs"><i class="fa fa-check"></i><b>4.7.4</b> Variable selection outputs</a></li>
@@ -239,26 +238,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="installation" class="section level2">
 <h2><span class="header-section-number">2.1</span> Installation</h2>
 <p>First, download the latest  version from Bioconductor:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="op">!</span><span class="kw">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>))
-    <span class="kw">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)
- BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">&quot;mixOmics&quot;</span>)</code></pre>
-<p>Alternatively, you can install the development version of the package from Github.</p>
-<pre class="sourceCode r"><code class="sourceCode r">BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">&quot;mixOmicsTeam/mixOmics/&quot;</span>)</code></pre>
-<p>The <code>mixOmics</code> package should directly import the following packages: <code>igraph, rgl, ellipse, corpcor, RColorBrewer, plyr, parallel, dplyr, tidyr, reshape2, methods, matrixStats, rARPACK, gridExtra</code>. For <em>apple mac users</em>, if you are unable to install the imported library <code>rgl</code>, you will need to install the <a href="https://www.xquartz.org">XQuartz software</a> first.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="cf">if</span> (<span class="op">!</span><span class="kw">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">    <span class="kw">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"> BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">&quot;mixOmics&quot;</span>)</a></code></pre></div>
+<p>Alternatively, you can install the latest GitHub version of the package:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">&quot;mixOmicsTeam/mixOmics&quot;</span>)</a></code></pre></div>
+<p>The <code>mixOmics</code> package should directly import the following packages:
+<code>igraph, rgl, ellipse, corpcor, RColorBrewer, plyr, parallel, dplyr, tidyr, reshape2, methods, matrixStats, rARPACK, gridExtra</code>.
+<strong>For Apple mac users:</strong> if you are unable to install the imported package <code>rgl</code>, you will need to install the <a href="https://www.xquartz.org">XQuartz software</a> first.</p>
 </div>
 <div id="start:upload" class="section level2">
 <h2><span class="header-section-number">2.2</span> Load the package</h2>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mixOmics)</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(mixOmics)</a></code></pre></div>
 <p>Check that there is no error when loading the package, especially for the <code>rgl</code> library (see above).</p>
 </div>
 <div id="upload-data" class="section level2">
 <h2><span class="header-section-number">2.3</span> Upload data</h2>
 <p>The examples we give in this vignette use data that are already part of the package. To upload your own data, check first that your working directory is set, then read your data from a <code>.txt</code> or <code>.csv</code> format, either by using <strong>File &gt; Import Dataset</strong> in RStudio or via one of these command lines:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># from csv file</span>
-data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;your_data.csv&quot;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)
-
-<span class="co"># from txt file</span>
-data &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;your_data.txt&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># from csv file</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;your_data.csv&quot;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co"># from txt file</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">data &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="st">&quot;your_data.txt&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>For more details about the arguments used to modify those functions, type <code>?read.csv</code> or <code>?read.table</code> in the R console.</p>
 </div>
 <div id="start:PCA" class="section level2">
@@ -271,27 +272,27 @@ data &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span clas
 </ol>
 <p>Then use your critical thinking and additional functions and visual tools to make sense of your data! (some of which are listed in <a href="intro.html#intro:overview">1.2.2</a>) and will be described in the next Chapters.</p>
 <p>For instance, for Principal Components Analysis, we first load the data:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(nutrimouse)
-X &lt;-<span class="st"> </span>nutrimouse<span class="op">$</span>gene</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">data</span>(nutrimouse)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">X &lt;-<span class="st"> </span>nutrimouse<span class="op">$</span>gene</a></code></pre></div>
 <p>Then use the following steps:</p>
-<pre class="sourceCode r"><code class="sourceCode r">MyResult.pca &lt;-<span class="st"> </span><span class="kw">pca</span>(X)  <span class="co"># 1 Run the method</span>
-<span class="kw">plotIndiv</span>(MyResult.pca) <span class="co"># 2 Plot the samples</span></code></pre>
-<p><img src="Figures/02-pca-nutrimouse-1.png" width="50%"  style="display: block; margin: auto;" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotVar</span>(MyResult.pca)   <span class="co"># 3 Plot the variables</span></code></pre>
-<p><img src="Figures/02-pca-nutrimouse-2.png" width="50%"  style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">MyResult.pca &lt;-<span class="st"> </span><span class="kw">pca</span>(X)  <span class="co"># 1 Run the method</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">plotIndiv</span>(MyResult.pca) <span class="co"># 2 Plot the samples</span></a></code></pre></div>
+<p><img src="Figures/02-pca-nutrimouse-1.png" width="75%"  style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">plotVar</span>(MyResult.pca)   <span class="co"># 3 Plot the variables</span></a></code></pre></div>
+<p><img src="Figures/02-pca-nutrimouse-2.png" width="75%"  style="display: block; margin: auto;" /></p>
 <p>This is only a first quick-start, there will be many avenues you can take to deepen your exploratory and integrative analyses. The package proposes several methods to perform variable, or feature selection to identify the relevant information from rather large omics data sets. The sparse methods are listed in the Table in <a href="intro.html#intro:overview">1.2.2</a>.</p>
-<p>Following our example here, sparse PCA can be applied to select the top 5 variables contributing to each of the two components in PCA. The user specifies the number of variables to selected on each component, for example here 5 variables are selected on each of the first two components (<code>keepX=c(5,5)</code>):</p>
-<pre class="sourceCode r"><code class="sourceCode r">MyResult.spca &lt;-<span class="st"> </span><span class="kw">spca</span>(X, <span class="dt">keepX=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>)) <span class="co"># 1 Run the method</span>
-<span class="kw">plotIndiv</span>(MyResult.spca)               <span class="co"># 2 Plot the samples</span></code></pre>
-<p><img src="Figures/02-spca-nutrimouse-1.png" width="50%"  style="display: block; margin: auto;" /></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotVar</span>(MyResult.spca)                 <span class="co"># 3 Plot the variables</span></code></pre>
-<p><img src="Figures/02-spca-nutrimouse-2.png" width="50%"  style="display: block; margin: auto;" /></p>
+<p>Following our example here, sparse PCA can be applied to select the top 5 variables contributing to each of the two components in PCA. The user specifies the number of variables to selected on each component, for example, here 5 variables are selected on each of the first two components (<code>keepX=c(5,5)</code>):</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">MyResult.spca &lt;-<span class="st"> </span><span class="kw">spca</span>(X, <span class="dt">keepX=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>)) <span class="co"># 1 Run the method</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw">plotIndiv</span>(MyResult.spca)               <span class="co"># 2 Plot the samples</span></a></code></pre></div>
+<p><img src="Figures/02-spca-nutrimouse-1.png" width="75%"  style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">plotVar</span>(MyResult.spca)                 <span class="co"># 3 Plot the variables</span></a></code></pre></div>
+<p><img src="Figures/02-spca-nutrimouse-2.png" width="75%"  style="display: block; margin: auto;" /></p>
 <p>You can see know that we have considerably reduced the number of genes in the <code>plotVar</code> correlation circle plot.</p>
 <p>Do not stop here! We are not done yet. You can enhance your analyses with the following:</p>
 <ul>
 <li><p>Have a look at our manual and each of the functions and their examples, e.g. <code>?pca</code>, <code>?plotIndiv</code>, <code>?sPCA</code>, …</p></li>
 <li><p>Run the examples from the help file using the <code>example</code> function: <code>example(pca)</code>, <code>example(plotIndiv)</code>, …</p></li>
-<li><p>Have a look at out <a href="http://www.mixomics.org">website</a> that features many tutorials and case studies,</p></li>
+<li><p>Have a look at our <a href="http://www.mixomics.org">website</a> that features many tutorials and case studies,</p></li>
 <li><p>Keep reading this vignette, this is <em>just the beginning!</em></p></li>
 </ul>
 
