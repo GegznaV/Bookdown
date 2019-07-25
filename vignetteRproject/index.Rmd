@@ -1,12 +1,12 @@
 --- 
 title: 'mixOmics vignette'
-## for BiocStyle html output
-# author: 'Kim-Anh Le Cao, Sebastien Dejean, Al J Abadi'
-## for gitbook html output
-author: |
-  Kim-Anh Le Cao^[Melbourne Integrative Genomics & School of Mathematics and Statistics, The University of Melbourne],
-  Sebastien Dejean^[Institut de Mathematiques de Toulouse, UMR 5219 | CNRS and Universite de Toulouse, France],
-  Al J Abadi^[Melbourne Integrative Genomics & School of Mathematics and Statistics, The University of Melbourne]
+## for BiocStyle and pdf output:
+author: 'Kim-Anh Le Cao, Sebastien Dejean, Al J Abadi'
+## for gitbook html output:
+## author: |
+##   Kim-Anh Le Cao^[Melbourne Integrative Genomics & School of Mathematics and Statistics, The University of Melbourne],
+##   Sebastien Dejean^[Institut de Mathematiques de Toulouse, UMR 5219 | CNRS and Universite de Toulouse, France],
+##   Al J Abadi^[Melbourne Integrative Genomics & School of Mathematics and Statistics, The University of Melbourne]
 
 package: mixOmics
 date: '\today'
@@ -21,10 +21,6 @@ biblio-style: apalike
 link-citations: true
 github-repo: mixOmicsTeam/mixOmics
 description: "Vignette for the R package mixOmics"
-
-header-includes:
-  - \usepackage{color}
-  
 ---
 ```{r, include=FALSE}
 library(knitr)
@@ -32,10 +28,6 @@ library(knitr)
 knitr::opts_chunk$set(dpi = 100, echo=TRUE, warning=FALSE, message=FALSE, eval = TRUE, cache=TRUE,
                       fig.show=TRUE, fig.asp=1,fig.align='center', out.width = '75%',
                       fig.pos= "h", out.extra = '', fig.path= 'Figures/')
-```
-
-```{r 00-logo, echo=FALSE, out.width="20%", fig.align='right'}
-knitr::include_graphics('XtraFigs/logo-mixomics.png')
 ```
 
 ```{r 00-htmlTemplate, echo=FALSE, eval=FALSE}
