@@ -24,7 +24,7 @@
 \usepackage{hyperref}
 \hypersetup{unicode=true,
             pdftitle={mixOmics vignette},
-            pdfauthor={Kim-Anh Le Cao, Sebastien Dejean, Al J Abadi},
+            pdfauthor={Kim-Anh L Cao, Sebastien Dejean, Al J Abadi},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
@@ -119,7 +119,7 @@
   \title{mixOmics vignette}
     \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
-    \author{Kim-Anh Le Cao, Sebastien Dejean, Al J Abadi}
+    \author{Kim-Anh L Cao, Sebastien Dejean, Al J Abadi}
     \preauthor{\centering\large\emph}
   \postauthor{\par}
       \predate{\centering\large\emph}
@@ -137,7 +137,7 @@
 
 \usepackage{fancyhdr}
 \usepackage{xcolor, hyperref}
-\usepackage{lipsum}
+%%\usepackage{lipsum}
 \setlength{\headheight}{28pt}
 \setlength{\footskip}{25pt}
 \pagestyle{fancy}
@@ -228,7 +228,7 @@ We list here the main methodological or theoretical concepts you need to know to
 
 Here is an overview of the most widely used methods in \texttt{mixOmics} that will be further detailed in this vignette, with the exception of rCCA and MINT. We depict them along with the type of data set they can handle.
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/01-overview-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/01-overview-1} \end{center}
 
 \begin{figure}[h]
 
@@ -344,7 +344,9 @@ Alternatively, you can install the latest GitHub version of the package:
 \end{Highlighting}
 \end{Shaded}
 
-The \texttt{mixOmics} package should directly import the following packages: \texttt{igraph,\ rgl,\ ellipse,\ corpcor,\ RColorBrewer,\ plyr,\ parallel,\ dplyr,\ tidyr,\ reshape2,\ methods,\ matrixStats,\ rARPACK,\ gridExtra}. For \emph{apple mac users}, if you are unable to install the imported package \texttt{rgl}, you will need to install the \href{https://www.xquartz.org}{XQuartz software} first.
+The \texttt{mixOmics} package should directly import the following packages:
+\texttt{igraph,\ rgl,\ ellipse,\ corpcor,\ RColorBrewer,\ plyr,\ parallel,\ dplyr,\ tidyr,\ reshape2,\ methods,\ matrixStats,\ rARPACK,\ gridExtra}.
+\textbf{For Apple mac users:} if you are unable to install the imported package \texttt{rgl}, you will need to install the \href{https://www.xquartz.org}{XQuartz software} first.
 
 \hypertarget{start:upload}{%
 \section{Load the package}\label{start:upload}}
@@ -410,7 +412,7 @@ Then use the following steps:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/02-pca-nutrimouse-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/02-pca-nutrimouse-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -418,7 +420,7 @@ Then use the following steps:
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/02-pca-nutrimouse-2} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/02-pca-nutrimouse-2} \end{center}
 
 This is only a first quick-start, there will be many avenues you can take to deepen your exploratory and integrative analyses. The package proposes several methods to perform variable, or feature selection to identify the relevant information from rather large omics data sets. The sparse methods are listed in the Table in \ref{intro:overview}.
 
@@ -431,7 +433,7 @@ Following our example here, sparse PCA can be applied to select the top 5 variab
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/02-spca-nutrimouse-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/02-spca-nutrimouse-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -439,7 +441,7 @@ Following our example here, sparse PCA can be applied to select the top 5 variab
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/02-spca-nutrimouse-2} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/02-spca-nutrimouse-2} \end{center}
 
 You can see know that we have considerably reduced the number of genes in the \texttt{plotVar} correlation circle plot.
 
@@ -459,7 +461,7 @@ Do not stop here! We are not done yet. You can enhance your analyses with the fo
 \hypertarget{pca}{%
 \chapter{Principal Component Analysis (PCA)}\label{pca}}
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/03-overview-PCA-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/03-overview-PCA-1} \end{center}
 
 \hypertarget{biological-question}{%
 \section{Biological question}\label{biological-question}}
@@ -522,11 +524,15 @@ We first load the data from the package. See \ref{start:upload} to upload your o
 \end{Highlighting}
 \end{Shaded}
 
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/03-pca-plots-1} \end{center}
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{plotVar}\NormalTok{(MyResult.pca)      }\CommentTok{# 3 Plot the variables}
+\KeywordTok{plotVar}\NormalTok{(MyResult.pca, }\DataTypeTok{cutoff =} \FloatTok{0.8}\NormalTok{)      }\CommentTok{# 3 Plot the variables}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/03-pca-plots-2} \end{center}
 
 If you were to run \texttt{pca} with this minimal code, you would be using the following default values:
 
@@ -561,7 +567,7 @@ Here is an example where we include the sample groups information with the argum
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/03-pca-liver-1-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/03-pca-liver-1-1} \end{center}
 
 Additionally, two factors can be displayed using both colours (argument \texttt{group}) and symbols (argument \texttt{pch}). For example here we display both Dose and Time of exposure and improve the title and legend:
 
@@ -575,7 +581,7 @@ Additionally, two factors can be displayed using both colours (argument \texttt{
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/03-pca-liver-1-plot-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/03-pca-liver-1-plot-1} \end{center}
 
 By including information related to the dose of acetaminophen and time of exposure enables us to see a cluster of low dose samples (blue and orange, top left at 50 and 100mg respectively), whereas samples with high doses (1500 and 2000mg in grey and green respectively) are more scattered, but highlight an exposure effect.
 
@@ -590,7 +596,7 @@ To display the results on other components, we can change the \texttt{comp} argu
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/03-pca-liver-2-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/03-pca-liver-2-1} \end{center}
 
 Here, the 3rd component on the y-axis clearly highlights a time of exposure effect.
 
@@ -605,7 +611,7 @@ The amount of variance explained can be extracted with the following: a screeplo
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/03-pca-liver-2-plot-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/03-pca-liver-2-plot-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -645,6 +651,8 @@ We can also have a look at the variable coefficients in each component with the 
 \end{Highlighting}
 \end{Shaded}
 
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/03-pca-liver-loadings-1} \end{center}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# a customized example to only show the top 100 genes }
@@ -655,9 +663,11 @@ We can also have a look at the variable coefficients in each component with the 
 \end{Highlighting}
 \end{Shaded}
 
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/03-pca-liver-loadings-args-1} \end{center}
+
 Such representation will be more informative once we select a few variables in the next section \ref{sPCA}.
 
-Plots can also be displayed in 3 dimensions using the option \texttt{style="3d"}, and interactively (we use the \texttt{rgl} package for this).
+Plots can also be interactively displayed in 3 dimensions using the option \texttt{style="3d"}. We use the \texttt{rgl} package for this (the interative figure is only interatice in the \texttt{html} vignette).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -666,6 +676,10 @@ Plots can also be displayed in 3 dimensions using the option \texttt{style="3d"}
           \DataTypeTok{legend =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{title =} \StringTok{'Liver toxicity: genes, PCA comp 1 - 2 - 3'}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\hypertarget{_03_pca_liver_plotIndivdiv}{}
+
+You must enable Javascript to view this page properly.
 
 \hypertarget{sPCA}{%
 \section{Variable selection with sparse PCA}\label{sPCA}}
@@ -689,7 +703,7 @@ Variable selection can be performed using the sparse version of PCA implemented 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/03-pca-liver-plotIndiv-args-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/03-pca-liver-plotIndiv-args-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -697,7 +711,7 @@ Variable selection can be performed using the sparse version of PCA implemented 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/03-pca-liver-plotIndiv-args-2} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/03-pca-liver-plotIndiv-args-2} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -742,11 +756,11 @@ We can complement this output with \texttt{plotLoadings}. We can see here that a
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/03-pca-liver-plotLoadings-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/03-pca-liver-plotLoadings-1} \end{center}
 
 If we look at the 2nd component, we can see a mix of positive and negative weights (also see in the \texttt{plotVar}), those correspond to variables that oppose the low and high doses (see from the \texttt{plotIndiv}):
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/03-pca-liver-comp2-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/03-pca-liver-comp2-1} \end{center}
 
 \hypertarget{tuning-parameters}{%
 \section{Tuning parameters}\label{tuning-parameters}}
@@ -769,7 +783,7 @@ The function \texttt{tune.pca} calculates the percentage of variance explained f
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/03-tune-pca-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/03-tune-pca-1} \end{center}
 
 Regarding the number of variables to select in sparse PCA, there is not a clear criterion at this stage. As PCA is an exploration method, we prefer to set arbitrary thresholds that will pinpoint the key variables to focus on during the interpretation stage.
 
@@ -830,7 +844,7 @@ Additional reading in \citep{She08}.
 \hypertarget{plsda}{%
 \chapter{PLS - Discriminant Analysis (PLS-DA)}\label{plsda}}
 
-\begin{center}\includegraphics[width=0.5\linewidth]{Figures/04-overview-PLSDA-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/04-overview-PLSDA-1} \end{center}
 
 \hypertarget{biological-question-2}{%
 \section{Biological question}\label{biological-question-2}}
@@ -891,7 +905,7 @@ We will mainly focus on sparse PLS-DA that is more suited for large biological d
 \KeywordTok{data}\NormalTok{(srbct)}
 \NormalTok{X <-}\StringTok{ }\NormalTok{srbct}\OperatorTok{$}\NormalTok{gene}
 \NormalTok{Y <-}\StringTok{ }\NormalTok{srbct}\OperatorTok{$}\NormalTok{class }
-\KeywordTok{summary}\NormalTok{(Y)}
+\KeywordTok{summary}\NormalTok{(Y) }\CommentTok{## class summary}
 \end{Highlighting}
 \end{Shaded}
 
@@ -902,13 +916,19 @@ We will mainly focus on sparse PLS-DA that is more suited for large biological d
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{dim}\NormalTok{(X); }\KeywordTok{length}\NormalTok{(Y)}
+\KeywordTok{dim}\NormalTok{(X) }\CommentTok{## number of samples and features}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## [1]   63 2308
 \end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{length}\NormalTok{(Y) }\CommentTok{## length of class memebrship factor = number of samples}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{verbatim}
 ## [1] 63
@@ -922,15 +942,19 @@ For a quick start, we arbitrarily set the number of variables to select to 50 on
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{MyResult.splsda <-}\StringTok{ }\KeywordTok{splsda}\NormalTok{(X, Y, }\DataTypeTok{keepX =} \KeywordTok{c}\NormalTok{(}\DecValTok{50}\NormalTok{,}\DecValTok{50}\NormalTok{)) }\CommentTok{# 1 Run the method}
-\KeywordTok{plotIndiv}\NormalTok{(MyResult.splsda)                          }\CommentTok{# 2 Plot the samples}
+\KeywordTok{plotIndiv}\NormalTok{(MyResult.splsda)                          }\CommentTok{# 2 Plot the samples (coloured by classes automatically)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/04-splsda-and-plots-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{plotVar}\NormalTok{(MyResult.splsda)                            }\CommentTok{# 3 Plot the variables}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/04-splsda-and-plots-2} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -965,7 +989,7 @@ PLS-DA without variable selection can be performed as:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{plotVar}\NormalTok{(MyResult.plsda)      }\CommentTok{# 3 Plot the variables}
+\KeywordTok{plotVar}\NormalTok{(MyResult.plsda, }\DataTypeTok{cutoff =} \FloatTok{0.7}\NormalTok{)      }\CommentTok{# 3 Plot the variables}
 \end{Highlighting}
 \end{Shaded}
 
@@ -973,7 +997,7 @@ PLS-DA without variable selection can be performed as:
 \section{To go further}\label{plsda-tgf}}
 
 \hypertarget{splsda:plotIndiv}{%
-\subsection{Customize sample plots}\label{splsda:plotIndiv}}
+\subsection{Customize the sample plots}\label{splsda:plotIndiv}}
 
 The sample plots can be improved in various ways. First, if the names of the samples are not meaningful at this stage, they can be replaced by symbols (\texttt{ind.names=TRUE}). Confidence ellipses can be plotted for each sample (\texttt{ellipse\ =\ TRUE}, confidence level set to 95\% by default, see the argument \texttt{ellipse.level}), Additionally, a star plot displays arrows from each group centroid towards each individual sample (\texttt{star\ =\ TRUE}). A 3D plot is also available, see \texttt{plotIndiv} for more details.
 
@@ -985,7 +1009,7 @@ The sample plots can be improved in various ways. First, if the names of the sam
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth]{Figures/04-plsda-plotindiv-args-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/04-plsda-plotindiv-args-1} \end{center}
 
 \hypertarget{customize-variable-plots}{%
 \subsection{Customize variable plots}\label{customize-variable-plots}}
@@ -998,7 +1022,7 @@ The name of the variables can be set to FALSE (\texttt{var.names=FALSE}):
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth]{Figures/04-plsda-plotVar-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/04-plsda-plotVar-1} \end{center}
 
 In addition, if we had used the non-sparse version of PLS-DA, a cut-off can be set to display only the variables that mostly contribute to the definition of each component. These variables should be located towards the circle of radius 1, far from the centre.
 
@@ -1008,7 +1032,7 @@ In addition, if we had used the non-sparse version of PLS-DA, a cut-off can be s
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth]{Figures/04-plsda-plotVar-cutoff-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/04-plsda-plotVar-cutoff-1} \end{center}
 
 In this particular case, no variable selection was performed. Only the display was altered to show a subset of variables.
 
@@ -1030,7 +1054,7 @@ A `prediction' background can be added to the sample plot by calculating a backg
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth]{Figures/04-plsda-background-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/04-plsda-background-1} \end{center}
 
 \hypertarget{roc}{%
 \subsubsection{ROC}\label{roc}}
@@ -1040,9 +1064,10 @@ As PLS-DA acts as a classifier, we can plot a ROC Curve to complement the sPLS-D
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{auc.plsda <-}\StringTok{ }\KeywordTok{auroc}\NormalTok{(MyResult.splsda)}
-\NormalTok{auc.plsda}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/04-auroc-1} \end{center}
 
 \hypertarget{variable-selection-outputs}{%
 \subsection{Variable selection outputs}\label{variable-selection-outputs}}
@@ -1090,17 +1115,21 @@ and can be visualised in \texttt{plotLoadings} with the arguments \texttt{contri
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth]{Figures/04-splsda-plotLoadings-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/04-splsda-plotLoadings-1} \end{center}
 
 Interestingly from this plot, we can see that all selected variables on component 1 are highly expressed in the BL (orange) class. Setting \texttt{contrib\ =\ \textquotesingle{}min\textquotesingle{}} would highlight that those variables are lowly expressed in the NB grey class, which makes sense when we look at the sample plot.
 
-Since 4 classes are being discriminated here, samples plots in 3d may help interpretation:
+Since 4 classes are being discriminated here, samples plots in 3d may help interpretation (available in the \texttt{html} vignette only):
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{plotIndiv}\NormalTok{(MyResult.splsda2, }\DataTypeTok{style=}\StringTok{"3d"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\hypertarget{_04_splsda_3ddiv}{}
+
+You must enable Javascript to view this page properly.
 
 \hypertarget{tuning:sPLSDA}{%
 \subsection{Tuning parameters and numerical outputs}\label{tuning:sPLSDA}}
@@ -1126,7 +1155,7 @@ For \textbf{item 1}, the \texttt{perf} evaluates the performance of PLS-DA for a
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth]{Figures/04-plsda-perf-1-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/04-plsda-perf-1-1} \end{center}
 
 The plot outputs the classification error rate, or \emph{Balanced} classification error rate when the number of samples per group is unbalanced, the standard deviation according to three prediction distances. Here we can see that for the BER and the maximum distance, the best performance (i.e.~low error rate) seems to be achieved for \texttt{ncomp\ =\ 3}.
 
@@ -1213,17 +1242,20 @@ We can then extract the classification error rate averaged across all folds and 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth]{Figures/04-tune-values-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/04-tune-values-1} \end{center}
 
 Based on those tuning results, we can run our final and tuned sPLS-DA model:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{MyResult.splsda.final <-}\StringTok{ }\KeywordTok{splsda}\NormalTok{(X, Y, }\DataTypeTok{ncomp =}\NormalTok{ ncomp, }\DataTypeTok{keepX =}\NormalTok{ select.keepX)}
+
 \KeywordTok{plotIndiv}\NormalTok{(MyResult.splsda.final, }\DataTypeTok{ind.names =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{legend=}\OtherTok{TRUE}\NormalTok{,}
-          \DataTypeTok{ellipse =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{title=}\StringTok{"SPLS-DA, Final result"}\NormalTok{)}
+          \DataTypeTok{ellipse =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{title=}\StringTok{"sPLS-DA - final result"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/04-final-splsda-1} \end{center}
 
 Additionally, we can run \texttt{perf} for the final performance of the sPLS-DA model. Also, note that \texttt{perf} will output \texttt{features} that lists the frequency of selection of the variables across the different folds and different repeats. This is a useful output to assess the confidence of your final variable selection, see a more \href{http://mixomics.org/case-studies/splsda-srbct/}{detailed example here}.
 
@@ -1268,7 +1300,7 @@ Additional examples are provided in \texttt{example(splsda)} and in our case stu
 \hypertarget{pls}{%
 \chapter{Projection to Latent Structure (PLS)}\label{pls}}
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/05-overview-PLS-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/05-overview-PLS-1} \end{center}
 
 \hypertarget{biological-question-3}{%
 \section{Biological question}\label{biological-question-3}}
@@ -1354,15 +1386,19 @@ We will mainly focus on sparse PLS for large biological data sets where variable
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{MyResult.spls <-}\StringTok{ }\KeywordTok{spls}\NormalTok{(X,Y, }\DataTypeTok{keepX =} \KeywordTok{c}\NormalTok{(}\DecValTok{25}\NormalTok{, }\DecValTok{25}\NormalTok{), }\DataTypeTok{keepY =} \KeywordTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{))  }
-\KeywordTok{plotIndiv}\NormalTok{(MyResult.spls)                                      }
+\KeywordTok{plotIndiv}\NormalTok{(MyResult.spls)     }\CommentTok{## sample plot                   }
 \end{Highlighting}
 \end{Shaded}
 
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/05-pls-and-plots-1} \end{center}
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{plotVar}\NormalTok{(MyResult.spls)                                        }
+\KeywordTok{plotVar}\NormalTok{(MyResult.spls)       }\CommentTok{## variable plot}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/05-pls-and-plots-2} \end{center}
 
 If you were to run \texttt{spls} with this minimal code, you would be using the following default values:
 
@@ -1396,7 +1432,7 @@ Some of the sample plot additional arguments were described in \ref{splsda:plotI
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/05-pls-plotIndiv-1-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/05-pls-plotIndiv-1-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1409,12 +1445,12 @@ Some of the sample plot additional arguments were described in \ref{splsda:plotI
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/05-pls-plotIndiv-2-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/05-pls-plotIndiv-2-1} \end{center}
 
 \hypertarget{pls:plotVar}{%
 \subsection{Customize variable plots}\label{pls:plotVar}}
 
-See (\texttt{example(plotVar)}) for more examples. Here we change the size of the labels. By default the colours are assigned to each type of variable. The coordinates of the variables can also be saved as follows:
+See (\texttt{example(plotVar)}) for more examples. Here we change the size of the labels. By default the colours are assigned to each type of variable.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1422,7 +1458,9 @@ See (\texttt{example(plotVar)}) for more examples. Here we change the size of th
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/05-pls-plotVar-1-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/05-pls-plotVar-1-1} \end{center}
+
+The coordinates of the variables can also be saved as follows:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1444,6 +1482,14 @@ A clustered image map can be produced using the \texttt{cim} function. You may e
 \begin{Highlighting}[]
 \KeywordTok{X11}\NormalTok{()}
 \KeywordTok{cim}\NormalTok{(MyResult.spls, }\DataTypeTok{comp =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/05-pls-cim-1-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{## or save it}
 \KeywordTok{cim}\NormalTok{(MyResult.spls, }\DataTypeTok{comp =} \DecValTok{1}\NormalTok{, }\DataTypeTok{save =} \StringTok{'jpeg'}\NormalTok{, }\DataTypeTok{name.save =} \StringTok{'PLScim'}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -1459,6 +1505,12 @@ Other arguments such as \texttt{interactive\ =\ TRUE} enables a scrollbar to cha
 \begin{Highlighting}[]
 \KeywordTok{X11}\NormalTok{()}
 \KeywordTok{network}\NormalTok{(MyResult.spls, }\DataTypeTok{comp =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{## or save it}
 \KeywordTok{network}\NormalTok{(MyResult.spls, }\DataTypeTok{comp =} \DecValTok{1}\NormalTok{, }\DataTypeTok{cutoff =} \FloatTok{0.6}\NormalTok{, }\DataTypeTok{save =} \StringTok{'jpeg'}\NormalTok{, }\DataTypeTok{name.save =} \StringTok{'PLSnetwork'}\NormalTok{)}
 \CommentTok{# save as graph object for cytoscape}
 \NormalTok{myNetwork <-}\StringTok{ }\KeywordTok{network}\NormalTok{(MyResult.spls, }\DataTypeTok{comp =} \DecValTok{1}\NormalTok{)}\OperatorTok{$}\NormalTok{gR}
@@ -1477,7 +1529,7 @@ Instead of projecting the samples into the combined XY representation space, as 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/05-pls-plotArrow-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/05-pls-plotArrow-1} \end{center}
 
 \hypertarget{variable-selection-outputs-1}{%
 \subsection{Variable selection outputs}\label{variable-selection-outputs-1}}
@@ -1516,7 +1568,7 @@ The loading plots help visualise the coefficients assigned to each selected vari
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/05-pls-plotLoadings-1-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/05-pls-plotLoadings-1-1} \end{center}
 
 \hypertarget{tuning:PLS}{%
 \subsection{Tuning parameters and numerical outputs}\label{tuning:PLS}}
@@ -1542,7 +1594,7 @@ We run a PLS model with a sufficient number of components first, then run \textt
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/05-pls-perf-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/05-pls-perf-1} \end{center}
 
 This example seems to indicate that up to 3 components could be enough. In a small \(p+q\) setting we generally observe a Q\(^2\) that decreases, but that is not the case here as \(n << p+q\).
 
@@ -1562,7 +1614,7 @@ This example seems to indicate that up to 3 components could be enough. In a sma
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/05-pls-tune-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/05-pls-tune-1} \end{center}
 
 Based on the lowest MAE obtained on each component, the optimal number of variables to select in the \texttt{X} data set, including all variables in the \texttt{Y} data set would be:
 
@@ -1675,7 +1727,7 @@ Additional examples are provided in \texttt{example(spls)} and in our case studi
 \hypertarget{diablo}{%
 \chapter{Multi-block Discriminant Analysis with DIABLO}\label{diablo}}
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/06-overview-DIABLO-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/06-overview-DIABLO-1} \end{center}
 
 DIABLO is our new framework in \texttt{mixOmics} that extends PLS for multiple data sets integration and PLS-discriminant analysis. The acronyms stands for \textbf{D}ata \textbf{I}ntegration \textbf{A}nalysis for \textbf{B}iomarker discovery using a \textbf{L}atent c\textbf{O}mponents \citep{Sin16}.
 
@@ -1771,15 +1823,19 @@ We check that the dimensions are correct and match. We then set up arbitrarily t
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{MyResult.diablo <-}\StringTok{ }\KeywordTok{block.splsda}\NormalTok{(X, Y, }\DataTypeTok{keepX=}\NormalTok{list.keepX)}
-\KeywordTok{plotIndiv}\NormalTok{(MyResult.diablo)}
+\KeywordTok{plotIndiv}\NormalTok{(MyResult.diablo) }\CommentTok{## sample plot}
 \end{Highlighting}
 \end{Shaded}
 
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/06-diablo-sparse-1} \end{center}
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{plotVar}\NormalTok{(MyResult.diablo)}
+\KeywordTok{plotVar}\NormalTok{(MyResult.diablo) }\CommentTok{## variable plot}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/06-diablo-sparse-2} \end{center}
 
 Similar to PLS (Chapter \ref{pls}), DIABLO generates a pair of components, each associated to each data set. This is why we can visualise here 3 sample plots. As DIABLO is a supervised method, samples are represented with different colours depending on their known class.
 
@@ -1822,7 +1878,7 @@ Here is an example of an improved plot, see also Section \ref{splsda:plotIndiv} 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/06-diablo-plotIndiv-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/06-diablo-plotIndiv-1} \end{center}
 
 \hypertarget{diablo:plotVar}{%
 \subsection{Customize variable plots}\label{diablo:plotVar}}
@@ -1836,7 +1892,7 @@ Labels can be omitted in some data sets to improve readability. For example her 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/06-diablo-plotVar-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/06-diablo-plotVar-1} \end{center}
 
 \hypertarget{other-useful-plots-for-data-integration-1}{%
 \subsection{Other useful plots for data integration}\label{other-useful-plots-for-data-integration-1}}
@@ -1854,7 +1910,7 @@ A global overview of the correlation structure at the component level can be rep
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/06-diablo-plotDiablo-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/06-diablo-plotDiablo-1} \end{center}
 
 Here, we can see that a strong correlation is extracted by DIABLO between the mRNA and protein data sets. Other dimensions can be plotted with the argument \texttt{comp}.
 
@@ -1869,7 +1925,7 @@ The circos plot represents the correlations between variables of different types
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/06-diablo-circosPlot-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/06-diablo-circosPlot-1} \end{center}
 
 \hypertarget{cimdiablo}{%
 \subsubsection{\texorpdfstring{\texttt{cimDiablo}}{cimDiablo}}\label{cimdiablo}}
@@ -1885,6 +1941,8 @@ The \texttt{cimDiablo} function is a clustered image map specifically implemente
 \end{Highlighting}
 \end{Shaded}
 
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/06-cimDiablo-1} \end{center}
+
 \hypertarget{plotloadings}{%
 \subsubsection{\texorpdfstring{\texttt{plotLoadings}}{plotLoadings}}\label{plotloadings}}
 
@@ -1897,7 +1955,7 @@ The \texttt{plotLoadings} function visualises the loading weights of each select
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/06-plotLoadings-max-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/06-plotLoadings-max-1} \end{center}
 
 \hypertarget{relevance-networks}{%
 \subsubsection{Relevance networks}\label{relevance-networks}}
@@ -1949,7 +2007,7 @@ Here we evaluate the AUC for the model that includes 2 components in the miRNA d
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth,]{Figures/06-auroc-1} \end{center}
+\begin{center}\includegraphics[width=0.75\linewidth,]{Figures/06-auroc-1} \end{center}
 
 \hypertarget{prediction-on-an-external-test-set}{%
 \subsubsection{Prediction on an external test set}\label{prediction-on-an-external-test-set}}
